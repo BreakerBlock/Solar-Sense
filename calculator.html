@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarSense India — On-Grid · Off-Grid · Surplus Solar</title>
+<style>
+:root{
+  --green:#1D9E75;--green-dk:#0F6E56;--green-lt:#E8F5EF;--green-tint:#F4FAF7;
+  --amber:#B5761A;--amber-lt:#FBF0DE;
+  --blue:#1A5FA3;--blue-lt:#E8F1FA;
+  --purple:#6B4E9E;--purple-lt:#F0EAF8;
+  --red:#A32D2D;--red-lt:#FBEBEB;
+  --bg:#F6F7F5;--surf:#FFFFFF;--surf2:#FAFBF9;
+  --bd:#E3E5E0;--bd2:#C9CCC5;
+  --tx:#191B17;--tx2:#5A5E56;--tx3:#8B8F86;
+  --r:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.5}
+.page{max-width:860px;margin:0 auto;padding:28px 32px 80px}
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid var(--bd)}
+.hdr-icon{width:46px;height:46px;background:var(--green-lt);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0}
+.hdr-t{font-size:21px;font-weight:700;letter-spacing:-.01em}
+.hdr-s{font-size:13px;color:var(--tx3);margin-top:1px}
+.step-badge{display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.step-lbl{font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.09em}
+.step-q{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:18px}
+.path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:8px}
+@media(max-width:700px){.path-grid{grid-template-columns:1fr}}
+.path-card{background:var(--surf);border:2px solid var(--bd);border-radius:16px;padding:22px 20px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
+.path-card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 20px rgba(29,158,117,.10)}
+.path-card.sel{border-color:var(--green);background:var(--green-tint)}
+.path-card.sel::after{content:'✓';position:absolute;top:12px;right:14px;width:22px;height:22px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.path-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+.pi-green{background:var(--green-lt)}.pi-amber{background:var(--amber-lt)}.pi-purple{background:var(--purple-lt)}.pi-blue{background:var(--blue-lt)}
+.path-name{font-size:16px;font-weight:700;margin-bottom:5px}
+.path-desc{font-size:12.5px;color:var(--tx2);line-height:1.55}
+.path-meta{margin-top:12px;padding-top:11px;border-top:1px solid var(--bd);font-size:11px;color:var(--tx3);display:flex;flex-direction:column;gap:3px}
+.path-meta b{color:var(--tx2);font-weight:600}
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:20px 22px;margin-bottom:15px}
+.card-t{font-size:15px;font-weight:700;margin-bottom:4px}
+.card-s{font-size:12.5px;color:var(--tx3);margin-bottom:16px;line-height:1.6}
+.slabel{font-size:10.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:11px;display:flex;align-items:center;gap:7px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--bd)}
+label{font-size:11.5px;color:var(--tx3);display:block;margin-bottom:5px;font-weight:600}
+select,input[type=number],input[type=text]{width:100%;padding:9px 11px;font-size:13px;border-radius:9px;border:1px solid var(--bd2);background:var(--surf2);color:var(--tx);outline:none;transition:all .14s;font-family:inherit}
+select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.11)}
+input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:620px){.g3,.g4{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+.metric{background:var(--surf2);border:1px solid var(--bd);border-radius:10px;padding:12px 14px}
+.metric.acc{background:var(--green-lt);border-color:#b9e0d0}
+.metric.amb{background:var(--amber-lt);border-color:#e8ceA0}
+.metric.pur{background:var(--purple-lt);border-color:#cfc0e6}
+.m-l{font-size:10.5px;color:var(--tx3);margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.metric.acc .m-l{color:var(--green-dk)}.metric.amb .m-l{color:var(--amber)}.metric.pur .m-l{color:var(--purple)}
+.m-v{font-size:20px;font-weight:700;line-height:1.15;letter-spacing:-.01em}
+.metric.acc .m-v{color:var(--green-dk)}.metric.amb .m-v{color:var(--amber)}.metric.pur .m-v{color:var(--purple)}
+.m-u{font-size:11px;color:var(--tx2);margin-top:2px}
+.ap-hdr,.ap-row{display:grid;grid-template-columns:1.9fr 86px 62px 66px 30px;gap:7px;align-items:center}
+.ap-hdr{padding:7px 0;border-bottom:1.5px solid var(--bd2)}
+.ap-row{padding:8px 0;border-bottom:1px solid var(--bd)}
+.ap-h{font-size:10.5px;color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.ap-n{font-size:13px;display:flex;align-items:center;gap:6px;min-width:0}
+.ap-n>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ap-in{padding:5px 7px !important;font-size:12px !important}
+.qw{display:flex;align-items:center;gap:4px}
+.qb{width:25px;height:25px;border-radius:7px;border:1px solid var(--bd2);background:var(--surf2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;color:var(--tx)}
+.qb:hover{background:var(--bg)}
+.qv{width:24px;text-align:center;font-size:13px;font-weight:700}
+.xb{width:27px;height:27px;border-radius:7px;border:1px solid var(--bd);background:transparent;cursor:pointer;font-size:12px;color:var(--tx3);display:flex;align-items:center;justify-content:center;transition:all .14s;flex-shrink:0}
+.xb:hover,.xb.on{background:var(--red-lt);border-color:var(--red);color:var(--red)}
+.dim{opacity:.32}
+.tag{font-size:10px;padding:2px 7px;border-radius:20px;white-space:nowrap;font-weight:600}
+.t-a{background:var(--amber-lt);color:var(--amber)}
+.t-b{background:var(--blue-lt);color:var(--blue)}
+.t-g{background:var(--green-lt);color:var(--green-dk)}
+.t-p{background:var(--purple-lt);color:var(--purple)}
+.tr{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--bd)}
+.tr:last-child{border-bottom:none}
+.tl{font-size:13.5px;font-weight:500}
+.td{font-size:11.5px;color:var(--tx3);margin-top:2px}
+.tog{width:38px;height:22px;border-radius:22px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;background:var(--bd2)}
+.tog.on{background:var(--green)}
+.th{position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.tog.on .th{left:19px}
+.pt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:620px){.pt-grid{grid-template-columns:1fr}}
+.pt-card{border:1.5px solid var(--bd);border-radius:11px;padding:13px 15px;cursor:pointer;transition:all .15s;background:var(--surf2)}
+.pt-card:hover{border-color:var(--green)}
+.pt-card.sel{border-color:var(--green);background:var(--green-tint)}
+.pt-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.pt-n{font-size:13.5px;font-weight:700}
+.pt-eff{font-size:12px;font-weight:700;color:var(--green-dk)}
+.pt-d{font-size:11.5px;color:var(--tx3);line-height:1.5;margin-bottom:7px}
+.pt-stats{display:flex;gap:12px;font-size:10.5px;color:var(--tx2)}
+.pt-stats b{font-weight:700;color:var(--tx)}
+.btn{display:block;width:100%;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s;font-family:inherit}
+.btn-p{background:var(--green);color:#fff;margin-top:16px}
+.btn-p:hover{background:var(--green-dk)}
+.btn-s{background:var(--surf);color:var(--tx);border:1px solid var(--bd2);margin-top:8px}
+.btn-s:hover{background:var(--surf2)}
+.btn-add{padding:9px;border-radius:9px;border:1px dashed var(--bd2);background:transparent;color:var(--tx3);cursor:pointer;font-size:12.5px;margin-top:11px;width:100%;font-family:inherit}
+.btn-add:hover{background:var(--surf2)}
+.info{padding:12px 15px;border-radius:10px;font-size:12px;line-height:1.65;margin-top:11px}
+.i-b{background:var(--blue-lt);color:var(--blue)}
+.i-g{background:var(--green-lt);color:var(--green-dk)}
+.i-a{background:var(--amber-lt);color:var(--amber)}
+.i-p{background:var(--purple-lt);color:var(--purple)}
+.info b,.info strong{font-weight:700}
+.expl{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.expl-h{padding:14px 20px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:background .14s;user-select:none}
+.expl-h:hover{background:var(--surf2)}
+.expl-i{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.expl-t{font-size:14px;font-weight:700}
+.expl-s{font-size:11.5px;color:var(--tx3)}
+.expl-arr{margin-left:auto;font-size:13px;color:var(--tx3);transition:transform .2s}
+.expl.open .expl-arr{transform:rotate(180deg)}
+.expl-b{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.expl.open .expl-b{max-height:1200px}
+.expl-c{padding:4px 20px 20px;font-size:12.5px;color:var(--tx2);line-height:1.75}
+.expl-c p{margin-bottom:11px}
+.expl-c strong{color:var(--tx);font-weight:700}
+.expl-c ul{margin:0 0 11px 17px}
+.expl-c li{margin-bottom:5px}
+.cmp{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px}
+.cmp th{text-align:left;padding:9px 11px;font-size:10.5px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.05em;background:var(--surf2);border-bottom:1.5px solid var(--bd2)}
+.cmp th:first-child{border-radius:8px 0 0 0}.cmp th:last-child{border-radius:0 8px 0 0}
+.cmp td{padding:10px 11px;border-bottom:1px solid var(--bd);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}
+.cmp td:first-child{color:var(--tx3);font-weight:600;width:30%}
+.yes{color:var(--green-dk);font-weight:600}
+.no{color:var(--red);font-weight:600}
+.bar-t{height:8px;border-radius:4px;background:var(--bg);overflow:hidden;margin-bottom:6px}
+.bar-f{height:100%;border-radius:4px;transition:width .5s ease}
+.mc{display:flex;gap:4px;align-items:flex-end;height:72px}
+.mc-c{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.mc-b{width:100%;border-radius:3px 3px 0 0;min-height:4px}
+.mc-l{font-size:9px;color:var(--tx3)}
+.cb-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.cb-row:last-of-type{border-bottom:none}
+.cb-row.total{border-top:1.5px solid var(--bd2);border-bottom:none;margin-top:5px;padding-top:12px;font-weight:700;font-size:14.5px}
+.cb-row.sub{color:var(--green-dk)}
+.cb-k{color:var(--tx2)}
+.cb-k small{display:block;font-size:11px;color:var(--tx3);margin-top:1px;font-weight:400}
+.cb-v{font-weight:600;white-space:nowrap}
+.cb-row.total .cb-v{color:var(--green-dk)}
+.env{background:var(--green-tint);border:1px solid #cbe6da;border-radius:12px;padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:520px){.env{grid-template-columns:1fr}}
+.env-i{display:flex;align-items:center;gap:13px}
+.env-e{font-size:32px}
+.env-v{font-size:22px;font-weight:700;color:var(--green-dk);line-height:1.1}
+.env-l{font-size:11.5px;color:var(--tx2);margin-top:2px}
+.agg{background:var(--surf);border:1px solid var(--bd);border-radius:13px;padding:16px 18px;margin-bottom:10px;display:flex;gap:14px}
+.agg-i{width:44px;height:44px;border-radius:11px;background:var(--green-lt);display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.agg-n{font-size:14px;font-weight:700;margin-bottom:3px}
+.agg-d{font-size:12.5px;color:var(--tx2);margin-bottom:7px;line-height:1.55}
+.agg-tg{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:5px}
+.agg-nt{font-size:11.5px;color:var(--tx3)}
+.nav{display:flex;border:1px solid var(--bd);border-radius:10px;overflow:hidden;margin-bottom:22px;background:var(--surf2)}
+.nb{flex:1;padding:10px 5px;font-size:11.5px;border:none;background:transparent;color:var(--tx3);cursor:pointer;border-right:1px solid var(--bd);transition:all .15s;font-family:inherit}
+.nb:last-child{border-right:none}
+.nb.act{background:var(--surf);color:var(--tx);font-weight:700}
+.nb.done{color:var(--green-dk)}
+.nb .nn{display:block;font-size:9.5px;color:var(--tx3);margin-bottom:2px;font-weight:600}
+.nb.act .nn{color:var(--green)}
+.notice{display:flex;gap:10px;background:var(--blue-lt);border-radius:10px;padding:12px 15px;font-size:11.5px;color:var(--blue);line-height:1.6;margin-top:13px}
+.notice-i{flex-shrink:0;font-size:14px}
+/* Space-fit meter */
+.fit{margin-top:14px;background:var(--surf2);border:1px solid var(--bd);border-radius:11px;padding:14px 16px}
+.fit-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.fit-l{font-size:11.5px;font-weight:600;color:var(--tx2)}
+.fit-v{font-size:12px;font-weight:700}
+.fit-bar{height:10px;border-radius:5px;background:var(--bg);overflow:hidden;position:relative}
+.fit-need{height:100%;border-radius:5px;transition:width .4s}
+.fit-cap{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--tx);opacity:.5}
+.fit-note{font-size:11.5px;margin-top:9px;line-height:1.6}
+/* Scale tiers */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:700px){.tier-grid{grid-template-columns:1fr}}
+.tier{border:1.5px solid var(--bd);border-radius:12px;padding:15px 16px;cursor:pointer;transition:all .15s;background:var(--surf2)}
+.tier:hover{border-color:var(--purple)}
+.tier.sel{border-color:var(--purple);background:var(--purple-lt)}
+.tier-n{font-size:14px;font-weight:700;margin-bottom:3px}
+.tier-sz{font-size:11px;color:var(--purple);font-weight:700;margin-bottom:6px}
+.tier-d{font-size:11.5px;color:var(--tx3);line-height:1.5}
+.hidden{display:none !important}
+.ml-a{margin-left:auto}
+
+/* ── Print / PDF ── */
+@media print{
+  .page{padding:0;max-width:100%}
+  .hdr,.nav,.path-grid,.ad,button,.notice,.btn,.btn-p,#s0,#s1,#s2,#s4,.expl-wrap{display:none!important}
+  #s3{display:block!important}
+  #pdf-hdr{display:flex!important;flex-direction:column;gap:4pt;margin-bottom:12pt}
+  #pdf-ftr{display:block!important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ddd;font-size:8pt;color:#999;text-align:center}
+  body{background:#fff;font-size:11pt;color:#000}
+  .card{border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
+  .metric{border:1px solid #eee;break-inside:avoid}
+  .mc-c .mc-b,.bar-f{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+#pdf-hdr,#pdf-ftr{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="hdr">
+  <a href="index.html" style="text-decoration:none;display:block">
+  <svg width="220" height="52" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" aria-label="SolarSense India">
+    <defs>
+      <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#F5A623"/><stop offset="100%" style="stop-color:#F07C00"/>
+      </linearGradient>
+    </defs>
+    <circle cx="24" cy="18" r="9" fill="url(#sg)"/>
+    <g stroke="#F5A623" stroke-width="2" stroke-linecap="round">
+      <line x1="24" y1="4" x2="24" y2="2"/><line x1="24" y1="32" x2="24" y2="34"/>
+      <line x1="10" y1="18" x2="8" y2="18"/><line x1="38" y1="18" x2="40" y2="18"/>
+      <line x1="14" y1="8" x2="12" y2="6"/><line x1="34" y1="28" x2="36" y2="30"/>
+      <line x1="34" y1="8" x2="36" y2="6"/><line x1="14" y1="28" x2="12" y2="30"/>
+    </g>
+    <rect x="4" y="36" width="40" height="12" rx="2.5" fill="#1D9E75"/>
+    <g stroke="rgba(255,255,255,0.3)" stroke-width="0.7">
+      <line x1="17.3" y1="36" x2="17.3" y2="48"/><line x1="30.6" y1="36" x2="30.6" y2="48"/>
+      <line x1="4" y1="42" x2="44" y2="42"/>
+    </g>
+    <rect x="5" y="37" width="38" height="2.5" rx="1" fill="rgba(255,255,255,0.12)"/>
+    <text x="56" y="26" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" font-weight="800" letter-spacing="-0.4" fill="#191B17">Solar<tspan fill="#1D9E75">Sense</tspan></text>
+    <rect x="56" y="29" width="44" height="2.5" rx="1.2" fill="#1D9E75"/>
+    <text x="56" y="44" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="10.5" fill="#8B8F86" letter-spacing="0.2">INDIA · On-grid · Off-grid · Surplus space</text>
+  </svg>
+  </a>
+</div>
+
+<div class="nav" id="nav">
+  <button class="nb act" id="nb0" onclick="go(0)"><span class="nn">Step 1</span>Purchase type</button>
+  <button class="nb" id="nb1" onclick="go(1)"><span class="nn">Step 2</span>Configure</button>
+  <button class="nb" id="nb2" onclick="go(2)"><span class="nn">Step 3</span>Panels</button>
+  <button class="nb" id="nb3" onclick="go(3)"><span class="nn">Step 4</span>Results</button>
+  <button class="nb" id="nb4" onclick="go(4)"><span class="nn">Step 5</span>Vendor guide</button>
+</div>
+
+<!-- ═══════ STEP 0 ═══════ -->
+<div id="s0">
+  <div class="step-badge"><div class="step-num">1</div><div class="step-lbl">Step One</div></div>
+  <div class="step-q">What kind of solar setup do you want?</div>
+
+  <div class="path-grid">
+    <div class="path-card" id="pc-ongrid" onclick="pickPath('ongrid')">
+      <div class="path-icon pi-green">🔌</div>
+      <div class="path-name">On-Grid</div>
+      <div class="path-desc">Stay connected to the grid. Cover your own bill, export the surplus, claim subsidy.</div>
+      <div class="path-meta">
+        <div><b>Cost:</b> ₹55–70k / kWp</div>
+        <div><b>Subsidy:</b> ✓ Up to ₹78,000</div>
+        <div><b>Backup:</b> ✗ None during outage</div>
+      </div>
+    </div>
+    <div class="path-card" id="pc-offgrid" onclick="pickPath('offgrid')">
+      <div class="path-icon pi-amber">🔋</div>
+      <div class="path-name">Off-Grid</div>
+      <div class="path-desc">Fully independent with battery storage. Works through outages, no DISCOM needed.</div>
+      <div class="path-meta">
+        <div><b>Cost:</b> ₹95–140k / kWp</div>
+        <div><b>Subsidy:</b> ✗ Not eligible</div>
+        <div><b>Backup:</b> ✓ Full autonomy</div>
+      </div>
+    </div>
+    <div class="path-card" id="pc-invest" onclick="pickPath('invest')">
+      <div class="path-icon pi-purple">📈</div>
+      <div class="path-name">Earn from Surplus Space</div>
+      <div class="path-desc">You have spare rooftop, terrace, or land. Oversize the system and sell what you don't use.</div>
+      <div class="path-meta">
+        <div><b>Cost:</b> ₹50–65k / kWp</div>
+        <div><b>Start from:</b> 500 sq ft</div>
+        <div><b>Return:</b> 10–16% yield</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:26px">
+    <div class="slabel">Not sure which? Read these first</div>
+
+    <div class="expl" id="ex-ongrid">
+      <div class="expl-h" onclick="tx('ex-ongrid')">
+        <div class="expl-i pi-green">🔌</div>
+        <div><div class="expl-t">What is an On-Grid system?</div><div class="expl-s">Most common choice for Indian homes · subsidy eligible</div></div>
+        <div class="expl-arr">▼</div>
+      </div>
+      <div class="expl-b"><div class="expl-c">
+        <p>An <strong>on-grid (grid-tied)</strong> system connects your panels directly to the utility grid through a bi-directional meter. There are no batteries. When your panels produce more than you consume, the excess flows back to the grid and your meter runs backwards.</p>
+        <p><strong>How the money works:</strong> Under net metering you're billed only on <em>net</em> consumption. Generate 400 units, use 300, and you pay for zero while carrying a 100-unit credit. Some states pay cash for surplus at a buyback rate (₹2–3.5/kWh); others only offset your bill.</p>
+        <p><strong>Where it wins:</strong></p>
+        <ul>
+          <li>Cheapest per kWp — no battery, which is 40–50% of an off-grid system</li>
+          <li>Only configuration eligible for the <strong>PM Surya Ghar subsidy</strong> (up to ₹78,000)</li>
+          <li>Lowest maintenance — no battery replacement every 5–8 years</li>
+          <li>Payback typically 3–5 years in high-tariff states</li>
+        </ul>
+        <p><strong>The catch:</strong> During a grid outage an on-grid inverter <em>shuts down automatically</em> — even in bright sunlight. This is mandatory anti-islanding safety so linemen repairing the grid aren't electrocuted by your exported power. If you have 4+ hour daily outages, that's a real problem.</p>
+        <p><strong>Best for:</strong> Urban and semi-urban homes with reliable grid supply and high bills. Under 2 hours of daily outage? This is almost always right.</p>
+      </div></div>
+    </div>
+
+    <div class="expl" id="ex-offgrid">
+      <div class="expl-h" onclick="tx('ex-offgrid')">
+        <div class="expl-i pi-amber">🔋</div>
+        <div><div class="expl-t">What is an Off-Grid system?</div><div class="expl-s">Full independence · battery storage · no subsidy</div></div>
+        <div class="expl-arr">▼</div>
+      </div>
+      <div class="expl-b"><div class="expl-c">
+        <p>An <strong>off-grid</strong> system is self-contained. Panels charge a battery bank during the day; the battery powers your home at night and through outages. You're either not connected to the DISCOM at all, or you keep the connection purely as backup.</p>
+        <p><strong>How the money works:</strong> You're not selling anything. Your return is the electricity bill you avoid entirely, plus the diesel generator you stop running. In areas with 6+ hours of daily load-shedding, DG fuel savings alone often justify the system.</p>
+        <p><strong>Where it wins:</strong></p>
+        <ul>
+          <li>Works through blackouts — the single biggest reason people go off-grid</li>
+          <li>No DISCOM paperwork, no net metering application, no approval wait</li>
+          <li>Essential for remote sites: farmhouses, hill stations, telecom towers</li>
+          <li>Replaces diesel generators, which cost ₹18–25 per unit to run</li>
+        </ul>
+        <p><strong>The catch:</strong> Batteries are expensive and they die. Lead-acid lasts 4–6 years; lithium (LFP) lasts 10–15 but costs 2.5× upfront. Budget for a full replacement in year 6 with lead-acid. There is also <strong>no PM Surya Ghar subsidy</strong> for off-grid residential — the scheme requires grid connection and net metering.</p>
+        <p><strong>Sizing is different:</strong> You size for your worst day, not your average. Two consecutive cloudy days with no grid means the battery carries the whole load. Off-grid systems run 30–50% oversized versus on-grid.</p>
+        <p><strong>Best for:</strong> Rural homes, farmhouses, 4+ hours of daily outage, or anyone who cannot tolerate a power cut.</p>
+      </div></div>
+    </div>
+
+    <div class="expl" id="ex-hybrid">
+      <div class="expl-h" onclick="tx('ex-hybrid')">
+        <div class="expl-i pi-blue">⚡</div>
+        <div><div class="expl-t">What about Hybrid systems?</div><div class="expl-s">Best of both · partial subsidy in some states</div></div>
+        <div class="expl-arr">▼</div>
+      </div>
+      <div class="expl-b"><div class="expl-c">
+        <p>A <strong>hybrid</strong> system is grid-tied <em>with</em> a battery. It exports surplus like on-grid, but keeps a small battery (2–5 kWh) to run essential loads during outages — lights, fans, fridge, router.</p>
+        <p>The battery is deliberately undersized. You aren't trying to run the AC through a 6-hour cut; you're keeping the fridge cold and the lights on. That keeps cost far below true off-grid.</p>
+        <p><strong>Subsidy nuance:</strong> Several DISCOMs let the <em>solar portion</em> claim PM Surya Ghar subsidy as long as export capability and a net meter are installed. The battery is never subsidised. Rules vary — confirm before assuming.</p>
+        <p><strong>Best for:</strong> Urban homes with occasional but disruptive outages, home offices, medical equipment. Costs roughly 1.5–1.7× an equivalent on-grid system.</p>
+        <p style="color:var(--tx3);margin-top:14px">Configure this by choosing <strong>On-Grid</strong> and enabling battery backup in Step 2.</p>
+      </div></div>
+    </div>
+
+    <div class="expl" id="ex-invest">
+      <div class="expl-h" onclick="tx('ex-invest')">
+        <div class="expl-i pi-purple">📈</div>
+        <div><div class="expl-t">Earning from surplus space</div><div class="expl-s">Spare terrace, warehouse roof, or a plot of land</div></div>
+        <div class="expl-arr">▼</div>
+      </div>
+      <div class="expl-b"><div class="expl-c">
+        <p>This is for people who have <strong>more space than they need power</strong>. A big terrace, a warehouse roof, a shed, half an acre of unused land behind the house. Instead of sizing solar to your own bill, you fill the space and sell the surplus.</p>
+        <p><strong>The core idea:</strong> Your own consumption might need 3 kWp. But you have room for 12 kWp. Those extra 9 kWp generate power you'll never use — so it goes to the grid, and the DISCOM pays you for it.</p>
+        <p><strong>What you actually earn:</strong> Self-consumed units are worth your full tariff (₹5–7.5/kWh) because you avoid buying them. Exported units earn the buyback rate (₹2–3.5/kWh), which is always lower. So the economics are strongest when you use as much as you can and sell the remainder.</p>
+        <p><strong>Three practical scales:</strong></p>
+        <ul>
+          <li><strong>Spare rooftop (500–1,500 sq ft):</strong> 5–15 kWp. Still residential. PM Surya Ghar: max ₹78,000 central subsidy regardless of size. Same installer and paperwork as a standard home system.</li>
+          <li><strong>Warehouse / commercial roof (2,000–10,000 sq ft):</strong> 20–100 kWp. Crosses into commercial net metering. No residential subsidy, but accelerated depreciation gives a tax benefit if you have business income.</li>
+          <li><strong>Small ground mount (0.25–2 acres):</strong> 50–400 kWp. Needs land conversion and a proper DISCOM application. This is where it becomes a genuine business rather than a bill-offset.</li>
+        </ul>
+        <p><strong>The three real constraints:</strong></p>
+        <ul>
+          <li><strong>Sanctioned load cap.</strong> Most states cap your rooftop system at 100–150% of your sanctioned load. If your connection is 5 kW, you may not be allowed to install 15 kWp without upgrading the connection. <em>Check this first — it kills more projects than cost does.</em></li>
+          <li><strong>Subsidy ceiling.</strong> PM Surya Ghar is capped at ₹78,000 for any system 3 kW or larger — installing a bigger system gives no additional central subsidy.</li>
+          <li><strong>Buyback isn't cash everywhere.</strong> Some DISCOMs credit units against future bills rather than paying cash. If you export far more than you consume, those credits may expire unused at year-end.</li>
+        </ul>
+        <p><strong>Realistic returns:</strong> A 10 kWp rooftop in a ₹7/kWh state with 50% self-consumption returns roughly 14–16% annually and pays back in 5–6 years. Push self-consumption higher (run the AC, charge an EV during the day) and it improves sharply.</p>
+        <p><strong>Best for:</strong> Homeowners with large terraces, small businesses with warehouse roofs, or anyone sitting on an idle plot near an existing electricity connection.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:22px">
+    <div class="card-t">Side-by-side comparison</div>
+    <div class="card-s">All figures for a typical residential setup, 2025 prices.</div>
+    <div style="overflow-x:auto">
+    <table class="cmp">
+      <thead><tr><th></th><th>On-Grid</th><th>Off-Grid</th><th>Surplus Space</th></tr></thead>
+      <tbody>
+        <tr><td>Sized to</td><td>Your consumption</td><td>Your worst day</td><td>Your available space</td></tr>
+        <tr><td>Battery required</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
+        <tr><td>Cost per kWp</td><td>₹55–70k</td><td>₹95–140k</td><td>₹50–65k <small>(scale discount)</small></td></tr>
+        <tr><td>PM Surya Ghar subsidy</td><td class="yes">✓ Max ₹78,000</td><td class="no">✗ Not eligible</td><td class="yes">✓ Max ₹78,000 (≥3kWp)</td></tr>
+        <tr><td>Works during blackout</td><td class="no">✗ Auto shutdown</td><td class="yes">✓ Full backup</td><td class="no">✗ Auto shutdown</td></tr>
+        <tr><td>Sell power back</td><td class="yes">✓ Small surplus</td><td class="no">✗ No export</td><td class="yes">✓ Primary income</td></tr>
+        <tr><td>Typical payback</td><td>3–5 yrs</td><td>6–9 yrs</td><td>5–7 yrs</td></tr>
+        <tr><td>Maintenance</td><td>Low</td><td>Medium <small>(battery swap yr 6)</small></td><td>Low–Medium</td></tr>
+        <tr><td>DISCOM approval</td><td class="yes">Required</td><td class="no">Not needed</td><td class="yes">Required + load check</td></tr>
+        <tr><td>Main constraint</td><td>Your bill size</td><td>Battery cost</td><td>Sanctioned load cap</td></tr>
+        <tr><td>Best for</td><td>Urban homes, stable grid</td><td>Rural, outage-prone</td><td>Big terraces, sheds, plots</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <button class="btn btn-p" id="btnNext0" disabled style="opacity:.4;cursor:not-allowed">Select a purchase type to continue →</button>
+</div>
+
+<!-- ═══════ STEP 1 — CONFIGURE ═══════ -->
+<div id="s1" class="hidden">
+  <div class="step-badge"><div class="step-num">2</div><div class="step-lbl">Step Two</div></div>
+  <div class="step-q" id="s1q">Configure your system</div>
+
+  <!-- Common: state -->
+  <div class="card">
+    <div class="slabel">Location &amp; tariff</div>
+    <div class="g2">
+      <div><label>State</label><select id="stSel" onchange="onState()"><option value="">Select state…</option></select></div>
+      <div><label id="tLbl">Electricity tariff (₹/kWh)</label><input type="number" id="tIn" step="0.1" min="1" max="20" placeholder="e.g. 7.0" oninput="calcAll()"></div>
+    </div>
+    <div class="g2" style="margin-top:12px">
+      <div id="buybackBox"><label id="bbLbl">Export / buyback rate (₹/kWh)</label><input type="number" id="bbIn" step="0.05" min="0.5" max="12" placeholder="e.g. 3.0" oninput="onBuyback()"></div>
+    </div>
+    <div class="g2" style="margin-top:12px">
+      <div id="sanctionBox" class="hidden"><label>Sanctioned load (kW) <span style="font-weight:400;color:var(--tx3)">from your bill</span></label><input type="number" id="sanction" value="5" step="0.5" min="1" max="500" oninput="calcAll()"></div>
+    </div>
+    <div id="tInfo" class="info i-g hidden"></div>
+    <div id="zoneOut" class="info i-b hidden"></div>
+  </div>
+
+  <!-- RESIDENTIAL BLOCK -->
+  <div id="cfgResi">
+    <div class="card">
+      <div class="slabel">How would you like to calculate?</div>
+      <div class="g2" style="margin-bottom:14px">
+        <div class="pt-card sel" id="im-app" onclick="setMode('app')">
+          <div class="pt-top"><div class="pt-n">⚙️ By Appliances</div></div>
+          <div class="pt-d">List what you own. Most accurate for sizing.</div>
+        </div>
+        <div class="pt-card" id="im-bill" onclick="setMode('bill')">
+          <div class="pt-top"><div class="pt-n">₹ By Monthly Bill</div></div>
+          <div class="pt-d">Enter your average bill amount or units.</div>
+        </div>
+      </div>
+      <div id="billMode" class="hidden">
+        <div class="g2">
+          <div><label>Average monthly bill (₹)</label><input type="number" id="billAmt" placeholder="e.g. 4500" oninput="fromBill('amt')"></div>
+          <div><label>— or — monthly units (kWh)</label><input type="number" id="billUnits" placeholder="e.g. 620" oninput="fromBill('units')"></div>
+        </div>
+        <div class="info i-b" id="billOut">Enter your bill or units to estimate daily load.</div>
+      </div>
+    </div>
+
+    <div class="card" id="appCard">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
+        <div class="card-t">Your appliances</div>
+        <div style="font-size:11px;color:var(--tx3)">✎ Watts column is editable</div>
+      </div>
+      <div class="card-s">Set quantity, daily hours, and wattage. Click ✕ to skip any item.</div>
+      <div class="ap-hdr"><div class="ap-h">Appliance</div><div class="ap-h">Qty</div><div class="ap-h">Hrs/day</div><div class="ap-h">Watts ✎</div><div class="ap-h">Off</div></div>
+      <div id="appList"></div>
+      <button class="btn-add" onclick="addApp()">+ Add custom appliance</button>
+    </div>
+
+    <div class="card">
+      <div class="slabel">Options</div>
+      <div class="tr" id="trHigh">
+        <div><div class="tl">Exclude high-powered appliances</div><div class="td">ACs, geysers, OTG, EV charger — let the grid handle these</div></div>
+        <div class="tog" id="tgHigh" onclick="flip('high')"><div class="th"></div></div>
+      </div>
+      <div class="tr" id="trBatt">
+        <div><div class="tl">Add battery backup (hybrid)</div><div class="td">Keeps essentials running during outages. Adds ~60% to cost.</div></div>
+        <div class="tog" id="tgBatt" onclick="flip('batt')"><div class="th"></div></div>
+      </div>
+    </div>
+
+    <div class="card hidden" id="offgridCard">
+      <div class="slabel">Off-grid battery sizing</div>
+      <div class="g2">
+        <div><label>Days of autonomy</label>
+          <select id="ogDays" onchange="calcAll()">
+            <option value="1">1 day — minimum, sunny climates</option>
+            <option value="1.5" selected>1.5 days — recommended</option>
+            <option value="2">2 days — monsoon-safe</option>
+            <option value="3">3 days — remote / critical</option>
+          </select></div>
+        <div><label>Battery chemistry</label>
+          <select id="ogBatt" onchange="calcAll()">
+            <option value="leadacid">Lead-acid tubular — ₹12k/kWh, 5 yr life</option>
+            <option value="lifepo4" selected>Lithium LFP — ₹28k/kWh, 12 yr life</option>
+            <option value="lithium_prem">Lithium premium — ₹38k/kWh, 15 yr life</option>
+          </select></div>
+      </div>
+      <div class="info i-a"><strong>Why autonomy matters:</strong> Off-grid systems must survive consecutive cloudy days with zero grid backup. 1.5 days is the practical minimum for most of India; monsoon-heavy regions like Kerala and coastal Karnataka should use 2–3 days.</div>
+    </div>
+  </div>
+
+  <!-- SURPLUS SPACE BLOCK -->
+  <div id="cfgInvest" class="hidden">
+    <div class="card">
+      <div class="slabel">What kind of space do you have?</div>
+      <div class="tier-grid">
+        <div class="tier sel" id="ti-roof" onclick="setTier('roof')">
+          <div class="tier-n">🏠 Spare rooftop</div>
+          <div class="tier-sz">500 – 1,500 sq ft · 5–15 kWp</div>
+          <div class="tier-d">Large terrace on a home. Residential tariff. PM Surya Ghar subsidy: max ₹78,000.</div>
+        </div>
+        <div class="tier" id="ti-comm" onclick="setTier('comm')">
+          <div class="tier-n">🏢 Commercial roof</div>
+          <div class="tier-sz">2,000 – 10,000 sq ft · 20–100 kWp</div>
+          <div class="tier-d">Warehouse, shop, factory shed. No subsidy, but accelerated depreciation.</div>
+        </div>
+        <div class="tier" id="ti-land" onclick="setTier('land')">
+          <div class="tier-n">🌾 Small ground mount</div>
+          <div class="tier-sz">0.25 – 2 acres · 50–400 kWp</div>
+          <div class="tier-d">Idle plot. Needs land conversion + full DISCOM application.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="slabel">Your space</div>
+      <div class="g2">
+        <div>
+          <label id="spaceLbl">Available shadow-free area (sq ft)</label>
+          <input type="number" id="space" value="1000" min="100" max="200000" oninput="calcAll()">
+          <div id="spaceHint" style="font-size:11px;color:var(--tx3);margin-top:4px"></div>
+        </div>
+        <div>
+          <label>Your own daily consumption (kWh)</label>
+          <input type="number" id="ownLoad" value="12" step="0.5" min="0" max="2000" oninput="calcAll()">
+          <div style="font-size:11px;color:var(--tx3);margin-top:4px">Monthly bill ÷ tariff ÷ 30. Units you consume are worth more than units you sell.</div>
+        </div>
+      </div>
+      <div class="info i-p" id="capacityOut"></div>
+    </div>
+
+    <div class="card">
+      <div class="slabel">Grid connection</div>
+      <div class="g2">
+        <div>
+          <label>Sanctioned load (kW) <span style="font-weight:400;color:var(--tx3)">check your bill</span></label>
+          <input type="number" id="invSanction" value="5" step="0.5" min="1" max="1000" oninput="calcAll()">
+        </div>
+        <div>
+          <label>State export cap (% of sanctioned load)</label>
+          <select id="capPct" onchange="calcAll()">
+            <option value="100">100% — conservative (most states)</option>
+            <option value="150" selected>150% — common allowance</option>
+            <option value="200">200% — liberal (select DISCOMs)</option>
+            <option value="1000">No cap — ground mount / open access</option>
+          </select>
+        </div>
+      </div>
+      <div id="capWarn"></div>
+    </div>
+
+    <div class="card">
+      <div class="slabel">Self-consumption</div>
+      <div>
+        <label>How much of your generation will you use yourself? <strong id="selfLbl">—</strong></label>
+        <input type="range" id="selfPct" min="0" max="100" step="5" value="40" oninput="calcAll()">
+      </div>
+      <div class="info i-a" id="selfNote"></div>
+    </div>
+  </div>
+
+  <button class="btn btn-p" onclick="go(2)">Continue to panels →</button>
+  <button class="btn btn-s" onclick="go(0)">← Back to purchase type</button>
+</div>
+
+<!-- ═══════ STEP 2 — PANELS ═══════ -->
+<div id="s2" class="hidden">
+  <div class="step-badge"><div class="step-num">3</div><div class="step-lbl">Step Three</div></div>
+  <div class="step-q">Choose your panel technology</div>
+
+  <div class="card">
+    <div class="card-t">Panel type</div>
+    <div class="card-s">Higher efficiency means less area for the same output — matters most when space is tight.</div>
+    <div class="pt-grid" id="panelGrid"></div>
+    <div class="info i-b" id="panelInfo"></div>
+
+    <!-- Space fit meter: inline constraint check, not a separate step -->
+    <div class="fit" id="fitBox">
+      <div class="fit-top">
+        <div class="fit-l" id="fitLabel">Does it fit your roof?</div>
+        <div class="fit-v" id="fitVerdict">—</div>
+      </div>
+      <div class="fit-bar"><div class="fit-need" id="fitBar" style="width:0%"></div><div class="fit-cap" id="fitCap" style="left:100%"></div></div>
+      <div class="fit-note" id="fitNote"></div>
+      <div id="fitInputWrap" style="margin-top:12px">
+        <label>Available shadow-free area (sq ft)</label>
+        <input type="number" id="roofArea" value="600" min="50" max="200000" oninput="calcAll()">
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-p" onclick="go(3)">See results →</button>
+  <button class="btn btn-s" onclick="go(1)">← Back to configure</button>
+</div>
+
+<!-- ═══════ STEP 3 — RESULTS ═══════ -->
+<div id="s3" class="hidden">
+  <div id="pdf-hdr">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:16pt;font-weight:800;color:#0f6e56">☀️ SolarSense India</div>
+      <div style="font-size:9pt;color:#888" id="pdf-date"></div>
+    </div>
+    <div style="font-size:14pt;font-weight:700;color:#191b17;margin-top:6pt;border-bottom:2px solid #1d9e75;padding-bottom:8pt" id="pdf-title">Solar Estimate Report</div>
+    <div style="font-size:9pt;color:#555" id="pdf-config"></div>
+  </div>
+  <div class="step-badge"><div class="step-num">4</div><div class="step-lbl">Step Four</div></div>
+  <div class="step-q" id="resTitle">Your system</div>
+
+  <div id="resResi">
+    <div class="g3" style="margin-bottom:11px" id="rm1"></div>
+    <div class="g3" style="margin-bottom:11px" id="rm2"></div>
+    <div class="card">
+      <div class="card-t">Cost breakdown</div>
+      <div class="card-s" id="costSub">Itemised — every component and what it costs.</div>
+      <div id="costRows"></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Savings &amp; payback</div>
+      <div class="g3" style="margin-top:14px" id="saveMetrics"></div>
+      <div id="sellBackBox" class="hidden" style="margin-top:16px">
+        <div class="slabel">Energy split</div><div id="splitBars"></div>
+      </div>
+      <div class="info i-b" id="paybackNote"></div>
+    </div>
+    <div class="card">
+      <div class="card-t">Generation pattern</div>
+      <div class="card-s">Monthly output based on your location's irradiance profile.</div>
+      <div class="mc" id="monthChart"></div>
+      <div class="g3" style="margin-top:16px" id="genMetrics"></div>
+    </div>
+    <div class="card">
+      <div class="slabel">Environmental impact</div>
+      <div class="env">
+        <div class="env-i"><div class="env-e">💨</div><div><div class="env-v" id="envCo2">—</div><div class="env-l">CO₂ emissions mitigated (25 yrs)</div></div></div>
+        <div class="env-i"><div class="env-e">🌲</div><div><div class="env-v" id="envTrees">—</div><div class="env-l">Trees planted equivalent</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="resInvest" class="hidden">
+    <div class="g3" style="margin-bottom:11px" id="im1"></div>
+    <div class="g3" style="margin-bottom:11px" id="im2"></div>
+
+    <div class="card">
+      <div class="card-t">Cost breakdown</div>
+      <div class="card-s" id="invCostSub"></div>
+      <div id="invCostRows"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-t">Where your money comes from</div>
+      <div class="card-s">Self-consumed units avoid your tariff. Exported units earn the buyback rate — always lower.</div>
+      <div id="invSplit"></div>
+      <div class="g3" style="margin-top:16px" id="invEarnings"></div>
+      <div class="info i-a" id="invSelfTip"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-t">Returns</div>
+      <div class="g4" style="margin-top:14px" id="invReturns"></div>
+      <div class="info i-p" id="invNote"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-t">25-year cumulative earnings</div>
+      <div class="card-s">Assumes panel degradation and 3% annual tariff escalation. Bar height = cumulative net position.</div>
+      <div class="mc" style="height:90px" id="cfChart"></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tx3);margin-top:5px"><span>Yr 1</span><span>Yr 13</span><span>Yr 25</span></div>
+      <div class="g3" style="margin-top:16px" id="cfMetrics"></div>
+    </div>
+
+    <div class="card">
+      <div class="slabel">Environmental impact</div>
+      <div class="env">
+        <div class="env-i"><div class="env-e">💨</div><div><div class="env-v" id="invCo2">—</div><div class="env-l">CO₂ mitigated (25 yrs)</div></div></div>
+        <div class="env-i"><div class="env-e">🌲</div><div><div class="env-v" id="invTrees">—</div><div class="env-l">Trees planted equivalent</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice">
+    <div class="notice-i">ℹ️</div>
+    <div>The computation is indicative in nature. Generation and financial savings may vary based on actual solar irradiation, panel efficiency, shading, and local grid conditions. Subsidy amounts are as per PM Surya Ghar Muft Bijli Yojana guidelines for residential consumers and are subject to change. Export caps and buyback rates vary by DISCOM. Consult a certified solar advisor for a precise assessment.</div>
+  </div>
+
+  <div id="pdf-ftr">Generated by SolarSense India (solarsense.in) · Estimates are indicative — get quotes from certified installers. Not financial or engineering advice.</div>
+
+  <button class="btn btn-p" onclick="go(4)">See vendor guide →</button>
+  <button class="btn btn-s" onclick="go(2)">← Back to panels</button>
+</div>
+
+<!-- ═══════ STEP 4 — INSTALLERS ═══════ -->
+<div id="s4" class="hidden">
+  <div class="step-badge"><div class="step-num">5</div><div class="step-lbl">Step Five</div></div>
+  <div class="step-q">What kind of vendor to look for</div>
+  <div class="card">
+    <div class="slabel">Your configuration</div>
+    <div class="g2" id="finalSummary"></div>
+  </div>
+  <div style="font-size:13px;color:var(--tx2);margin-bottom:13px" id="aggIntro"></div>
+  <div id="aggList"></div>
+  <div class="card">
+    <div class="card-t">Questions to ask every vendor</div>
+    <div class="card-s">Get quotes from at least 3. Prices vary 15–25% across regions.</div>
+    <div id="checklist" style="font-size:12.5px;color:var(--tx2);line-height:2"></div>
+  </div>
+  <button class="btn btn-s" onclick="go(3)">← Back to results</button>
+  <button class="btn btn-s" onclick="location.reload()">Start over</button>
+</div>
+
+</div>
+
+<script>
+/* ══════ DATA ══════ */
+const TARIFFS={
+ "Andhra Pradesh":{d:4.5,b:2.50,dis:"APEPDCL / APSPDCL"},"Assam":{d:5.2,b:2.80,dis:"APDCL"},
+ "Bihar":{d:6.1,b:3.00,dis:"NBPDCL / SBPDCL"},"Chhattisgarh":{d:4.8,b:2.60,dis:"CSPDCL"},
+ "Delhi":{d:7.0,b:3.50,dis:"BSES / Tata Power Delhi"},"Goa":{d:3.9,b:2.20,dis:"Goa Electricity Dept."},
+ "Gujarat":{d:5.5,b:2.25,dis:"DGVCL / MGVCL / PGVCL"},"Haryana":{d:7.2,b:2.00,dis:"DHBVN / UHBVN"},
+ "Himachal Pradesh":{d:4.1,b:2.50,dis:"HPSEBL"},"Jharkhand":{d:5.5,b:2.80,dis:"JBVNL"},
+ "Karnataka":{d:6.2,b:3.35,dis:"BESCOM / HESCOM"},"Kerala":{d:5.8,b:3.00,dis:"KSEB"},
+ "Madhya Pradesh":{d:5.1,b:2.65,dis:"MPEZ / MPMKVVCL"},"Maharashtra":{d:6.5,b:3.06,dis:"MSEDCL / Adani / Tata"},
+ "Odisha":{d:5.5,b:2.80,dis:"TPCODL / TPNODL"},"Punjab":{d:7.0,b:2.50,dis:"PSPCL"},
+ "Rajasthan":{d:6.5,b:2.85,dis:"AVVNL / JDVVNL / JVVNL"},"Tamil Nadu":{d:5.0,b:2.25,dis:"TANGEDCO"},
+ "Telangana":{d:5.3,b:2.50,dis:"TSNPDCL / TSSPDCL"},"Uttar Pradesh":{d:6.5,b:2.50,dis:"PVVNL / DVVNL / MVVNL"},
+ "Uttarakhand":{d:5.4,b:2.60,dis:"UPCL"},"West Bengal":{d:7.5,b:2.75,dis:"WBSEDCL / CESC"},
+};
+const ZONES={
+ rajasthan:{n:"Very High Solar Zone",e:"🔆",h:6.5,desc:"India's highest irradiance — best ROI in the country.",m:[85,80,90,95,100,95,75,72,80,90,88,82]},
+ jaipur:{n:"Very High Solar Zone",e:"🔆",h:6.4,desc:"Jaipur sits in Rajasthan's prime solar belt.",m:[84,80,90,96,100,94,76,73,80,90,88,82]},
+ gujarat:{n:"High Solar Zone",e:"☀️",h:5.8,desc:"Consistent sunshine year-round.",m:[80,78,85,90,88,80,68,65,75,85,82,78]},
+ ahmedabad:{n:"High Solar Zone",e:"☀️",h:5.8,desc:"Central Gujarat gets strong year-round sunshine.",m:[80,78,85,90,88,80,70,67,76,86,82,78]},
+ delhi:{n:"Good Solar Zone",e:"☀️",h:5.5,desc:"Good irradiance with winter haze. Summers peak.",m:[65,72,82,88,90,82,70,72,80,82,72,60]},
+ gurugram:{n:"Good Solar Zone",e:"☀️",h:5.5,desc:"Delhi-NCR with the highest domestic tariff in India.",m:[65,72,82,88,90,82,70,72,80,82,72,60]},
+ gurgaon:{n:"Good Solar Zone",e:"☀️",h:5.5,desc:"Delhi-NCR with high tariffs — strong payback.",m:[65,72,82,88,90,82,70,72,80,82,72,60]},
+ noida:{n:"Good Solar Zone",e:"☀️",h:5.5,desc:"NCR region — same irradiance as Delhi.",m:[65,72,82,88,90,82,70,72,80,82,72,60]},
+ haryana:{n:"Good Solar Zone",e:"☀️",h:5.5,desc:"Highest domestic tariff in India — excellent payback.",m:[65,72,82,88,90,82,70,72,80,82,72,60]},
+ punjab:{n:"Good Solar Zone",e:"☀️",h:5.2,desc:"Good sunshine with strong state incentives.",m:[60,68,78,88,90,82,72,74,80,82,72,58]},
+ maharashtra:{n:"High Solar Zone",e:"☀️",h:5.5,desc:"Vidarbha and Marathwada are exceptional.",m:[88,85,90,88,82,60,55,55,65,85,88,86]},
+ mumbai:{n:"High Solar Zone",e:"☀️",h:5.2,desc:"Good solar but monsoon months dip significantly.",m:[85,82,88,86,80,55,50,52,60,82,86,84]},
+ pune:{n:"High Solar Zone",e:"☀️",h:5.5,desc:"Among the best irradiance in Maharashtra.",m:[88,86,90,88,84,65,60,62,70,86,88,86]},
+ karnataka:{n:"High Solar Zone",e:"☀️",h:5.3,desc:"Bangalore and interior Karnataka excel.",m:[85,82,85,80,75,60,58,60,65,80,82,84]},
+ bangalore:{n:"High Solar Zone",e:"☀️",h:5.3,desc:"One of India's best zones, high buyback rate.",m:[85,82,85,80,75,60,58,60,65,80,82,84]},
+ bengaluru:{n:"High Solar Zone",e:"☀️",h:5.3,desc:"One of India's best zones, high buyback rate.",m:[85,82,85,80,75,60,58,60,65,80,82,84]},
+ hyderabad:{n:"High Solar Zone",e:"☀️",h:5.4,desc:"Excellent irradiance year-round.",m:[86,84,88,88,84,74,70,72,76,82,84,84]},
+ telangana:{n:"High Solar Zone",e:"☀️",h:5.4,desc:"Strong sunshine especially in summer.",m:[86,84,88,88,84,74,70,72,76,82,84,84]},
+ tamil:{n:"Moderate-High Zone",e:"⛅",h:5.0,desc:"Strong solar but monsoon (Oct–Dec) reduces output.",m:[80,82,85,85,82,72,70,72,68,55,50,65]},
+ chennai:{n:"Moderate-High Zone",e:"⛅",h:4.9,desc:"Two monsoon seasons reduce annual hours.",m:[78,80,84,83,80,70,68,70,65,52,48,62]},
+ kerala:{n:"Moderate Solar Zone",e:"⛅",h:4.5,desc:"Two monsoons. Battery backup recommended.",m:[75,78,80,70,60,45,42,45,55,60,65,70]},
+ "west bengal":{n:"Moderate Solar Zone",e:"⛅",h:4.5,desc:"Moderate irradiance, significant monsoon losses.",m:[70,72,78,82,80,65,60,62,68,75,72,68]},
+ kolkata:{n:"Moderate Solar Zone",e:"⛅",h:4.5,desc:"Monsoon significantly reduces output.",m:[68,70,76,80,78,62,58,60,66,73,70,65]},
+ "uttar pradesh":{n:"Good Solar Zone",e:"☀️",h:5.3,desc:"Good irradiance, large rooftop market.",m:[70,75,84,90,90,82,72,74,80,84,76,65]},
+ lucknow:{n:"Good Solar Zone",e:"☀️",h:5.3,desc:"Central UP sees good solar potential.",m:[70,75,84,90,90,82,72,74,80,84,76,65]},
+ default:{n:"Average Solar Zone",e:"🌤️",h:5.0,desc:"India averages 4.5–5.5 peak sun hours.",m:[75,76,82,86,85,72,65,66,72,80,78,74]},
+};
+const PANELS={
+ poly:{n:"Polycrystalline",eff:16,cost:1.0,warranty:25,degr:0.7,wpp:330,desc:"Blue-tinted budget option. Lowest cost per watt but needs the most space.",pros:"Cheapest upfront",cons:"Largest area, lower heat tolerance"},
+ mono:{n:"Mono PERC",eff:19.5,cost:1.08,warranty:25,degr:0.55,wpp:400,desc:"Black cells, current industry standard. Best balance of cost and efficiency.",pros:"Best value, widely available",cons:"Slightly costlier than poly"},
+ topcon:{n:"TOPCon N-Type",eff:22,cost:1.22,warranty:30,degr:0.4,wpp:550,desc:"Newer N-type cells. Better low-light and high-temp performance, slower degradation.",pros:"30-yr warranty, low degradation",cons:"~20% costlier than mono"},
+ bifacial:{n:"Bifacial HJT",eff:23,cost:1.38,warranty:30,degr:0.35,wpp:590,desc:"Generates from both faces. Needs elevated mounting or reflective ground to benefit.",pros:"Up to +12% yield on ground mount",cons:"Highest cost, needs clearance"},
+};
+const BATTS={leadacid:{n:"Lead-acid tubular",cost:12000,life:5,dod:0.5},lifepo4:{n:"Lithium LFP",cost:28000,life:12,dod:0.85},lithium_prem:{n:"Lithium premium",cost:38000,life:15,dod:0.9}};
+const APPS_DEFAULT=[
+ {n:"Air conditioner (1.5T)",w:1500,hi:true,q:1,h:8},{n:"EV charger (home AC, 3.3kW)",w:3300,hi:true,q:0,h:4},
+ {n:"Refrigerator",w:150,hi:false,q:1,h:24},{n:"Ceiling fans",w:75,hi:false,q:4,h:12},
+ {n:"LED lights",w:10,hi:false,q:10,h:6},{n:"Washing machine",w:500,hi:false,q:1,h:1},
+ {n:"Television",w:100,hi:false,q:2,h:5},{n:"Geyser / water heater",w:2000,hi:true,q:1,h:1},
+ {n:"Microwave / OTG",w:1200,hi:true,q:1,h:0.5},{n:"Laptop / computer",w:60,hi:false,q:2,h:8},
+ {n:"Water pump (0.5 HP)",w:375,hi:false,q:1,h:1},{n:"Induction cooktop",w:1800,hi:true,q:0,h:1},
+];
+const TIERS={
+ roof:{n:"Spare rooftop",min:500,max:1500,def:1000,unit:"sq ft",rate:58000,sub:true,depr:false,
+   hint:"Typical Indian terrace: 800–1,500 sq ft usable after water tanks and stairwell.",
+   note:"Residential connection. PM Surya Ghar: max ₹78,000 for any system 3 kWp or larger."},
+ comm:{n:"Commercial roof",min:2000,max:10000,def:4000,unit:"sq ft",rate:52000,sub:false,depr:true,
+   hint:"Warehouse or factory shed. Measure only unshaded, load-bearing roof.",
+   note:"Commercial tariff. No residential subsidy, but 40% accelerated depreciation in year 1 if you have business income."},
+ land:{n:"Small ground mount",min:0.25,max:2,def:0.5,unit:"acres",rate:50000,sub:false,depr:true,
+   hint:"1 acre ≈ 43,560 sq ft. Ground mount needs ~1.4× rooftop area due to row spacing.",
+   note:"Requires land conversion to non-agricultural use and full DISCOM connectivity application. Budget 4–8 months for approvals."},
+};
+const AGGS={
+ ongrid:[
+  {i:"📋",n:"MNRE-empanelled installer",d:"MNRE and your state nodal agency publish a list of vendors approved to install subsidised rooftop solar. Only these vendors can process your PM Surya Ghar claim.",t:["Subsidy eligible","State certified"],x:"Start here — subsidy is only payable if your installer is on the approved list"},
+  {i:"🏭",n:"Manufacturer with in-house install",d:"Panel makers who also install give you a single warranty chain — one party is accountable for both hardware and workmanship.",t:["Single warranty","Accountable"],x:"Fewer finger-pointing disputes if something underperforms"},
+  {i:"🏢",n:"National EPC contractor",d:"Large turnkey providers who handle design, install, paperwork, and multi-year O&amp;M across states.",t:["Turnkey","O&amp;M included"],x:"Costs more, but strongest for warranty support and service reach"},
+  {i:"🔍",n:"Quote-comparison platform",d:"Online marketplaces that collect competing bids from several local installers in your area.",t:["Price discovery","Multiple bids"],x:"Best for fast, transparent price comparison in metros"},
+  {i:"🔧",n:"Local certified installer",d:"Independent regional installers, often 15–25% cheaper. Verify certification and check completed installations nearby.",t:["Lowest cost","Local service"],x:"Cheapest option — but vet their track record and warranty terms carefully"},
+ ],
+ offgrid:[
+  {i:"🔋",n:"Battery-system specialist",d:"Vendors whose core expertise is storage, not just panels. Off-grid lives or dies on correct battery sizing and quality.",t:["Battery specialist","Correct sizing"],x:"The most important choice off-grid — get the battery bank right"},
+  {i:"🏭",n:"Battery manufacturer (direct)",d:"Buying the battery through its maker gives you a direct warranty — critical when the bank fails in year 5.",t:["Direct warranty","OEM backed"],x:"Direct battery warranty matters more than any other single factor"},
+  {i:"🔧",n:"Local installer with service network",d:"For remote or rural sites, a vendor who can physically reach you for service beats a distant national brand.",t:["Serviceable","Local presence"],x:"Off-grid needs hands-on maintenance — proximity is a real advantage"},
+  {i:"📋",n:"MNRE channel partner",d:"State-certified installers, often 20–30% cheaper than national brands. Insist on a written battery warranty.",t:["Lower cost","State certified"],x:"Cheaper, but get every warranty term in writing"},
+  {i:"🏢",n:"Institutional / hybrid specialist",d:"For farmhouses, schools, or telecom sites, vendors experienced with larger hybrid installations.",t:["Institutional","Hybrid ready"],x:"Suited to bigger or mission-critical off-grid sites"},
+ ],
+ invest:[
+  {i:"📋",n:"Your DISCOM — first call",d:"Confirm your sanctioned load, the export cap, and whether buyback is paid in cash or credited against future bills.",t:["Mandatory first step","Free"],x:"This determines your maximum legal system size — do it before getting any quotes"},
+  {i:"🏢",n:"Commercial-capable EPC",d:"For 20 kWp+, a contractor experienced with commercial rooftop who can be a single accountable party.",t:["Commercial scale","Accountable"],x:"Worth it when the array is large enough to need proper engineering"},
+  {i:"🏭",n:"Manufacturer at scale",d:"At 25 kWp+, buying closer to the panel maker is where the per-kWp scale discount actually appears.",t:["Scale pricing","Direct supply"],x:"Where larger systems get genuinely cheaper per watt"},
+  {i:"💡",n:"OPEX / RESCO provider",d:"They fund and own the system; you buy the power at a fixed rate below grid tariff. Zero upfront cost.",t:["Zero capex","RESCO model"],x:"Compare this: no upfront outlay, but you forgo the asset and the upside"},
+  {i:"🏦",n:"Rooftop solar financing",d:"Many banks offer solar loans linked to home loans at competitive rates over long tenures.",t:["Financing","Long tenure"],x:"If the loan rate is below your yield, financing improves return on your own capital"},
+ ],
+};
+const CHECKS={
+ ongrid:["Is the inverter grid-tied with anti-islanding certification?","Who files the PM Surya Ghar subsidy application — you or me?","What is the net metering approval timeline with my DISCOM?","Is the bi-directional meter cost included?","Panel warranty vs performance warranty — what are both?","Is there a written O&amp;M contract for the first 5 years?","What happens to my system during a power cut?"],
+ offgrid:["What is the exact battery chemistry, capacity, and depth-of-discharge?","What is the written battery warranty period and replacement cost?","How many days of autonomy is this sized for?","Is the inverter pure sine wave? What is its surge rating?","What happens if I have 3 consecutive cloudy days?","Is there a charge controller? MPPT or PWM?","Total cost of ownership over 15 years including battery replacement?"],
+ invest:["What is my sanctioned load, and what system size does my DISCOM permit against it?","Does my DISCOM pay cash for exported units, or only credit them against future bills?","Do unused export credits expire at year-end? Many DISCOMs zero them out each March.","Is a connection upgrade needed, and what does it cost?","Will you file the net metering application, or is that on me?","For commercial: can I claim 40% accelerated depreciation in year one?","What is the guaranteed generation, and is there a performance guarantee clause?","Is the structure engineered for my roof's load-bearing capacity?"],
+};
+
+/* ══════ STATE ══════ */
+let path=null,mode='app',panel='mono',tier='roof';
+let apps=APPS_DEFAULT.map(a=>({...a}));
+let excl=new Set(),exHigh=false,useBatt=false;
+let zone=ZONES.default;
+let R={},I={};
+const MONTHS=['J','F','M','A','M','J','J','A','S','O','N','D'];
+const RATES={ongrid:65000,offgrid:52000};
+
+/* ══════ INIT ══════ */
+(function(){
+  const s=document.getElementById('stSel');
+  Object.keys(TARIFFS).sort().forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;s.appendChild(o);});
+  renderApps();renderPanels();
+})();
+
+/* ══════ NAV ══════ */
+function go(n){
+  if(n>0&&!path)return;
+  [0,1,2,3,4].forEach(i=>{
+    document.getElementById('s'+i).classList.toggle('hidden',i!==n);
+    const b=document.getElementById('nb'+i);b.classList.toggle('act',i===n);b.classList.toggle('done',i<n);
+  });
+  if(n===1)setupStep1();
+  if(n===2){renderPanels();calcAll();}
+  if(n===3)renderResults();
+  if(n===4)renderInstallers();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pickPath(p){
+  path=p;
+  ['ongrid','offgrid','invest'].forEach(k=>document.getElementById('pc-'+k).classList.toggle('sel',k===p));
+  const b=document.getElementById('btnNext0');
+  b.disabled=false;b.style.opacity='1';b.style.cursor='pointer';
+  b.textContent=p==='invest'?'Configure your space →':'Configure your system →';
+  b.onclick=()=>go(1);
+}
+function tx(id){document.getElementById(id).classList.toggle('open');}
+
+/* ══════ STEP1 ══════ */
+function setupStep1(){
+  const inv=path==='invest';
+  document.getElementById('cfgResi').classList.toggle('hidden',inv);
+  document.getElementById('cfgInvest').classList.toggle('hidden',!inv);
+  document.getElementById('offgridCard').classList.toggle('hidden',path!=='offgrid');
+  document.getElementById('trBatt').classList.toggle('hidden',path==='offgrid');
+  document.getElementById('sanctionBox').classList.add('hidden');
+  document.getElementById('s1q').textContent = inv?'Configure your surplus space'
+    : path==='offgrid'?'Configure your off-grid system':'Configure your on-grid system';
+  if(inv) setTier(tier);
+  calcAll();
+}
+function setMode(m){
+  mode=m;
+  document.getElementById('im-app').classList.toggle('sel',m==='app');
+  document.getElementById('im-bill').classList.toggle('sel',m==='bill');
+  document.getElementById('billMode').classList.toggle('hidden',m!=='bill');
+  document.getElementById('appCard').classList.toggle('hidden',m!=='app');
+  const th=document.getElementById('trHigh');
+  if(th) th.classList.toggle('hidden',m!=='app');
+  if(m!=='app'){exHigh=false;const tg=document.getElementById('tgHigh');if(tg)tg.classList.remove('on');}
+  calcAll();
+}
+function fromBill(src){
+  const t=parseFloat(document.getElementById('tIn').value)||7;let u;
+  if(src==='amt'){const a=parseFloat(document.getElementById('billAmt').value)||0;u=a/t;document.getElementById('billUnits').value=u?Math.round(u):'';}
+  else{u=parseFloat(document.getElementById('billUnits').value)||0;document.getElementById('billAmt').value=u?Math.round(u*t):'';}
+  document.getElementById('billOut').innerHTML=u?`<strong>${Math.round(u)} units/month</strong> → <strong>${(u/30).toFixed(1)} kWh/day</strong> average at ₹${t}/kWh.`:'Enter your bill or units to estimate daily load.';
+  calcAll();
+}
+function setTier(t){
+  tier=t;
+  ['roof','comm','land'].forEach(k=>document.getElementById('ti-'+k).classList.toggle('sel',k===t));
+  const T=TIERS[t];
+  const sp=document.getElementById('space');
+  sp.value=T.def; sp.min=T.min; sp.max=T.max*2;
+  sp.step = t==='land'?0.25:100;
+  document.getElementById('spaceLbl').textContent = t==='land'
+    ? 'Available land (acres)' : 'Available shadow-free area (sq ft)';
+  document.getElementById('spaceHint').textContent=T.hint;
+  document.getElementById('capPct').value = t==='land'?'1000':'150';
+  calcAll();
+}
+
+/* ══════ APPLIANCES ══════ */
+function renderApps(){
+  document.getElementById('appList').innerHTML=apps.map((a,i)=>{
+    const dim=excl.has(i)||(exHigh&&a.hi);const ev=a.n.includes('EV');
+    return `<div class="ap-row${dim?' dim':''}">
+      <div class="ap-n"><span title="${a.n}">${a.n}</span>${a.hi?`<span class="tag ${ev?'t-b':'t-a'}">${ev?'EV':'High'}</span>`:''}</div>
+      <div class="qw"><button class="qb" onclick="q(${i},-1)">−</button><div class="qv" id="q${i}">${a.q}</div><button class="qb" onclick="q(${i},1)">+</button></div>
+      <input type="number" class="ap-in" min="0" max="24" step="0.5" value="${a.h}" onchange="apps[${i}].h=parseFloat(this.value)||0;calcAll()">
+      <input type="number" class="ap-in" min="1" max="20000" value="${a.w}" onchange="apps[${i}].w=parseInt(this.value)||1;calcAll()">
+      <button class="xb${excl.has(i)?' on':''}" onclick="xc(${i})">✕</button></div>`;
+  }).join('');
+}
+function q(i,d){apps[i].q=Math.max(0,apps[i].q+d);document.getElementById('q'+i).textContent=apps[i].q;calcAll();}
+function xc(i){excl.has(i)?excl.delete(i):excl.add(i);renderApps();calcAll();}
+function addApp(){const n=prompt('Appliance name:','Custom appliance');if(!n)return;const w=parseInt(prompt('Wattage (W):','100'))||100;const h=parseFloat(prompt('Daily usage (hours):','4'))||4;apps.push({n,w,hi:w>=1200,q:1,h});renderApps();calcAll();}
+function flip(k){
+  if(k==='high'){exHigh=!exHigh;document.getElementById('tgHigh').classList.toggle('on',exHigh);}
+  else{useBatt=!useBatt;document.getElementById('tgBatt').classList.toggle('on',useBatt);}
+  renderApps();calcAll();
+}
+
+/* ══════ PANELS ══════ */
+function renderPanels(){
+  document.getElementById('panelGrid').innerHTML=Object.entries(PANELS).map(([k,p])=>`
+    <div class="pt-card${panel===k?' sel':''}" onclick="pickPanel('${k}')">
+      <div class="pt-top"><div class="pt-n">${p.n}</div><div class="pt-eff">${p.eff}%</div></div>
+      <div class="pt-d">${p.desc}</div>
+      <div class="pt-stats"><span>Cost: <b>${p.cost===1?'Base':'+'+Math.round((p.cost-1)*100)+'%'}</b></span><span>Warranty: <b>${p.warranty}y</b></span><span>Degr: <b>${p.degr}%/y</b></span></div>
+    </div>`).join('');
+}
+function pickPanel(k){panel=k;renderPanels();calcAll();}
+
+/* ══════ LOCATION ══════ */
+function onLoc(){
+  const raw=(document.getElementById('loc').value||'').toLowerCase().trim();
+  zone=ZONES.default;
+  for(const k of Object.keys(ZONES)){if(k!=='default'&&raw.includes(k)){zone=ZONES[k];break;}}
+  const z=document.getElementById('zoneOut');
+  if(raw.length>2){z.innerHTML=`${zone.e} <strong>${zone.n}</strong> — ${zone.h} peak sun hours/day. ${zone.desc}`;z.classList.remove('hidden');}
+  else z.classList.add('hidden');
+  calcAll();
+}
+let buybackEdited=false;
+function onState(){
+  const s=document.getElementById('stSel').value,t=TARIFFS[s];
+  const inp=document.getElementById('tIn'),inf=document.getElementById('tInfo'),lbl=document.getElementById('tLbl');
+  const bb=document.getElementById('bbIn'),bbl=document.getElementById('bbLbl');
+  if(t){inp.value=t.d;lbl.innerHTML='Electricity tariff (₹/kWh) <span style="color:var(--green);font-size:10px">← auto</span>';
+    if(!buybackEdited){bb.value=t.b;bbl.innerHTML='Export / buyback rate (₹/kWh) <span style="color:var(--green);font-size:10px">← auto</span>';}
+    inf.innerHTML=`<strong>${s}:</strong> ₹${t.d}/kWh domestic · Buyback ₹${t.b}/kWh · DISCOM: ${t.dis}`;inf.classList.remove('hidden');
+    /* loc field removed — zone auto-set by state name */ onLocByState(s);}
+  else inf.classList.add('hidden');
+  calcAll();
+}
+function onLocByState(stateName){
+  const raw=stateName.toLowerCase();
+  zone=ZONES.default;
+  for(const k of Object.keys(ZONES)){if(k!=="default"&&raw.includes(k)){zone=ZONES[k];break;}}
+  const z=document.getElementById('zoneOut');
+  if(stateName){z.innerHTML=zone.e+' <strong>'+zone.n+'</strong> — '+zone.h+' peak sun hours/day. '+zone.desc;z.classList.remove('hidden');}
+  else z.classList.add('hidden');
+  calcAll();
+}
+function onBuyback(){
+  buybackEdited=true;
+  document.getElementById('bbLbl').innerHTML='Export / buyback rate (₹/kWh) <span style="color:var(--amber);font-size:10px">← edited</span>';
+  calcAll();
+}
+function getBuyback(){
+  const v=parseFloat(document.getElementById('bbIn').value);
+  if(v>0)return v;
+  const s=document.getElementById('stSel').value;
+  return TARIFFS[s]?TARIFFS[s].b:2.5;
+}
+
+/* ══════ MATH ══════ */
+function areaFor(kw,eff,ground=false){const sqm=(kw*100)/eff*(ground?1.4:1);return{sqm:+sqm.toFixed(1),sqft:Math.round(sqm*10.764)};}
+function kwFromArea(sqft,eff,ground=false){const sqm=sqft/10.764/(ground?1.4:1);return +(sqm*eff/100).toFixed(2);}
+/* PM Surya Ghar: ₹30k/kW up to 2kW, ₹18k for the 3rd kW. Hard cap ₹78,000 for 3kW+. */
+function subsidy(kw){if(kw<=0)return 0;if(kw<=2)return kw*30000;if(kw<3)return 60000+(kw-2)*18000;return 78000;}
+function fN(n){return Math.round(n).toLocaleString('en-IN');}
+function fK(n){if(n>=10000000)return'₹'+(n/10000000).toFixed(2)+' Cr';if(n>=100000)return'₹'+(n/100000).toFixed(1)+' L';return'₹'+fN(n/1000)+'k';}
+function mkM(l,v,u,c=''){return`<div class="metric ${c}"><div class="m-l">${l}</div><div class="m-v">${v}</div><div class="m-u">${u}</div></div>`;}
+
+function calcAll(){ if(path==='invest')calcInvest(); else if(path)calcResi(); updateFit(); }
+
+/* ── Residential ── */
+function calcResi(){
+  const tariff=parseFloat(document.getElementById('tIn').value)||7;
+  const buyback=getBuyback();
+  let kWh=0;
+  if(mode==='bill'){kWh=(parseFloat(document.getElementById('billUnits').value)||0)/30;}
+  else{apps.forEach((a,i)=>{if(excl.has(i))return;if(exHigh&&a.hi)return;kWh+=a.w*a.q*a.h;});kWh/=1000;}
+  kWh=+kWh.toFixed(2);
+  const sunH=zone.h,p=PANELS[panel],isOff=path==='offgrid';
+  const kw=Math.max(0.5,Math.ceil((kWh/sunH)*(isOff?1.35:1)*10)/10);
+  let battKwh=0,battCost=0,battChem=null;
+  if(isOff){const days=parseFloat(document.getElementById('ogDays').value)||1.5;battChem=BATTS[document.getElementById('ogBatt').value];battKwh=+(kWh*days/battChem.dod).toFixed(1);battCost=battKwh*battChem.cost;}
+  else if(useBatt){battChem=BATTS.lifepo4;battKwh=+(kWh*0.35/battChem.dod).toFixed(1);battCost=battKwh*battChem.cost;}
+  const base=isOff?RATES.offgrid:RATES.ongrid;
+  const panelCost=kw*base*0.42*p.cost,inverterCost=kw*base*(isOff?0.22:0.18),structCost=kw*base*0.12,bosCost=kw*base*0.14,laborCost=kw*base*0.14,meterCost=isOff?0:8000;
+  const hardware=panelCost+inverterCost+structCost+bosCost+laborCost+meterCost;
+  const gross=hardware+battCost;
+  const sub=isOff?0:subsidy(kw);
+  const net=Math.max(0,gross-sub);
+  const dailyGen=+(kw*sunH*0.78).toFixed(1),annGen=Math.round(dailyGen*365);
+  let selfUse,exported=0,selfSave,exportRev=0,dgSave=0;
+  if(isOff){selfUse=Math.min(annGen,kWh*365);selfSave=Math.round(selfUse*tariff);dgSave=Math.round(kWh*365*0.30*18);}
+  else{selfUse=Math.round(Math.min(annGen,kWh*365)*0.65);exported=Math.max(0,annGen-selfUse);selfSave=Math.round(selfUse*tariff);exportRev=Math.round(exported*buyback);}
+  const annBenefit=isOff?(selfSave+dgSave):(selfSave+exportRev);
+  const payback=annBenefit>0?(net/annBenefit).toFixed(1):'—';
+  const battRepl=battChem?Math.max(0,Math.floor(25/battChem.life)-1):0;
+  const lifetimeBatt=battRepl*battCost;
+  const area=areaFor(kw,p.eff);
+  const co2=Math.round(annGen*25*0.82/1000),trees=Math.round(co2*1000/22);
+  R={kWh,kw,sunH,tariff,buyback,isOff,p,panelCost,inverterCost,structCost,bosCost,laborCost,meterCost,battKwh,battCost,battChem,gross,sub,net,dailyGen,annGen,selfUse,exported,selfSave,exportRev,dgSave,annBenefit,payback,area,co2,trees,battRepl,lifetimeBatt};
+}
+
+/* ── Surplus space ── */
+function calcInvest(){
+  const T=TIERS[tier];
+  const tariff=parseFloat(document.getElementById('tIn').value)||7;
+  const buyback=getBuyback();
+  const p=PANELS[panel];
+  const isLand=tier==='land';
+  const rawSpace=parseFloat(document.getElementById('space').value)||T.def;
+  const sqft=isLand?rawSpace*43560:rawSpace;
+  const ownLoad=parseFloat(document.getElementById('ownLoad').value)||0;
+  const sanction=parseFloat(document.getElementById('invSanction').value)||5;
+  const capPct=parseFloat(document.getElementById('capPct').value)||150;
+  const selfTarget=parseInt(document.getElementById('selfPct').value)||40;
+
+  // capacity from space
+  const kwSpace=kwFromArea(sqft,p.eff,isLand);
+  // capacity cap from sanctioned load
+  const kwCap=sanction*capPct/100;
+  const kw=+Math.min(kwSpace,kwCap).toFixed(2);
+  const limited=kwSpace>kwCap;
+
+  const sunH=zone.h;
+  const dailyGen=+(kw*sunH*0.78).toFixed(1);
+  const annGen=Math.round(dailyGen*365);
+
+  // self consumption bounded by own load
+  const ownAnn=ownLoad*365;
+  const maxSelfPct=annGen>0?Math.min(100,Math.round(ownAnn/annGen*100)):0;
+  const effSelfPct=Math.min(selfTarget,maxSelfPct);
+  const selfKwh=Math.round(annGen*effSelfPct/100);
+  const exportKwh=annGen-selfKwh;
+  const selfSave=Math.round(selfKwh*tariff);
+  const exportRev=Math.round(exportKwh*buyback);
+  const annEarn=selfSave+exportRev;
+
+  // cost with scale discount
+  let rate=T.rate;
+  if(kw>=25)rate*=0.94;
+  if(kw>=50)rate*=0.95;
+  if(kw>=100)rate*=0.96;
+  const panelCost=kw*rate*0.44*p.cost;
+  const inverterCost=kw*rate*0.16;
+  const structCost=kw*rate*(isLand?0.16:0.11);
+  const bosCost=kw*rate*0.13;
+  const laborCost=kw*rate*0.12;
+  const civilCost=isLand?kw*rate*0.08:0;
+  const meterCost=kw>10?15000:8000;
+  const gross=panelCost+inverterCost+structCost+bosCost+laborCost+civilCost+meterCost;
+
+  const sub=T.sub?subsidy(kw):0;
+  // accelerated depreciation benefit (40% * 30% tax) year 1
+  const deprBenefit=T.depr?Math.round(gross*0.40*0.30):0;
+  const net=Math.max(0,gross-sub-deprBenefit);
+  const payback=annEarn>0?(net/annEarn).toFixed(1):'—';
+  const yieldPct=net>0?(annEarn/net*100).toFixed(1):'—';
+
+  // 25y cumulative with 3% tariff escalation and degradation
+  const cf=[];let cum=-net;
+  for(let y=1;y<=25;y++){
+    const degr=Math.pow(1-p.degr/100,y-1);
+    const esc=Math.pow(1.03,y-1);
+    const g=annGen*degr;
+    const e=Math.round(g*effSelfPct/100*tariff*esc + g*(1-effSelfPct/100)*buyback*esc);
+    const om=Math.round(gross*0.01*Math.pow(1.03,y-1));
+    cum+=(e-om);
+    cf.push({y,e,om,cum,g});
+  }
+  const total25=cf[24].cum;
+  const breakEvenYr=cf.findIndex(x=>x.cum>=0)+1;
+  const totalGen=cf.reduce((s,x)=>s+x.g,0);
+  const co2=Math.round(totalGen*0.82/1000),trees=Math.round(co2*1000/22);
+  const area=areaFor(kw,p.eff,isLand);
+
+  I={T,tier,isLand,rawSpace,sqft,kw,kwSpace,kwCap,limited,sanction,capPct,ownLoad,tariff,buyback,p,sunH,
+     dailyGen,annGen,effSelfPct,maxSelfPct,selfTarget,selfKwh,exportKwh,selfSave,exportRev,annEarn,rate,
+     panelCost,inverterCost,structCost,bosCost,laborCost,civilCost,meterCost,gross,sub,deprBenefit,net,
+     payback,yieldPct,cf,total25,breakEvenYr,co2,trees,area,totalGen};
+
+  // live UI
+  document.getElementById('selfLbl').textContent=effSelfPct+'%'+(effSelfPct<selfTarget?' (capped by your load)':'');
+  document.getElementById('capacityOut').innerHTML=
+    `<strong>${isLand?rawSpace+' acres':fN(sqft)+' sq ft'}</strong> at ${p.eff}% efficiency fits about <strong>${kwSpace.toFixed(1)} kWp</strong>${isLand?' (ground mount needs 1.4× the area of rooftop due to row spacing)':''}. That generates roughly <strong>${fN(Math.round(kwSpace*sunH*0.78*365))} kWh/year</strong> — against your own use of ${fN(ownAnn)} kWh.`;
+
+  const cw=document.getElementById('capWarn');
+  if(limited){
+    cw.innerHTML=`<div class="info i-a"><strong>Your sanctioned load is the binding constraint.</strong> Your space fits ${kwSpace.toFixed(1)} kWp, but at ${sanction} kW sanctioned load and a ${capPct}% cap, your DISCOM will only permit <strong>${kwCap.toFixed(1)} kWp</strong>. To use the full roof you would need to apply for a load enhancement — usually a ₹5,000–25,000 fee plus a revised connection agreement. <em>Verify this with your DISCOM before buying panels.</em></div>`;
+  } else if(capPct<1000){
+    cw.innerHTML=`<div class="info i-g"><strong>Within limits.</strong> Your ${kw.toFixed(1)} kWp system sits under the ${kwCap.toFixed(1)} kWp your ${sanction} kW connection permits at a ${capPct}% cap. No load enhancement needed.</div>`;
+  } else cw.innerHTML='';
+
+  document.getElementById('selfNote').innerHTML = maxSelfPct<selfTarget
+    ? `<strong>You can't consume more than you use.</strong> Your daily load of ${ownLoad} kWh caps self-consumption at ${maxSelfPct}% of a ${kw.toFixed(1)} kWp system's output. The other ${100-maxSelfPct}% must be exported at ₹${buyback}/kWh — worth ${((1-buyback/tariff)*100).toFixed(0)}% less than a unit you consume yourself. <em>Shifting loads to daytime (EV charging, water heating, AC pre-cooling) is the single highest-return change you can make.</em>`
+    : `Every unit you consume yourself saves ₹${tariff}. Every unit exported earns only ₹${buyback} — that's <strong>${((1-buyback/tariff)*100).toFixed(0)}% less</strong>. Raising self-consumption is worth more than adding panels.`;
+}
+
+/* ── Fit meter (inline, step 2) ── */
+function updateFit(){
+  if(!path)return;
+  const isInv=path==='invest';
+  const wrap=document.getElementById('fitInputWrap');
+  const box=document.getElementById('fitBox');
+
+  if(isInv){
+    // For surplus path, space IS the input — show derived capacity instead
+    wrap.classList.add('hidden');
+    const i=I;if(!i.kw)return;
+    box.querySelector('#fitLabel').textContent='Capacity from your space';
+    document.getElementById('fitVerdict').innerHTML=`<span style="color:var(--purple)">${i.kw.toFixed(1)} kWp</span>`;
+    const pct=i.limited?Math.round(i.kwCap/i.kwSpace*100):100;
+    document.getElementById('fitBar').style.width=pct+'%';
+    document.getElementById('fitBar').style.background=i.limited?'var(--amber)':'var(--purple)';
+    document.getElementById('fitCap').style.left='100%';
+    document.getElementById('fitNote').innerHTML = i.limited
+      ? `<span style="color:var(--amber)">Space fits ${i.kwSpace.toFixed(1)} kWp, but your sanctioned load caps you at ${i.kwCap.toFixed(1)} kWp.</span> Switching to ${PANELS[panel].n} doesn't help — the limit is regulatory, not physical.`
+      : `Your ${i.isLand?i.rawSpace+' acres':fN(i.sqft)+' sq ft'} supports the full ${i.kw.toFixed(1)} kWp with ${PANELS[panel].n} panels — about ${Math.ceil(i.kw*1000/PANELS[panel].wpp)} panels.`;
+    document.getElementById('panelInfo').innerHTML=
+      `<strong>${i.p.n}</strong> at ${i.p.eff}% efficiency: your ${i.isLand?i.rawSpace+' acres':fN(i.sqft)+' sq ft'} yields <strong>${i.kwSpace.toFixed(1)} kWp</strong>. A higher-efficiency panel packs more capacity into the same space — switch to TOPCon or Bifacial to raise output without expanding the site. Pro: ${i.p.pros}. Con: ${i.p.cons}.`;
+    return;
+  }
+
+  // Residential: system size is fixed by load; area is a check
+  wrap.classList.remove('hidden');
+  const r=R;if(!r.kw)return;
+  const roof=parseFloat(document.getElementById('roofArea').value)||600;
+  const need=r.area.sqft;
+  const pct=Math.min(150,Math.round(need/roof*100));
+  const fits=need<=roof;
+  box.querySelector('#fitLabel').textContent='Does it fit your roof?';
+  document.getElementById('fitVerdict').innerHTML=fits
+    ? `<span style="color:var(--green-dk)">✓ Fits — ${fN(need)} of ${fN(roof)} sq ft</span>`
+    : `<span style="color:var(--red)">✗ Short by ${fN(need-roof)} sq ft</span>`;
+  document.getElementById('fitBar').style.width=Math.min(100,pct)+'%';
+  document.getElementById('fitBar').style.background=fits?'var(--green)':'var(--red)';
+  document.getElementById('fitCap').style.left=need>roof?(roof/need*100)+'%':'100%';
+
+  if(fits){
+    const spare=roof-need;
+    document.getElementById('fitNote').innerHTML=`Your ${r.kw.toFixed(1)} kWp system needs ${fN(need)} sq ft. You have ${fN(spare)} sq ft to spare.${spare>400?` <strong>That's enough for another ${kwFromArea(spare,r.p.eff).toFixed(1)} kWp</strong> — consider the <em>Earn from Surplus Space</em> path instead.`:''}`;
+  } else {
+    const best=Object.entries(PANELS).sort((a,b)=>b[1].eff-a[1].eff)[0];
+    const bestArea=areaFor(r.kw,best[1].eff).sqft;
+    document.getElementById('fitNote').innerHTML= bestArea<=roof
+      ? `<span style="color:var(--red)">Doesn't fit with ${r.p.n}.</span> Switching to <strong>${best[1].n}</strong> (${best[1].eff}%) drops the requirement to ${fN(bestArea)} sq ft, which fits. Costs ${Math.round((best[1].cost-1)*100)}% more per watt.`
+      : `<span style="color:var(--red)">Doesn't fit even with the highest-efficiency panel.</span> You'll need to reduce load — turn off some appliances in Step 2 — or accept a smaller system that covers part of your consumption.`;
+  }
+  document.getElementById('panelInfo').innerHTML=
+    `<strong>${r.p.n}</strong> at ${r.p.eff}% efficiency: your ${r.kw.toFixed(1)} kWp system needs <strong>${fN(need)} sq ft</strong> (${r.area.sqm} m²) — roughly <strong>${Math.ceil(r.kw*1000/r.p.wpp)} panels</strong>. Pro: ${r.p.pros}. Con: ${r.p.cons}.`;
+}
+
+/* ══════ RESULTS ══════ */
+function renderResults(){
+  const inv=path==='invest';
+  document.getElementById('resResi').classList.toggle('hidden',inv);
+  document.getElementById('resInvest').classList.toggle('hidden',!inv);
+  calcAll();
+  inv?renderInvestResults():renderResiResults();
+}
+
+function renderResiResults(){
+  const r=R,isOff=r.isOff;
+  document.getElementById('resTitle').textContent=isOff?'Your off-grid system':(useBatt?'Your hybrid system':'Your on-grid system');
+  document.getElementById('costSub').textContent=isOff?`Battery is the biggest line item. Note the year-${(r.battChem?.life||5)+1} replacement.`:'Itemised — every component and what it costs.';
+  document.getElementById('rm1').innerHTML=mkM('Daily load',r.kWh.toFixed(1),'kWh/day')+mkM('System size',r.kw.toFixed(1),'kWp'+(isOff?' (35% oversized)':''))+mkM('Area needed',fN(r.area.sqft)+' sq ft',r.area.sqm+' m² · '+r.p.n);
+  document.getElementById('rm2').innerHTML=mkM('Gross cost',fK(r.gross),'all hardware')+(isOff?mkM('Subsidy','₹0','not eligible off-grid','amb'):mkM('PM Surya Ghar subsidy',fK(r.sub),'govt. benefit','acc'))+mkM('Net cost',fK(r.net),'you pay');
+
+  let rows=`<div class="cb-row"><div class="cb-k">Solar panels<small>${r.p.n} · ${r.p.eff}% · ${r.p.warranty}yr warranty</small></div><div class="cb-v">${fK(r.panelCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Inverter<small>${isOff?'Off-grid inverter with charge controller':'Grid-tied string inverter, anti-islanding'}</small></div><div class="cb-v">${fK(r.inverterCost)}</div></div>`;
+  if(r.battCost>0)rows+=`<div class="cb-row"><div class="cb-k">Battery bank<small>${r.battKwh} kWh · ${r.battChem.n} · ${r.battChem.life}yr life · ${r.battChem.dod*100}% DoD</small></div><div class="cb-v">${fK(r.battCost)}</div></div>`;
+  rows+=`<div class="cb-row"><div class="cb-k">Mounting structure<small>Galvanised steel, wind-rated</small></div><div class="cb-v">${fK(r.structCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Balance of system<small>Cables, DC/AC boxes, earthing, lightning arrestor</small></div><div class="cb-v">${fK(r.bosCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Installation &amp; commissioning<small>Labour, testing, handover</small></div><div class="cb-v">${fK(r.laborCost)}</div></div>`;
+  if(r.meterCost>0)rows+=`<div class="cb-row"><div class="cb-k">Bi-directional meter<small>Required for net metering</small></div><div class="cb-v">${fK(r.meterCost)}</div></div>`;
+  rows+=`<div class="cb-row" style="border-top:1px solid var(--bd);margin-top:4px;padding-top:11px"><div class="cb-k"><strong>Gross system cost</strong></div><div class="cb-v">${fK(r.gross)}</div></div>`;
+  if(r.sub>0)rows+=`<div class="cb-row sub"><div class="cb-k">Less: PM Surya Ghar subsidy<small>Credited post-commissioning</small></div><div class="cb-v">− ${fK(r.sub)}</div></div>`;
+  rows+=`<div class="cb-row total"><div class="cb-k">Net cost to you</div><div class="cb-v">${fK(r.net)}</div></div>`;
+  if(r.battRepl>0)rows+=`<div class="info i-a" style="margin-top:14px"><strong>Lifetime battery cost:</strong> Your ${r.battChem.n} bank lasts ~${r.battChem.life} years. Over 25 years you'll replace it <strong>${r.battRepl} time${r.battRepl>1?'s':''}</strong>, adding roughly <strong>${fK(r.lifetimeBatt)}</strong> in today's money.</div>`;
+  document.getElementById('costRows').innerHTML=rows;
+
+  document.getElementById('saveMetrics').innerHTML=mkM('Annual benefit','₹'+fN(r.annBenefit),isOff?'bill + diesel saved':'bill saved + export','acc')+mkM('Payback period',r.payback,'years')+mkM('25-yr net benefit',fK(r.annBenefit*25-r.lifetimeBatt),'after battery swaps');
+
+  const sb=document.getElementById('sellBackBox');sb.classList.remove('hidden');
+  if(isOff){
+    document.getElementById('splitBars').innerHTML=`
+    <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin-bottom:4px"><span>Grid bill avoided</span><span style="font-weight:700;color:var(--green-dk)">₹${fN(r.selfSave)}/yr</span></div>
+    <div class="bar-t"><div class="bar-f" style="width:${Math.round(r.selfSave/r.annBenefit*100)}%;background:var(--green)"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin:7px 0 4px"><span>Diesel generator fuel avoided</span><span style="font-weight:700;color:var(--amber)">₹${fN(r.dgSave)}/yr</span></div>
+    <div class="bar-t"><div class="bar-f" style="width:${Math.round(r.dgSave/r.annBenefit*100)}%;background:var(--amber)"></div></div>`;
+  } else {
+    const sp=Math.round(r.selfUse/r.annGen*100);
+    document.getElementById('splitBars').innerHTML=`
+    <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin-bottom:4px"><span>Self-consumed (${sp}%) — ${fN(r.selfUse)} kWh</span><span style="font-weight:700;color:var(--green-dk)">₹${fN(r.selfSave)}/yr</span></div>
+    <div class="bar-t"><div class="bar-f" style="width:${sp}%;background:var(--green)"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin:7px 0 4px"><span>Exported (${100-sp}%) — ${fN(r.exported)} kWh</span><span style="font-weight:700;color:var(--amber)">₹${fN(r.exportRev)}/yr @ ₹${r.buyback}</span></div>
+    <div class="bar-t"><div class="bar-f" style="width:${100-sp}%;background:var(--amber)"></div></div>`;
+  }
+  document.getElementById('paybackNote').innerHTML=isOff
+    ?`<strong>Off-grid economics:</strong> Payback of ${r.payback} years assumes you were running a diesel generator for ~30% of your load at ₹18/unit. Without DG displacement, payback stretches to about ${(r.net/r.selfSave).toFixed(1)} years. The real value is <em>uninterrupted power</em>, which is hard to price.`
+    :`<strong>How this works:</strong> You consume ${Math.round(r.selfUse/r.annGen*100)}% of generation directly, offsetting ₹${r.tariff}/unit. The surplus ${fN(r.exported)} kWh earns ₹${r.buyback}/unit. Self-consumption is always worth more — run heavy loads during daylight.`;
+
+  const mMax=Math.max(...zone.m);
+  document.getElementById('monthChart').innerHTML=zone.m.map((v,i)=>`<div class="mc-c" title="${MONTHS[i]}: ~${Math.round(v/100*r.dailyGen*30)} kWh"><div class="mc-b" style="height:${Math.round(v/mMax*58)}px;background:var(--green)"></div><div class="mc-l">${MONTHS[i]}</div></div>`).join('');
+  document.getElementById('genMetrics').innerHTML=mkM('Daily generation',r.dailyGen,'kWh/day avg')+mkM('Annual generation',fN(r.annGen),'kWh/year')+mkM('Solar covers',Math.min(100,Math.round(r.annGen/(r.kWh*365)*100))+'%','of your consumption');
+  document.getElementById('envCo2').textContent=fN(r.co2)+' T';
+  document.getElementById('envTrees').textContent=fN(r.trees);
+}
+
+function renderInvestResults(){
+  const i=I,T=i.T;
+  document.getElementById('resTitle').textContent='Earning from your '+T.n.toLowerCase();
+  document.getElementById('invCostSub').textContent=T.note;
+
+  document.getElementById('im1').innerHTML=
+    mkM('System size',i.kw.toFixed(1)+' kWp',(i.isLand?i.rawSpace+' acres':fN(i.sqft)+' sq ft')+(i.limited?' · load-capped':''))+
+    mkM('Annual generation',fN(i.annGen),'kWh/year')+
+    mkM('Net cost',fK(i.net),'after subsidy/depreciation','pur');
+
+  document.getElementById('im2').innerHTML=
+    mkM('Annual earnings','₹'+fN(i.annEarn),'saved + sold','acc')+
+    mkM('Simple payback',i.payback,'years')+
+    mkM('Annual yield',i.yieldPct+'%','on net cost');
+
+  let rows=`<div class="cb-row"><div class="cb-k">Solar panels<small>${i.p.n} · ${i.p.eff}% · ${Math.ceil(i.kw*1000/i.p.wpp)} panels</small></div><div class="cb-v">${fK(i.panelCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Inverter<small>${i.kw>15?'Three-phase string inverter':'Single-phase grid-tied inverter'}</small></div><div class="cb-v">${fK(i.inverterCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Mounting structure<small>${i.isLand?'Ground-mount galvanised frames, concrete footings':'Elevated roof structure, wind-rated'}</small></div><div class="cb-v">${fK(i.structCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Balance of system<small>Cabling, DC/AC boxes, earthing, protection</small></div><div class="cb-v">${fK(i.bosCost)}</div></div>`;
+  if(i.civilCost>0)rows+=`<div class="cb-row"><div class="cb-k">Civil works<small>Levelling, fencing, foundations, access</small></div><div class="cb-v">${fK(i.civilCost)}</div></div>`;
+  rows+=`<div class="cb-row"><div class="cb-k">Installation &amp; commissioning<small>Labour, testing, DISCOM liaison</small></div><div class="cb-v">${fK(i.laborCost)}</div></div>
+  <div class="cb-row"><div class="cb-k">Net meter<small>${i.kw>10?'Three-phase bi-directional':'Single-phase bi-directional'}</small></div><div class="cb-v">${fK(i.meterCost)}</div></div>
+  <div class="cb-row" style="border-top:1px solid var(--bd);margin-top:4px;padding-top:11px"><div class="cb-k"><strong>Gross cost</strong><small>₹${fN(i.gross/i.kw)}/kWp${i.kw>=25?' — includes scale discount':''}</small></div><div class="cb-v">${fK(i.gross)}</div></div>`;
+  if(i.sub>0)rows+=`<div class="cb-row sub"><div class="cb-k">Less: PM Surya Ghar subsidy<small>Hard cap ₹78,000 — same for any system 3 kWp+</small></div><div class="cb-v">− ${fK(i.sub)}</div></div>`;
+  if(i.deprBenefit>0)rows+=`<div class="cb-row sub"><div class="cb-k">Less: Accelerated depreciation<small>40% of asset written off in year 1 @ 30% tax — only if you have business income</small></div><div class="cb-v">− ${fK(i.deprBenefit)}</div></div>`;
+  rows+=`<div class="cb-row total"><div class="cb-k">Net cost to you</div><div class="cb-v">${fK(i.net)}</div></div>`;
+  if(!T.sub&&!T.depr)rows+=`<div class="info i-a" style="margin-top:14px">No subsidy applies at this scale or connection type.</div>`;
+  /* Subsidy note: flat ₹78,000 for any system 3kW+ — no additional above 3kW */
+  document.getElementById('invCostRows').innerHTML=rows;
+
+  // split
+  document.getElementById('invSplit').innerHTML=`
+  <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin-bottom:4px">
+    <span>Self-consumed (${i.effSelfPct}%) — ${fN(i.selfKwh)} kWh @ ₹${i.tariff}</span>
+    <span style="font-weight:700;color:var(--green-dk)">₹${fN(i.selfSave)}/yr</span></div>
+  <div class="bar-t"><div class="bar-f" style="width:${i.effSelfPct}%;background:var(--green)"></div></div>
+  <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--tx3);margin:7px 0 4px">
+    <span>Exported (${100-i.effSelfPct}%) — ${fN(i.exportKwh)} kWh @ ₹${i.buyback}</span>
+    <span style="font-weight:700;color:var(--amber)">₹${fN(i.exportRev)}/yr</span></div>
+  <div class="bar-t"><div class="bar-f" style="width:${100-i.effSelfPct}%;background:var(--amber)"></div></div>`;
+
+  document.getElementById('invEarnings').innerHTML=
+    mkM('From bill savings','₹'+fN(i.selfSave),Math.round(i.selfSave/i.annEarn*100)+'% of earnings')+
+    mkM('From export','₹'+fN(i.exportRev),Math.round(i.exportRev/i.annEarn*100)+'% of earnings')+
+    mkM('Blended rate','₹'+(i.annEarn/i.annGen).toFixed(2),'per kWh generated');
+
+  const lost=Math.round(i.exportKwh*(i.tariff-i.buyback));
+  document.getElementById('invSelfTip').innerHTML=
+    `<strong>The self-consumption gap:</strong> You export ${fN(i.exportKwh)} kWh at ₹${i.buyback} that would be worth ₹${i.tariff} if you used them. That gap costs you <strong>₹${fN(lost)}/year</strong>. Every 10 percentage points of self-consumption you can shift adds roughly <strong>₹${fN(Math.round(i.annGen*0.1*(i.tariff-i.buyback)))}/year</strong>. Practical moves: charge an EV during daylight, run the washing machine and dishwasher at noon, pre-cool the house before evening, heat water electrically instead of with gas.`;
+
+  document.getElementById('invReturns').innerHTML=
+    mkM('Annual yield',i.yieldPct+'%','on ₹'+fN(i.net),'acc')+
+    mkM('Payback',i.payback,'years')+
+    mkM('Break-even year','Yr '+(i.breakEvenYr||'—'),'incl. O&M + escalation')+
+    mkM('25-yr net',fK(i.total25),'after all costs');
+
+  const yn=parseFloat(i.yieldPct);
+  document.getElementById('invNote').innerHTML=
+    `<strong>Reading this:</strong> Your ${i.yieldPct}% annual yield is the return on the ₹${fN(i.net)} you actually spend. ${yn>=15?'That comfortably beats a fixed deposit and most debt funds, and it is effectively tax-free since avoided electricity bills are not income.':yn>=10?'That is competitive with debt mutual funds, and it is effectively tax-free since avoided bills are not taxable income.':'That is modest — check whether your self-consumption assumption is realistic, or whether a smaller system sized closer to your own load would pay back faster.'} The yield improves every year as grid tariffs rise ~3% annually while your cost is fixed. ${i.limited?'<br><br><strong>Note:</strong> Your system is capped by sanctioned load, not by space. Upgrading your connection could unlock '+(i.kwSpace-i.kwCap).toFixed(1)+' kWp of additional capacity.':''}`;
+
+  const cfMax=Math.max(...i.cf.map(x=>Math.abs(x.cum)));
+  document.getElementById('cfChart').innerHTML=i.cf.map(x=>{
+    const h=Math.max(4,Math.round(Math.abs(x.cum)/cfMax*72));
+    return `<div class="mc-c" title="Yr ${x.y}: ${fK(x.cum)} cumulative"><div class="mc-b" style="height:${h}px;background:${x.cum>=0?'var(--green)':'var(--red)'}"></div></div>`;
+  }).join('');
+
+  document.getElementById('cfMetrics').innerHTML=
+    mkM('25-yr cumulative',fK(i.total25),'net of O&M','acc')+
+    mkM('Lifetime generation',fN(Math.round(i.totalGen/1000))+'k','kWh over 25 yrs')+
+    mkM('Effective cost',(i.net/i.totalGen).toFixed(2),'₹/kWh over life');
+
+  document.getElementById('invCo2').textContent=fN(i.co2)+' T';
+  document.getElementById('invTrees').textContent=fN(i.trees);
+}
+
+/* ══════ INSTALLERS ══════ */
+function renderInstallers(){
+  const st=document.getElementById('stSel').value,t=TARIFFS[st];
+  let sum;
+  if(path==='invest'){
+    sum=[['System size',I.kw?.toFixed(1)+' kWp'],['Space',I.isLand?I.rawSpace+' acres':fN(I.sqft)+' sq ft'],
+         ['Net cost',fK(I.net||0)],['Annual yield',I.yieldPct+'%']];
+    document.getElementById('aggIntro').innerHTML=`Before anything else, <strong>call your DISCOM</strong> and confirm your sanctioned load and export cap. That single number determines your maximum legal system size — and it kills more projects than cost does.`;
+  } else {
+    sum=[['System size',R.kw?.toFixed(1)+' kWp'],['Type',R.isOff?'Off-grid':(useBatt?'Hybrid':'On-grid')],
+         ['Net cost',fK(R.net||0)],['Payback',R.payback+' years']];
+    document.getElementById('aggIntro').innerHTML=R.isOff
+      ?`Off-grid lives or dies on <strong>battery sizing</strong>, not panels. These are the kinds of vendors to shortlist — prioritise a strong local service network, since you'll need them when the bank misbehaves.`
+      :`These are the categories of vendor to shortlist — all should handle PM Surya Ghar paperwork and net-metering registration with <strong>${t?t.dis:'your DISCOM'}</strong>. Specific company names are deliberately left out; use this to know what to look for, then compare local options.`;
+  }
+  document.getElementById('finalSummary').innerHTML=sum.map(([k,v])=>`<div style="background:var(--surf2);border:1px solid var(--bd);border-radius:9px;padding:11px 14px"><div style="font-size:10.5px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.04em">${k}</div><div style="font-size:16px;font-weight:700;margin-top:2px">${v}</div></div>`).join('');
+  document.getElementById('aggList').innerHTML=AGGS[path].map(a=>`<div class="agg"><div class="agg-i">${a.i}</div><div style="flex:1"><div class="agg-n">${a.n}</div><div class="agg-d">${a.d}</div><div class="agg-tg">${a.t.map(x=>`<span class="tag t-b">${x}</span>`).join('')}</div><div class="agg-nt">💡 ${a.x}</div></div></div>`).join('');
+  document.getElementById('checklist').innerHTML=CHECKS[path].map(c=>`<div>☐ &nbsp;${c}</div>`).join('');
+}
+/* ── Save as PDF (browser print) ── */
+function savePDF(){
+  const de=document.getElementById('pdf-date');
+  if(de) de.textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  const ti=document.getElementById('pdf-title');
+  const rt=document.getElementById('resTitle');
+  if(ti&&rt) ti.textContent=rt.textContent+' — SolarSense India';
+  const st=document.getElementById('stSel');
+  const tIn=document.getElementById('tIn');
+  let cfg=[];
+  if(path==='invest'){
+    cfg=['Surplus space estimate','State: '+(st?st.value:'—'),'Tariff: ₹'+(tIn?tIn.value:'—')+'/kWh'];
+  } else {
+    const p=R||{};
+    cfg=[(p.isOff?'Off-grid':'On-grid')+' system','System: '+(p.kw||0).toFixed(1)+' kWp','State: '+(st?st.value:'—')+' · ₹'+(tIn?tIn.value:'—')+'/kWh'];
+  }
+  const ce=document.getElementById('pdf-config');
+  if(ce) ce.textContent=cfg.join('  ·  ');
+  /* Show results step for printing even if user is on another step */
+  const cur=step;
+  const s3=document.getElementById('s3');
+  s3.classList.remove('hidden');
+  setTimeout(()=>{window.print();setTimeout(()=>{if(cur!==3){s3.classList.add('hidden');}},500);},100);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>State Electricity Tariffs & Solar Buyback Rates in India (2026) | SolarSense</title>
+<meta name="description" content="Compare domestic electricity tariffs and solar net-metering buyback rates across 22 Indian states. See which states give the fastest solar payback.">
+<link rel="canonical" href="https://solarsense.in/tariffs/">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#F6F7F5;color:#191B17;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:#0F6E56;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+.topnav{background:#fff;border-bottom:1px solid #E3E5E0;position:sticky;top:0;z-index:50}
+.topnav-in{max-width:1040px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:8px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:#191B17;margin-right:auto;text-decoration:none}
+.brand-ic{width:34px;height:34px;background:#E8F5EF;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.navlinks{display:flex;gap:4px;align-items:center}
+.navlinks a{padding:8px 12px;border-radius:8px;font-size:13.5px;color:#5A5E56;font-weight:500}
+.navlinks a:hover{background:#FAFBF9;color:#191B17;text-decoration:none}
+.navlinks .cta{background:#1D9E75;color:#fff}
+.navlinks .cta:hover{background:#0F6E56}
+.menu-btn{display:none;background:none;border:none;font-size:22px;cursor:pointer;padding:4px 8px}
+@media(max-width:720px){
+  .navlinks{display:none;position:absolute;top:60px;left:0;right:0;background:#fff;border-bottom:1px solid #E3E5E0;flex-direction:column;padding:8px;gap:2px}
+  .navlinks.open{display:flex}
+  .navlinks a{width:100%}
+  .menu-btn{display:block}
+}
+
+/* PAGE */
+.wrap{max-width:1040px;margin:0 auto;padding:36px 20px 70px}
+.crumb{font-size:12.5px;color:#8B8F86;margin-bottom:20px}
+.crumb a{color:#8B8F86}
+.crumb a:hover{color:#0F6E56}
+
+/* HERO */
+.hero{margin-bottom:28px}
+.hero h1{font-size:30px;font-weight:800;letter-spacing:-.025em;margin-bottom:8px}
+.hero p{font-size:15px;color:#5A5E56;max-width:620px}
+
+/* STAT BAND */
+.statband{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#E3E5E0;border:1px solid #E3E5E0;border-radius:14px;overflow:hidden;margin-bottom:32px}
+@media(max-width:640px){.statband{grid-template-columns:1fr 1fr}}
+.stat{background:#fff;padding:20px 18px;text-align:center}
+.stat-v{font-size:26px;font-weight:800;color:#0F6E56;letter-spacing:-.02em;line-height:1}
+.stat-l{font-size:11.5px;color:#8B8F86;margin-top:6px;line-height:1.4}
+
+/* RANK BARS */
+.section-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1D9E75;margin-bottom:6px}
+.section-title{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.section-sub{font-size:13.5px;color:#8B8F86;margin-bottom:20px}
+
+.rankbars{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.rb-row{display:grid;grid-template-columns:140px 1fr 48px;gap:10px;align-items:center}
+@media(max-width:520px){.rb-row{grid-template-columns:90px 1fr 40px}}
+.rb-name{font-size:12.5px;color:#5A5E56;text-align:right;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-name a{color:#5A5E56}
+.rb-name a:hover{color:#0F6E56;text-decoration:none}
+.rb-track{height:28px;background:#F6F7F5;border-radius:6px;overflow:hidden}
+.rb-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:10px;color:#fff;font-size:12px;font-weight:700;min-width:38px}
+.rb-val{font-size:12.5px;font-weight:700;color:#191B17}
+
+/* LEGEND */
+.legend{display:flex;gap:18px;flex-wrap:wrap;align-items:center;background:#E8F1FA;border-radius:10px;padding:12px 16px;margin-bottom:32px}
+.legend span{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#1A5FA3}
+.ldot{width:13px;height:13px;border-radius:3px;display:inline-block;flex-shrink:0}
+
+/* STATE GRID */
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:10px;margin:18px 0 32px}
+.sc{background:#fff;border:1px solid #E3E5E0;border-radius:12px;padding:14px 16px;display:block;transition:all .15s;text-decoration:none}
+.sc:hover{border-color:#1D9E75;transform:translateY(-2px);box-shadow:0 5px 16px rgba(29,158,117,.1);text-decoration:none}
+.sc-name{font-size:14px;font-weight:700;color:#191B17;margin-bottom:8px}
+.sc-row{display:flex;justify-content:space-between;font-size:12.5px;color:#8B8F86;margin-bottom:3px}
+.sc-row b{color:#0F6E56;font-weight:700}
+
+/* FULL TABLE */
+.tbl-wrap{overflow-x:auto;margin:16px 0 32px;border:1px solid #E3E5E0;border-radius:12px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:700;color:#8B8F86;text-transform:uppercase;letter-spacing:.05em;background:#FAFBF9;border-bottom:1.5px solid #E3E5E0}
+td{padding:12px 14px;border-bottom:1px solid #E3E5E0;color:#5A5E56}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#F6F7F5}
+.td-state a{font-weight:600;color:#191B17}
+.td-state a:hover{color:#0F6E56}
+.td-high{color:#B5761A;font-weight:700}
+.td-mid{color:#0F6E56;font-weight:600}
+.td-low{color:#1A5FA3}
+
+/* CTA */
+.ctaband{background:#E8F5EF;border:1px solid #cbe6da;border-radius:16px;padding:32px;text-align:center;margin-bottom:24px}
+.ctaband h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.ctaband p{font-size:14px;color:#5A5E56;margin-bottom:20px}
+.btn-cta{display:inline-block;background:#1D9E75;color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;transition:background .15s}
+.btn-cta:hover{background:#0F6E56;text-decoration:none;color:#fff}
+
+/* NOTICE */
+.notice{display:flex;gap:10px;background:#E8F1FA;border-radius:10px;padding:13px 16px;font-size:12.5px;color:#1A5FA3;line-height:1.6}
+
+/* FOOTER */
+footer{background:#fff;border-top:1px solid #E3E5E0;margin-top:40px}
+.foot-in{max-width:1040px;margin:0 auto;padding:28px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.foot-copy{font-size:12.5px;color:#8B8F86}
+.foot-links{display:flex;gap:16px}
+.foot-links a{font-size:12.5px;color:#8B8F86}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-in">
+    <a class="brand" href="../index.html" style="text-decoration:none">
+      <svg width="180" height="42" viewBox="0 0 180 42" xmlns="http://www.w3.org/2000/svg" style="display:block">
+        <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#F5A623"/><stop offset="100%" style="stop-color:#F07C00"/></linearGradient></defs>
+        <circle cx="18" cy="14" r="7" fill="url(#sg)"/>
+        <g stroke="#F5A623" stroke-width="1.6" stroke-linecap="round"><line x1="18" y1="3" x2="18" y2="1"/><line x1="18" y1="25" x2="18" y2="27"/><line x1="7" y1="14" x2="5" y2="14"/><line x1="29" y1="14" x2="31" y2="14"/><line x1="10" y1="6" x2="8" y2="4"/><line x1="26" y1="22" x2="28" y2="24"/><line x1="26" y1="6" x2="28" y2="4"/><line x1="10" y1="22" x2="8" y2="24"/></g>
+        <rect x="3" y="29" width="30" height="10" rx="2" fill="#1D9E75"/>
+        <g stroke="rgba(255,255,255,0.3)" stroke-width="0.6"><line x1="13" y1="29" x2="13" y2="39"/><line x1="23" y1="29" x2="23" y2="39"/><line x1="3" y1="34" x2="33" y2="34"/></g>
+        <text x="42" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="800" letter-spacing="-0.3" fill="#191B17">Solar<tspan fill="#1D9E75">Sense</tspan></text>
+        <text x="42" y="37" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="9" fill="#8B8F86" letter-spacing="0.2">INDIA</text>
+      </svg>
+    </a>
+    <button class="menu-btn" onclick="document.getElementById('nl').classList.toggle('open')">☰</button>
+    <div class="navlinks" id="nl">
+      <a href="../calculator.html">Calculator</a>
+      <a href="../guides/index.html">Guides</a>
+      <a href="../subsidy.html">Subsidy</a>
+      <a class="cta" href="../calculator.html">Estimate savings →</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="../index.html">Home</a> › State Tariffs</div>
+
+  <div class="hero">
+    <h1>Electricity Tariffs &amp; Solar Buyback by State</h1>
+    <p>The higher your tariff, the faster solar pays for itself. Compare all 22 states — updated January 2026.</p>
+  </div>
+
+  <div class="statband">
+    <div class="stat"><div class="stat-v">₹7.5</div><div class="stat-l">Highest tariff<br>(West Bengal)</div></div>
+    <div class="stat"><div class="stat-v">₹5.7</div><div class="stat-l">National average<br>domestic tariff</div></div>
+    <div class="stat"><div class="stat-v">₹3.9</div><div class="stat-l">Lowest tariff<br>(Goa)</div></div>
+    <div class="stat"><div class="stat-v">₹3.5</div><div class="stat-l">Best buyback<br>(Delhi)</div></div>
+  </div>
+
+  <div class="section-label">Ranked by tariff</div>
+  <div class="section-title">Domestic tariff, all 22 states</div>
+  <div class="section-sub">Longer bar = pricier grid electricity = faster solar payback. Click any state for its full breakdown.</div>
+
+  <div class="rankbars">
+    <div class="rb-row"><div class="rb-name"><a href="west-bengal.html">West Bengal</a></div><div class="rb-track"><div class="rb-fill" style="width:100%;background:#B5761A">₹7.5</div></div><div class="rb-val">₹7.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="haryana.html">Haryana</a></div><div class="rb-track"><div class="rb-fill" style="width:96%;background:#B5761A">₹7.2</div></div><div class="rb-val">₹7.2</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="delhi.html">Delhi</a></div><div class="rb-track"><div class="rb-fill" style="width:93%;background:#B5761A">₹7.0</div></div><div class="rb-val">₹7.0</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="punjab.html">Punjab</a></div><div class="rb-track"><div class="rb-fill" style="width:93%;background:#B5761A">₹7.0</div></div><div class="rb-val">₹7.0</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="maharashtra.html">Maharashtra</a></div><div class="rb-track"><div class="rb-fill" style="width:87%;background:#B5761A">₹6.5</div></div><div class="rb-val">₹6.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="rajasthan.html">Rajasthan</a></div><div class="rb-track"><div class="rb-fill" style="width:87%;background:#B5761A">₹6.5</div></div><div class="rb-val">₹6.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="uttar-pradesh.html">Uttar Pradesh</a></div><div class="rb-track"><div class="rb-fill" style="width:87%;background:#B5761A">₹6.5</div></div><div class="rb-val">₹6.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="karnataka.html">Karnataka</a></div><div class="rb-track"><div class="rb-fill" style="width:83%;background:#1D9E75">₹6.2</div></div><div class="rb-val">₹6.2</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="bihar.html">Bihar</a></div><div class="rb-track"><div class="rb-fill" style="width:81%;background:#1D9E75">₹6.1</div></div><div class="rb-val">₹6.1</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="kerala.html">Kerala</a></div><div class="rb-track"><div class="rb-fill" style="width:77%;background:#1D9E75">₹5.8</div></div><div class="rb-val">₹5.8</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="gujarat.html">Gujarat</a></div><div class="rb-track"><div class="rb-fill" style="width:73%;background:#1D9E75">₹5.5</div></div><div class="rb-val">₹5.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="jharkhand.html">Jharkhand</a></div><div class="rb-track"><div class="rb-fill" style="width:73%;background:#1D9E75">₹5.5</div></div><div class="rb-val">₹5.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="odisha.html">Odisha</a></div><div class="rb-track"><div class="rb-fill" style="width:73%;background:#1D9E75">₹5.5</div></div><div class="rb-val">₹5.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="uttarakhand.html">Uttarakhand</a></div><div class="rb-track"><div class="rb-fill" style="width:72%;background:#1A5FA3">₹5.4</div></div><div class="rb-val">₹5.4</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="telangana.html">Telangana</a></div><div class="rb-track"><div class="rb-fill" style="width:71%;background:#1A5FA3">₹5.3</div></div><div class="rb-val">₹5.3</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="assam.html">Assam</a></div><div class="rb-track"><div class="rb-fill" style="width:69%;background:#1A5FA3">₹5.2</div></div><div class="rb-val">₹5.2</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="madhya-pradesh.html">Madhya Pradesh</a></div><div class="rb-track"><div class="rb-fill" style="width:68%;background:#1A5FA3">₹5.1</div></div><div class="rb-val">₹5.1</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="tamil-nadu.html">Tamil Nadu</a></div><div class="rb-track"><div class="rb-fill" style="width:67%;background:#1A5FA3">₹5.0</div></div><div class="rb-val">₹5.0</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="chhattisgarh.html">Chhattisgarh</a></div><div class="rb-track"><div class="rb-fill" style="width:64%;background:#1A5FA3">₹4.8</div></div><div class="rb-val">₹4.8</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="andhra-pradesh.html">Andhra Pradesh</a></div><div class="rb-track"><div class="rb-fill" style="width:60%;background:#1A5FA3">₹4.5</div></div><div class="rb-val">₹4.5</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="himachal-pradesh.html">Himachal Pradesh</a></div><div class="rb-track"><div class="rb-fill" style="width:55%;background:#1A5FA3">₹4.1</div></div><div class="rb-val">₹4.1</div></div>
+    <div class="rb-row"><div class="rb-name"><a href="goa.html">Goa</a></div><div class="rb-track"><div class="rb-fill" style="width:52%;background:#1A5FA3">₹3.9</div></div><div class="rb-val">₹3.9</div></div>
+  </div>
+
+  <div class="legend">
+    <span><span class="ldot" style="background:#B5761A"></span> ₹6.5+ — fastest payback</span>
+    <span><span class="ldot" style="background:#1D9E75"></span> ₹5.5–6.5 — strong payback</span>
+    <span><span class="ldot" style="background:#1A5FA3"></span> Under ₹5.5 — slower payback</span>
+  </div>
+
+  <div class="section-label">Browse by state</div>
+  <div class="section-title" style="margin-bottom:4px">All 22 states</div>
+  <p style="font-size:13.5px;color:#8B8F86;margin-bottom:0">Click any card for the full state breakdown — solar estimate, payback, and DISCOM details.</p>
+
+  <div class="state-grid">
+    <a class="sc" href="andhra-pradesh.html"><div class="sc-name">Andhra Pradesh</div><div class="sc-row"><span>Domestic</span><b>₹4.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.5/kWh</b></div></a>
+    <a class="sc" href="assam.html"><div class="sc-name">Assam</div><div class="sc-row"><span>Domestic</span><b>₹5.2/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.8/kWh</b></div></a>
+    <a class="sc" href="bihar.html"><div class="sc-name">Bihar</div><div class="sc-row"><span>Domestic</span><b>₹6.1/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹3.0/kWh</b></div></a>
+    <a class="sc" href="chhattisgarh.html"><div class="sc-name">Chhattisgarh</div><div class="sc-row"><span>Domestic</span><b>₹4.8/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.6/kWh</b></div></a>
+    <a class="sc" href="delhi.html"><div class="sc-name">Delhi</div><div class="sc-row"><span>Domestic</span><b>₹7.0/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹3.5/kWh</b></div></a>
+    <a class="sc" href="goa.html"><div class="sc-name">Goa</div><div class="sc-row"><span>Domestic</span><b>₹3.9/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.2/kWh</b></div></a>
+    <a class="sc" href="gujarat.html"><div class="sc-name">Gujarat</div><div class="sc-row"><span>Domestic</span><b>₹5.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.25/kWh</b></div></a>
+    <a class="sc" href="haryana.html"><div class="sc-name">Haryana</div><div class="sc-row"><span>Domestic</span><b>₹7.2/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.0/kWh</b></div></a>
+    <a class="sc" href="himachal-pradesh.html"><div class="sc-name">Himachal Pradesh</div><div class="sc-row"><span>Domestic</span><b>₹4.1/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.5/kWh</b></div></a>
+    <a class="sc" href="jharkhand.html"><div class="sc-name">Jharkhand</div><div class="sc-row"><span>Domestic</span><b>₹5.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.8/kWh</b></div></a>
+    <a class="sc" href="karnataka.html"><div class="sc-name">Karnataka</div><div class="sc-row"><span>Domestic</span><b>₹6.2/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹3.35/kWh</b></div></a>
+    <a class="sc" href="kerala.html"><div class="sc-name">Kerala</div><div class="sc-row"><span>Domestic</span><b>₹5.8/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹3.0/kWh</b></div></a>
+    <a class="sc" href="madhya-pradesh.html"><div class="sc-name">Madhya Pradesh</div><div class="sc-row"><span>Domestic</span><b>₹5.1/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.65/kWh</b></div></a>
+    <a class="sc" href="maharashtra.html"><div class="sc-name">Maharashtra</div><div class="sc-row"><span>Domestic</span><b>₹6.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹3.06/kWh</b></div></a>
+    <a class="sc" href="odisha.html"><div class="sc-name">Odisha</div><div class="sc-row"><span>Domestic</span><b>₹5.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.8/kWh</b></div></a>
+    <a class="sc" href="punjab.html"><div class="sc-name">Punjab</div><div class="sc-row"><span>Domestic</span><b>₹7.0/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.5/kWh</b></div></a>
+    <a class="sc" href="rajasthan.html"><div class="sc-name">Rajasthan</div><div class="sc-row"><span>Domestic</span><b>₹6.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.85/kWh</b></div></a>
+    <a class="sc" href="tamil-nadu.html"><div class="sc-name">Tamil Nadu</div><div class="sc-row"><span>Domestic</span><b>₹5.0/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.25/kWh</b></div></a>
+    <a class="sc" href="telangana.html"><div class="sc-name">Telangana</div><div class="sc-row"><span>Domestic</span><b>₹5.3/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.5/kWh</b></div></a>
+    <a class="sc" href="uttar-pradesh.html"><div class="sc-name">Uttar Pradesh</div><div class="sc-row"><span>Domestic</span><b>₹6.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.5/kWh</b></div></a>
+    <a class="sc" href="uttarakhand.html"><div class="sc-name">Uttarakhand</div><div class="sc-row"><span>Domestic</span><b>₹5.4/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.6/kWh</b></div></a>
+    <a class="sc" href="west-bengal.html"><div class="sc-name">West Bengal</div><div class="sc-row"><span>Domestic</span><b>₹7.5/kWh</b></div><div class="sc-row"><span>Buyback</span><b>₹2.75/kWh</b></div></a>
+  </div>
+
+  <div class="section-label">Full comparison</div>
+  <div class="section-title" style="margin-bottom:16px">All states — tariff, buyback &amp; DISCOM</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>State</th><th>Domestic tariff</th><th>Buyback rate</th><th>DISCOM</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-state"><a href="andhra-pradesh.html">Andhra Pradesh</a></td><td class="td-low">₹4.5/kWh</td><td>₹2.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">APEPDCL / APSPDCL</td></tr>
+        <tr><td class="td-state"><a href="assam.html">Assam</a></td><td class="td-low">₹5.2/kWh</td><td>₹2.80/kWh</td><td style="color:#8B8F86;font-size:12.5px">APDCL</td></tr>
+        <tr><td class="td-state"><a href="bihar.html">Bihar</a></td><td class="td-mid">₹6.1/kWh</td><td>₹3.00/kWh</td><td style="color:#8B8F86;font-size:12.5px">NBPDCL / SBPDCL</td></tr>
+        <tr><td class="td-state"><a href="chhattisgarh.html">Chhattisgarh</a></td><td class="td-low">₹4.8/kWh</td><td>₹2.60/kWh</td><td style="color:#8B8F86;font-size:12.5px">CSPDCL</td></tr>
+        <tr><td class="td-state"><a href="delhi.html">Delhi</a></td><td class="td-high">₹7.0/kWh</td><td>₹3.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">BSES / Tata Power Delhi</td></tr>
+        <tr><td class="td-state"><a href="goa.html">Goa</a></td><td class="td-low">₹3.9/kWh</td><td>₹2.20/kWh</td><td style="color:#8B8F86;font-size:12.5px">Goa Electricity Dept.</td></tr>
+        <tr><td class="td-state"><a href="gujarat.html">Gujarat</a></td><td class="td-mid">₹5.5/kWh</td><td>₹2.25/kWh</td><td style="color:#8B8F86;font-size:12.5px">DGVCL / MGVCL / PGVCL</td></tr>
+        <tr><td class="td-state"><a href="haryana.html">Haryana</a></td><td class="td-high">₹7.2/kWh</td><td>₹2.00/kWh</td><td style="color:#8B8F86;font-size:12.5px">DHBVN / UHBVN</td></tr>
+        <tr><td class="td-state"><a href="himachal-pradesh.html">Himachal Pradesh</a></td><td class="td-low">₹4.1/kWh</td><td>₹2.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">HPSEBL</td></tr>
+        <tr><td class="td-state"><a href="jharkhand.html">Jharkhand</a></td><td class="td-mid">₹5.5/kWh</td><td>₹2.80/kWh</td><td style="color:#8B8F86;font-size:12.5px">JBVNL</td></tr>
+        <tr><td class="td-state"><a href="karnataka.html">Karnataka</a></td><td class="td-mid">₹6.2/kWh</td><td>₹3.35/kWh</td><td style="color:#8B8F86;font-size:12.5px">BESCOM / HESCOM</td></tr>
+        <tr><td class="td-state"><a href="kerala.html">Kerala</a></td><td class="td-mid">₹5.8/kWh</td><td>₹3.00/kWh</td><td style="color:#8B8F86;font-size:12.5px">KSEB</td></tr>
+        <tr><td class="td-state"><a href="madhya-pradesh.html">Madhya Pradesh</a></td><td class="td-low">₹5.1/kWh</td><td>₹2.65/kWh</td><td style="color:#8B8F86;font-size:12.5px">MPEZ / MPMKVVCL</td></tr>
+        <tr><td class="td-state"><a href="maharashtra.html">Maharashtra</a></td><td class="td-high">₹6.5/kWh</td><td>₹3.06/kWh</td><td style="color:#8B8F86;font-size:12.5px">MSEDCL / Adani / Tata</td></tr>
+        <tr><td class="td-state"><a href="odisha.html">Odisha</a></td><td class="td-mid">₹5.5/kWh</td><td>₹2.80/kWh</td><td style="color:#8B8F86;font-size:12.5px">TPCODL / TPNODL</td></tr>
+        <tr><td class="td-state"><a href="punjab.html">Punjab</a></td><td class="td-high">₹7.0/kWh</td><td>₹2.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">PSPCL</td></tr>
+        <tr><td class="td-state"><a href="rajasthan.html">Rajasthan</a></td><td class="td-high">₹6.5/kWh</td><td>₹2.85/kWh</td><td style="color:#8B8F86;font-size:12.5px">AVVNL / JDVVNL / JVVNL</td></tr>
+        <tr><td class="td-state"><a href="tamil-nadu.html">Tamil Nadu</a></td><td class="td-low">₹5.0/kWh</td><td>₹2.25/kWh</td><td style="color:#8B8F86;font-size:12.5px">TANGEDCO</td></tr>
+        <tr><td class="td-state"><a href="telangana.html">Telangana</a></td><td class="td-low">₹5.3/kWh</td><td>₹2.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">TSNPDCL / TSSPDCL</td></tr>
+        <tr><td class="td-state"><a href="uttar-pradesh.html">Uttar Pradesh</a></td><td class="td-high">₹6.5/kWh</td><td>₹2.50/kWh</td><td style="color:#8B8F86;font-size:12.5px">PVVNL / DVVNL / MVVNL</td></tr>
+        <tr><td class="td-state"><a href="uttarakhand.html">Uttarakhand</a></td><td class="td-low">₹5.4/kWh</td><td>₹2.60/kWh</td><td style="color:#8B8F86;font-size:12.5px">UPCL</td></tr>
+        <tr><td class="td-state"><a href="west-bengal.html">West Bengal</a></td><td class="td-high">₹7.5/kWh</td><td>₹2.75/kWh</td><td style="color:#8B8F86;font-size:12.5px">WBSEDCL / CESC</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ctaband">
+    <h2>See your exact savings</h2>
+    <p>The calculator uses your state's tariff automatically. Enter your appliances or bill for a full estimate.</p>
+    <a class="btn-cta" href="../calculator.html">Open the calculator →</a>
+  </div>
+
+  <div class="notice">
+    <span style="flex-shrink:0">ℹ️</span>
+    <span>Tariff and buyback figures are indicative, based on published DISCOM rates as of January 2026. Tariffs change with annual SERC orders — verify with your DISCOM before deciding. Not financial advice.</span>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-in">
+    <div class="foot-copy">© 2026 SolarSense India · Free rooftop solar calculator for Indian homes</div>
+    <div class="foot-links">
+      <a href="../index.html">Home</a>
+      <a href="../calculator.html">Calculator</a>
+      <a href="../subsidy.html">Subsidy</a>
+      <a href="../privacy.html">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SolarSense India — Free Rooftop Solar Calculator, Subsidy & Tariffs</title>
+<meta name="description" content="Free rooftop solar calculator for Indian homes. Estimate system size, cost, PM Surya Ghar subsidy, and payback. On-grid, off-grid, surplus space. Live state tariffs.">
+<link rel="canonical" href="https://solarsense.in/">
+<meta property="og:title" content="SolarSense India — Free Rooftop Solar Calculator">
+<meta property="og:description" content="Estimate solar cost, PM Surya Ghar subsidy, and payback for your Indian home in 3 minutes.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+/* ── Hero ── */
+.hero-section{background:linear-gradient(135deg,#0a3d2e 0%,#0f6e56 55%,#1d9e75 100%);color:#fff;padding:60px 24px 70px;text-align:center;position:relative;overflow:hidden}
+.hero-section::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-inner{max-width:720px;margin:0 auto;position:relative}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:12px;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.9);margin-bottom:18px}
+.hero-section h1{font-size:38px;font-weight:800;line-height:1.15;letter-spacing:-.025em;margin-bottom:14px;color:#fff}
+@media(max-width:600px){.hero-section h1{font-size:27px}}
+.hero-section p{font-size:17px;color:rgba(255,255,255,.82);max-width:560px;margin:0 auto 28px;line-height:1.6}
+.hero-cta{display:inline-block;background:#fff;color:#0f6e56;padding:14px 32px;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:-.01em;transition:all .2s}
+.hero-cta:hover{background:#f0faf7;transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.15);text-decoration:none}
+.hero-sub{display:flex;justify-content:center;gap:24px;margin-top:28px;flex-wrap:wrap}
+.hero-sub span{color:rgba(255,255,255,.7);font-size:13px;display:flex;align-items:center;gap:5px}
+.hero-sub span::before{content:'✓';color:#5dcaa5;font-weight:700}
+
+/* ── Stats strip ── */
+.stats-strip{background:#fff;border-bottom:1px solid #e3e5e0}
+.stats-inner{max-width:1000px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:640px){.stats-inner{grid-template-columns:1fr 1fr}}
+.stat-cell{padding:22px 16px;border-right:1px solid #e3e5e0;text-align:center}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-size:26px;font-weight:800;color:#0f6e56;letter-spacing:-.02em;line-height:1}
+.stat-l{font-size:12px;color:#8b8f86;margin-top:5px;line-height:1.35}
+
+/* ── Section spacing ── */
+.section{padding:52px 24px}
+.section-inner{max-width:1000px;margin:0 auto}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#1d9e75;margin-bottom:8px}
+.section h2{font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px;color:#191b17}
+.section .sh{font-size:16px;color:#5a5e56;margin-bottom:32px}
+.section-alt{background:#f6f7f5}
+.section-white{background:#fff}
+
+/* ── Path cards ── */
+.path-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.path-row{grid-template-columns:1fr}}
+.pcard{border-radius:16px;padding:28px;position:relative;overflow:hidden;display:block;transition:transform .2s,box-shadow .2s;text-decoration:none}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.1);text-decoration:none}
+.pcard-green{background:linear-gradient(135deg,#e8f5ef 0%,#d0ede0 100%);border:1px solid #b9e0d0}
+.pcard-amber{background:linear-gradient(135deg,#fbf0de 0%,#f5deba 100%);border:1px solid #e8ceA0}
+.pcard-purple{background:linear-gradient(135deg,#f0eaf8 0%,#e0d0f0 100%);border:1px solid #cfc0e6}
+.pcard-icon{font-size:36px;margin-bottom:14px;display:block}
+.pcard-title{font-size:18px;font-weight:800;margin-bottom:6px;color:#191b17}
+.pcard-desc{font-size:13.5px;color:#5a5e56;line-height:1.55;margin-bottom:16px}
+.pcard-metas{display:flex;flex-direction:column;gap:4px}
+.pcard-meta{font-size:12px;color:#8b8f86;display:flex;gap:6px}
+.pcard-meta b{color:#191b17;font-weight:600}
+.pcard-arrow{position:absolute;bottom:22px;right:22px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;font-size:14px;color:#5a5e56}
+
+/* ── How it works ── */
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#e3e5e0;border:1px solid #e3e5e0;border-radius:16px;overflow:hidden}
+@media(max-width:700px){.how-grid{grid-template-columns:1fr 1fr}}
+.how-step{background:#fff;padding:26px 22px;position:relative}
+.how-step:hover{background:#f4faf7}
+.how-num{width:28px;height:28px;border-radius:50%;background:#e8f5ef;color:#0f6e56;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.how-icon{font-size:28px;margin-bottom:10px}
+.how-title{font-size:14px;font-weight:700;color:#191b17;margin-bottom:4px}
+.how-desc{font-size:12.5px;color:#8b8f86;line-height:1.5}
+
+/* ── Tariff highlight ── */
+.tariff-viz{background:#fff;border:1px solid #e3e5e0;border-radius:16px;padding:28px;margin-top:24px}
+.tariff-viz h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.tariff-viz .tsub{font-size:13px;color:#8b8f86;margin-bottom:20px}
+.tbar-row{display:grid;grid-template-columns:120px 1fr 52px;gap:10px;align-items:center;margin-bottom:8px}
+@media(max-width:500px){.tbar-row{grid-template-columns:80px 1fr 44px}}
+.tbar-name{font-size:12.5px;color:#5a5e56;text-align:right;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbar-track{height:22px;background:#f6f7f5;border-radius:5px;overflow:hidden}
+.tbar-fill{height:100%;border-radius:5px}
+.tbar-val{font-size:12px;font-weight:700;color:#191b17}
+.tariff-note{font-size:12px;color:#8b8f86;margin-top:14px;border-top:1px solid #e3e5e0;padding-top:12px}
+
+/* ── Why different ── */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:700px){.why-grid{grid-template-columns:1fr}}
+.why-card{background:#fff;border:1px solid #e3e5e0;border-radius:14px;padding:22px}
+.why-ic{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px}
+.why-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.why-card p{font-size:13px;color:#5a5e56;margin:0;line-height:1.6}
+
+/* ── Subsidy band ── */
+.subsidy-band{background:linear-gradient(135deg,#1a5fa3 0%,#185490 100%);color:#fff;border-radius:16px;padding:36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+@media(max-width:600px){.subsidy-band{grid-template-columns:1fr}}
+.subsidy-band h2{font-size:22px;font-weight:800;margin-bottom:8px;color:#fff}
+.subsidy-band p{font-size:14px;color:rgba(255,255,255,.8);margin:0;line-height:1.6}
+.subsidy-slabs{display:flex;gap:16px;flex-wrap:wrap}
+.slab{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 16px;text-align:center;min-width:90px}
+.slab-v{font-size:18px;font-weight:800;color:#fff;display:block}
+.slab-l{font-size:11px;color:rgba(255,255,255,.7);display:block;margin-top:2px}
+.subsidy-cta{display:inline-block;background:#fff;color:#1a5fa3;padding:12px 22px;border-radius:9px;font-size:14px;font-weight:700;margin-top:16px;white-space:nowrap}
+.subsidy-cta:hover{background:#e8f1fa;text-decoration:none}
+
+/* ── CTA band ── */
+.cta-section{background:linear-gradient(135deg,#0f6e56,#1d9e75);padding:52px 24px;text-align:center}
+.cta-inner{max-width:560px;margin:0 auto}
+.cta-section h2{font-size:28px;font-weight:800;color:#fff;margin-bottom:10px}
+.cta-section p{font-size:16px;color:rgba(255,255,255,.8);margin-bottom:26px}
+.cta-white{display:inline-block;background:#fff;color:#0f6e56;padding:14px 32px;border-radius:10px;font-size:16px;font-weight:700;transition:all .2s}
+.cta-white:hover{background:#f0faf7;transform:translateY(-1px);text-decoration:none}
+.cta-ghost{display:inline-block;border:1px solid rgba(255,255,255,.4);color:#fff;padding:13px 24px;border-radius:10px;font-size:15px;font-weight:500;margin-left:12px;transition:all .2s}
+.cta-ghost:hover{background:rgba(255,255,255,.1);text-decoration:none}
+</style>
+<script>window.SS_BASE="";</script>
+<script defer src="assets/site.js"></script>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ── HERO ── -->
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-badge">☀️ Free · No sign-up · India-specific</div>
+    <h1>Should you go solar?<br>Find out in 3 minutes.</h1>
+    <p>The only India-specific calculator that shows real subsidy slabs, itemised costs, actual battery replacement costs, and honest payback — not just a pretty estimate to capture your number.</p>
+    <a class="hero-cta" href="calculator.html">Estimate my savings →</a>
+    <div class="hero-sub">
+      <span>PM Surya Ghar subsidy included</span>
+      <span>22 state tariffs live</span>
+      <span>On-grid, off-grid &amp; surplus space</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS STRIP ── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-cell"><div class="stat-n">₹78k</div><div class="stat-l">Max residential<br>solar subsidy</div></div>
+    <div class="stat-cell"><div class="stat-n">3–5 yr</div><div class="stat-l">Payback in states like<br>Haryana &amp; Delhi</div></div>
+    <div class="stat-cell"><div class="stat-n">22</div><div class="stat-l">States with live<br>DISCOM tariffs</div></div>
+    <div class="stat-cell"><div class="stat-n">₹0</div><div class="stat-l">Free forever —<br>no account needed</div></div>
+  </div>
+</div>
+
+<!-- ── AD SLOT ── -->
+<div style="max-width:1000px;margin:0 auto;padding:18px 24px 0">
+  <div class="ad" data-ad="home_top" data-format="leaderboard"></div>
+</div>
+
+<!-- ── PICK YOUR PATH ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-label">Start here</div>
+    <h2 class="section-h2" style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px">What's your goal?</h2>
+    <p class="sh" style="font-size:16px;color:#5a5e56;margin-bottom:32px">Each path has different economics, different costs, and different constraints. Pick the one that fits your situation.</p>
+    <div class="path-row">
+      <a class="pcard pcard-green" href="guides/on-grid.html">
+        <span class="pcard-icon">🔌</span>
+        <div class="pcard-title">On-Grid Solar</div>
+        <div class="pcard-desc">Stay connected to the grid. Cut your bill, export the surplus, claim the PM Surya Ghar subsidy. No batteries needed.</div>
+        <div class="pcard-metas">
+          <div class="pcard-meta"><b>Cost:</b> ₹55–70k / kWp</div>
+          <div class="pcard-meta"><b>Subsidy:</b> Up to ₹78,000</div>
+          <div class="pcard-meta"><b>Backup:</b> None during outage</div>
+        </div>
+        <div class="pcard-arrow">→</div>
+      </a>
+      <a class="pcard pcard-amber" href="guides/off-grid.html">
+        <span class="pcard-icon">🔋</span>
+        <div class="pcard-title">Off-Grid Solar</div>
+        <div class="pcard-desc">Fully independent with battery storage. Works through every blackout. For farmhouses, rural homes, outage-prone areas.</div>
+        <div class="pcard-metas">
+          <div class="pcard-meta"><b>Cost:</b> ₹95–140k / kWp</div>
+          <div class="pcard-meta"><b>Subsidy:</b> Not eligible</div>
+          <div class="pcard-meta"><b>Backup:</b> Full autonomy</div>
+        </div>
+        <div class="pcard-arrow">→</div>
+      </a>
+      <a class="pcard pcard-purple" href="guides/surplus-space.html">
+        <span class="pcard-icon">📈</span>
+        <div class="pcard-title">Earn from Surplus Space</div>
+        <div class="pcard-desc">Spare terrace, warehouse roof, or idle plot? Oversize the system and sell everything you don't use back to the grid.</div>
+        <div class="pcard-metas">
+          <div class="pcard-meta"><b>Start from:</b> 500 sq ft</div>
+          <div class="pcard-meta"><b>Yield:</b> 10–16% annually</div>
+          <div class="pcard-meta"><b>Payback:</b> 5–7 years</div>
+        </div>
+        <div class="pcard-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-label">The process</div>
+    <h2 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px">How the calculator works</h2>
+    <p style="font-size:16px;color:#5a5e56;margin-bottom:28px">Four steps. No registration. Your data never leaves your browser.</p>
+    <div class="how-grid">
+      <div class="how-step"><div class="how-num">1</div><div class="how-icon">⚙️</div><div class="how-title">Enter your usage</div><div class="how-desc">Your appliances (with editable wattages) or just your monthly bill amount.</div></div>
+      <div class="how-step"><div class="how-num">2</div><div class="how-icon">📐</div><div class="how-title">Choose panels</div><div class="how-desc">Pick panel technology and see exactly how much roof space each needs.</div></div>
+      <div class="how-step"><div class="how-num">3</div><div class="how-icon">₹</div><div class="how-title">See the full picture</div><div class="how-desc">Itemised cost, subsidy, monthly savings, payback, 25-year generation chart, CO₂ offset.</div></div>
+      <div class="how-step"><div class="how-num">4</div><div class="how-icon">📋</div><div class="how-title">Save your estimate</div><div class="how-desc">Print or save a PDF of your results — system size, cost breakdown, subsidy, and payback — to share with vendors.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TARIFF SNAPSHOT ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-label">State tariffs</div>
+    <h2 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px">Where solar pays back fastest</h2>
+    <p style="font-size:16px;color:#5a5e56;margin-bottom:0">The higher your electricity tariff, the faster solar pays for itself. Here are India's top states.</p>
+    <div class="tariff-viz">
+      <h3>Domestic electricity tariff — top 8 states</h3>
+      <p class="tsub">Tap any bar to see the full state breakdown including buyback rate, DISCOM, and solar estimate.</p>
+      <div id="tariffBars"></div>
+      <div class="tariff-note">
+        Showing top 8 by domestic tariff. <a href="tariffs/index.html" style="color:#0f6e56;font-weight:600">View all 22 states →</a>
+        <span style="float:right">Updated January 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUBSIDY BAND ── -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="subsidy-band">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px">PM Surya Ghar Muft Bijli Yojana</div>
+        <h2>Up to ₹78,000 in government subsidy</h2>
+        <p>India's flagship residential solar scheme. ₹30,000/kW for first 2 kW · ₹18,000 for the 3rd kW · ₹78,000 hard cap for 3 kW+.</p>
+        <a class="subsidy-cta" href="subsidy.html">Full subsidy guide →</a>
+      </div>
+      <div class="subsidy-slabs">
+        <div class="slab"><span class="slab-v">₹30k</span><span class="slab-l">per kW<br>up to 2 kW</span></div>
+        <div class="slab"><span class="slab-v">₹78k</span><span class="slab-l">total for<br>3 kW system</span></div>
+        <div class="slab"><span class="slab-v">₹78k</span><span class="slab-l">hard cap —<br>3 kW or larger</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY DIFFERENT ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-label">Why SolarSense</div>
+    <h2 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px">Built differently</h2>
+    <p style="font-size:16px;color:#5a5e56;margin-bottom:28px">Most solar calculators are lead-capture forms in disguise. This one isn't.</p>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-ic ic-green">🎯</div><h3>Real India data</h3><p>Actual SERC tariffs and exact PM Surya Ghar subsidy slabs — not generic numbers rounded to the nearest thousand.</p></div>
+      <div class="why-card"><div class="why-ic ic-amber">🔦</div><h3>Nothing hidden</h3><p>Batteries, their replacement every 5–12 years, meters, labour — every line item you'd normally find out after signing a contract.</p></div>
+      <div class="why-card"><div class="why-ic ic-blue">📤</div><h3>Save &amp; share your estimate</h3><p>Print or save your full calculation as a PDF to compare quotes, share with vendors, or show your family why the numbers work.</p></div>
+      <div class="why-card"><div class="why-ic ic-purple">🔒</div><h3>Your data stays yours</h3><p>The calculator runs entirely in your browser. We don't ask for your phone number to show you a number.</p></div>
+      <div class="why-card"><div class="why-ic ic-green">⚡</div><h3>Three paths, one tool</h3><p>On-grid, off-grid, and surplus-space earning are meaningfully different. Each gets its own calculator, not a one-size-fits-all form.</p></div>
+      <div class="why-card"><div class="why-ic ic-amber">📋</div><h3>Know what to ask</h3><p>Step 5 is a curated checklist of questions to put to any installer — so you can compare quotes on equal terms.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AD SLOT MID ── -->
+<div style="max-width:1000px;margin:0 auto;padding:0 24px">
+  <div class="ad" data-ad="home_mid" data-format="leaderboard"></div>
+</div>
+
+<!-- ── TOOLS STRIP ── -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="section-label">Free tools</div>
+    <h2 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:28px">Everything in one place</h2>
+    <div class="tiles">
+      <a class="tile" href="calculator.html">
+        <div class="tile-ic ic-green">🧮</div>
+        <h3>Solar Calculator</h3>
+        <p>Enter appliances or bill. Get system size, itemised cost, subsidy, savings, payback — and save as PDF.</p>
+      </a>
+      <a class="tile" href="subsidy.html">
+        <div class="tile-ic ic-blue">🏛️</div>
+        <h3>PM Surya Ghar Subsidy</h3>
+        <p>The exact slabs, eligibility rules, and step-by-step application process explained plainly.</p>
+      </a>
+      <a class="tile" href="tariffs/index.html">
+        <div class="tile-ic ic-amber">⚡</div>
+        <h3>State Tariff Comparison</h3>
+        <p>Domestic tariff, net-metering buyback rate, and DISCOM for all 22 states — with visual ranking.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Ready to see your numbers?</h2>
+    <p>Takes 3 minutes. No sign-up. Save your full estimate as a PDF when you're done.</p>
+    <a class="cta-white" href="calculator.html">Open the calculator →</a>
+    <a class="cta-ghost" href="guides/index.html">Read the guides</a>
+  </div>
+</section>
+
+<!-- ── NOTICE ── -->
+<div style="max-width:1000px;margin:0 auto;padding:18px 24px">
+  <div class="notice">
+    <span class="ni">ℹ️</span>
+    <span>All figures on SolarSense are indicative estimates based on standard assumptions and public data. Actual costs, generation, and subsidy depend on your site, DISCOM, and vendor. Always get quotes from certified installers before deciding. Not financial or engineering advice.</span>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script>
+// Live tariff bars on homepage (top 8 by tariff)
+const TOP8 = [
+  {n:"West Bengal",d:7.5,s:"west-bengal"},
+  {n:"Haryana",d:7.2,s:"haryana"},
+  {n:"Delhi",d:7.0,s:"delhi"},
+  {n:"Punjab",d:7.0,s:"punjab"},
+  {n:"Maharashtra",d:6.5,s:"maharashtra"},
+  {n:"Rajasthan",d:6.5,s:"rajasthan"},
+  {n:"Uttar Pradesh",d:6.5,s:"uttar-pradesh"},
+  {n:"Karnataka",d:6.2,s:"karnataka"},
+];
+const maxT=7.5;
+const colors={7.5:"#b5761a",7.2:"#b5761a",7.0:"#1d9e75",6.5:"#1d9e75",6.2:"#1a5fa3"};
+document.getElementById('tariffBars').innerHTML=TOP8.map(t=>`
+  <a href="tariffs/${t.s}.html" style="text-decoration:none;display:block" title="${t.n}: ₹${t.d}/kWh">
+    <div class="tbar-row">
+      <div class="tbar-name">${t.n}</div>
+      <div class="tbar-track">
+        <div class="tbar-fill" style="width:${Math.round(t.d/maxT*100)}%;background:${colors[t.d]||'#1d9e75'}"></div>
+      </div>
+      <div class="tbar-val">₹${t.d}</div>
+    </div>
+  </a>`).join('');
+</script>
+</body>
+</html>
