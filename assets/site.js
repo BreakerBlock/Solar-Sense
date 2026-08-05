@@ -13,7 +13,7 @@
   ────────────────────────────────────────────────────────────────── */
   const AD = {
     LIVE: false,
-    PUBLISHER_ID: "ca-pub-XXXXXXXXXXXXXXXX",
+    PUBLISHER_ID: "ca-pub-3644986071654119",
     AD_SLOTS: {
       home_top:      "0000000001",
       home_mid:      "0000000002",
