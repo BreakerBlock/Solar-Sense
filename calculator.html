@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
 <meta name="google-adsense-account" content="ca-pub-3644986071654119">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MVHCK1EZ2Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MVHCK1EZ2Q');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SolarSense India — On-Grid · Off-Grid · Surplus Solar</title>
@@ -191,20 +199,6 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .tier-d{font-size:11.5px;color:var(--tx3);line-height:1.5}
 .hidden{display:none !important}
 .ml-a{margin-left:auto}
-
-/* ── Print / PDF ── */
-@media print{
-  .page{padding:0;max-width:100%}
-  .hdr,.nav,.path-grid,.ad,button,.notice,.btn,.btn-p,#s0,#s1,#s2,#s4,.expl-wrap{display:none!important}
-  #s3{display:block!important}
-  #pdf-hdr{display:flex!important;flex-direction:column;gap:4pt;margin-bottom:12pt}
-  #pdf-ftr{display:block!important;margin-top:16pt;padding-top:8pt;border-top:1px solid #ddd;font-size:8pt;color:#999;text-align:center}
-  body{background:#fff;font-size:11pt;color:#000}
-  .card{border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
-  .metric{border:1px solid #eee;break-inside:avoid}
-  .mc-c .mc-b,.bar-f{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-}
-#pdf-hdr,#pdf-ftr{display:none}
 </style>
 </head>
 <body>
@@ -213,23 +207,11 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <div class="hdr">
   <a href="index.html" style="text-decoration:none;display:block">
   <svg width="220" height="52" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg" aria-label="SolarSense India">
-    <defs>
-      <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#F5A623"/><stop offset="100%" style="stop-color:#F07C00"/>
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#F5A623"/><stop offset="100%" style="stop-color:#F07C00"/></linearGradient></defs>
     <circle cx="24" cy="18" r="9" fill="url(#sg)"/>
-    <g stroke="#F5A623" stroke-width="2" stroke-linecap="round">
-      <line x1="24" y1="4" x2="24" y2="2"/><line x1="24" y1="32" x2="24" y2="34"/>
-      <line x1="10" y1="18" x2="8" y2="18"/><line x1="38" y1="18" x2="40" y2="18"/>
-      <line x1="14" y1="8" x2="12" y2="6"/><line x1="34" y1="28" x2="36" y2="30"/>
-      <line x1="34" y1="8" x2="36" y2="6"/><line x1="14" y1="28" x2="12" y2="30"/>
-    </g>
+    <g stroke="#F5A623" stroke-width="2" stroke-linecap="round"><line x1="24" y1="4" x2="24" y2="2"/><line x1="24" y1="32" x2="24" y2="34"/><line x1="10" y1="18" x2="8" y2="18"/><line x1="38" y1="18" x2="40" y2="18"/><line x1="14" y1="8" x2="12" y2="6"/><line x1="34" y1="28" x2="36" y2="30"/><line x1="34" y1="8" x2="36" y2="6"/><line x1="14" y1="28" x2="12" y2="30"/></g>
     <rect x="4" y="36" width="40" height="12" rx="2.5" fill="#1D9E75"/>
-    <g stroke="rgba(255,255,255,0.3)" stroke-width="0.7">
-      <line x1="17.3" y1="36" x2="17.3" y2="48"/><line x1="30.6" y1="36" x2="30.6" y2="48"/>
-      <line x1="4" y1="42" x2="44" y2="42"/>
-    </g>
+    <g stroke="rgba(255,255,255,0.3)" stroke-width="0.7"><line x1="17.3" y1="36" x2="17.3" y2="48"/><line x1="30.6" y1="36" x2="30.6" y2="48"/><line x1="4" y1="42" x2="44" y2="42"/></g>
     <rect x="5" y="37" width="38" height="2.5" rx="1" fill="rgba(255,255,255,0.12)"/>
     <text x="56" y="26" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" font-weight="800" letter-spacing="-0.4" fill="#191B17">Solar<tspan fill="#1D9E75">Sense</tspan></text>
     <rect x="56" y="29" width="44" height="2.5" rx="1.2" fill="#1D9E75"/>
@@ -594,14 +576,6 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 
 <!-- ═══════ STEP 3 — RESULTS ═══════ -->
 <div id="s3" class="hidden">
-  <div id="pdf-hdr">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:16pt;font-weight:800;color:#0f6e56">☀️ SolarSense India</div>
-      <div style="font-size:9pt;color:#888" id="pdf-date"></div>
-    </div>
-    <div style="font-size:14pt;font-weight:700;color:#191b17;margin-top:6pt;border-bottom:2px solid #1d9e75;padding-bottom:8pt" id="pdf-title">Solar Estimate Report</div>
-    <div style="font-size:9pt;color:#555" id="pdf-config"></div>
-  </div>
   <div class="step-badge"><div class="step-num">4</div><div class="step-lbl">Step Four</div></div>
   <div class="step-q" id="resTitle">Your system</div>
 
@@ -681,8 +655,6 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     <div class="notice-i">ℹ️</div>
     <div>The computation is indicative in nature. Generation and financial savings may vary based on actual solar irradiation, panel efficiency, shading, and local grid conditions. Subsidy amounts are as per PM Surya Ghar Muft Bijli Yojana guidelines for residential consumers and are subject to change. Export caps and buyback rates vary by DISCOM. Consult a certified solar advisor for a precise assessment.</div>
   </div>
-
-  <div id="pdf-ftr">Generated by SolarSense India (solarsense.in) · Estimates are indicative — get quotes from certified installers. Not financial or engineering advice.</div>
 
   <button class="btn btn-p" onclick="go(4)">See vendor guide →</button>
   <button class="btn btn-s" onclick="go(2)">← Back to panels</button>
@@ -1242,7 +1214,7 @@ function renderInvestResults(){
   if(i.deprBenefit>0)rows+=`<div class="cb-row sub"><div class="cb-k">Less: Accelerated depreciation<small>40% of asset written off in year 1 @ 30% tax — only if you have business income</small></div><div class="cb-v">− ${fK(i.deprBenefit)}</div></div>`;
   rows+=`<div class="cb-row total"><div class="cb-k">Net cost to you</div><div class="cb-v">${fK(i.net)}</div></div>`;
   if(!T.sub&&!T.depr)rows+=`<div class="info i-a" style="margin-top:14px">No subsidy applies at this scale or connection type.</div>`;
-  /* Subsidy note: flat ₹78,000 for any system 3kW+ — no additional above 3kW */
+  /* Subsidy: flat ₹78,000 for any system 3kW+ */
   document.getElementById('invCostRows').innerHTML=rows;
 
   // split
@@ -1309,31 +1281,6 @@ function renderInstallers(){
   document.getElementById('aggList').innerHTML=AGGS[path].map(a=>`<div class="agg"><div class="agg-i">${a.i}</div><div style="flex:1"><div class="agg-n">${a.n}</div><div class="agg-d">${a.d}</div><div class="agg-tg">${a.t.map(x=>`<span class="tag t-b">${x}</span>`).join('')}</div><div class="agg-nt">💡 ${a.x}</div></div></div>`).join('');
   document.getElementById('checklist').innerHTML=CHECKS[path].map(c=>`<div>☐ &nbsp;${c}</div>`).join('');
 }
-/* ── Save as PDF (browser print) ── */
-function savePDF(){
-  const de=document.getElementById('pdf-date');
-  if(de) de.textContent=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-  const ti=document.getElementById('pdf-title');
-  const rt=document.getElementById('resTitle');
-  if(ti&&rt) ti.textContent=rt.textContent+' — SolarSense India';
-  const st=document.getElementById('stSel');
-  const tIn=document.getElementById('tIn');
-  let cfg=[];
-  if(path==='invest'){
-    cfg=['Surplus space estimate','State: '+(st?st.value:'—'),'Tariff: ₹'+(tIn?tIn.value:'—')+'/kWh'];
-  } else {
-    const p=R||{};
-    cfg=[(p.isOff?'Off-grid':'On-grid')+' system','System: '+(p.kw||0).toFixed(1)+' kWp','State: '+(st?st.value:'—')+' · ₹'+(tIn?tIn.value:'—')+'/kWh'];
-  }
-  const ce=document.getElementById('pdf-config');
-  if(ce) ce.textContent=cfg.join('  ·  ');
-  /* Show results step for printing even if user is on another step */
-  const cur=step;
-  const s3=document.getElementById('s3');
-  s3.classList.remove('hidden');
-  setTimeout(()=>{window.print();setTimeout(()=>{if(cur!==3){s3.classList.add('hidden');}},500);},100);
-}
-
 </script>
 </body>
 </html>
