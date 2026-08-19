@@ -11,7 +11,6 @@
     LIVE: true,
     NATIVE_CONTAINER: "container-e652af360a94c45808f52efc91ed70ff",
     NATIVE_SRC: "https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js",
-    POPUNDER_SRC: "https://pl30922222.effectivecpmnetwork.com/2a/9d/53/2a9d53e22f8da47dd6928278407e2a19.js",
     SOCIALBAR_SRC: "https://pl30922223.effectivecpmnetwork.com/4d/2f/65/4d2f65c0f82ff58f590b40a96cd29098.js",
     SMARTLINK: "https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20"
   };
@@ -48,7 +47,7 @@
   // Load Popunder + Social Bar once, site-wide
   window.SS_loadGlobalAds = function(){
     if(!AD.LIVE) return;
-    [AD.POPUNDER_SRC, AD.SOCIALBAR_SRC].forEach(src=>{
+    [AD.SOCIALBAR_SRC].forEach(src=>{
       const s=document.createElement('script'); s.async=true; s.src=src;
       document.body.appendChild(s);
     });
