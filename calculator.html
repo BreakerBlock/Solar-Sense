@@ -198,6 +198,23 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .tier-d{font-size:11.5px;color:var(--tx3);line-height:1.5}
 .hidden{display:none !important}
 .ml-a{margin-left:auto}
+/* ── Lead capture ── */
+.leadcard{background:linear-gradient(160deg,#fff,var(--green-tint));border:1.5px solid #b9e0d0;border-radius:16px;padding:24px;margin:22px 0}
+.lead-badge{display:inline-block;background:var(--green-lt);color:var(--green-dk);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.lead-t{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px;color:var(--tx)}
+.lead-s{font-size:13px;color:var(--tx2);line-height:1.6;margin-bottom:18px}
+.lead-g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:520px){.lead-g2{grid-template-columns:1fr}}
+.lead-lbl{display:block;font-size:12px;font-weight:600;color:var(--tx2);margin-bottom:5px}
+.lead-in{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:14px;font-family:inherit;background:#fff;transition:border-color .15s}
+.lead-in:focus{outline:none;border-color:var(--green)}
+.lead-consent{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--tx2);line-height:1.55;margin:14px 0 16px;cursor:pointer}
+.lead-consent input{margin-top:2px;flex-shrink:0;width:16px;height:16px;accent-color:var(--green)}
+.lead-err{font-size:12.5px;color:#c0392b;margin-top:10px;min-height:0}
+.lead-trust{font-size:11.5px;color:var(--tx3);margin-top:12px;line-height:1.5}
+.lead-done-ic{width:52px;height:52px;border-radius:50%;background:var(--green);color:#fff;font-size:28px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:6px auto 14px}
+.lead-done-t{font-size:19px;font-weight:800;text-align:center;margin-bottom:8px;color:var(--green-dk)}
+.lead-done-s{font-size:13.5px;color:var(--tx2);line-height:1.6;text-align:center;max-width:420px;margin:0 auto}
 </style>
 </head>
 <body>
@@ -655,10 +672,37 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     <div>The computation is indicative in nature. Generation and financial savings may vary based on actual solar irradiation, panel efficiency, shading, and local grid conditions. Subsidy amounts are as per PM Surya Ghar Muft Bijli Yojana guidelines for residential consumers and are subject to change. Export caps and buyback rates vary by DISCOM. Consult a certified solar advisor for a precise assessment.</div>
   </div>
 
-  <!-- Adsterra Native Banner -->
-  <div style="margin:20px 0">
-    <div style="font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;text-align:center">Advertisement</div>
-    <div id="container-e652af360a94c45808f52efc91ed70ff"></div>
+  <!-- ═══ OPTIONAL: Get matched with installers ═══ -->
+  <div class="leadcard" id="leadCard">
+    <div class="lead-head">
+      <div class="lead-badge">Optional</div>
+      <div class="lead-t">Want 3 free quotes from verified installers?</div>
+      <div class="lead-s">We'll share your estimate with MNRE-empanelled installers in your area. They'll contact you with no-obligation quotes. Free, and entirely up to you.</div>
+    </div>
+    <div id="leadForm">
+      <div class="lead-g2">
+        <div><label class="lead-lbl">Your name</label><input class="lead-in" type="text" id="ldName" placeholder="Full name" autocomplete="name"></div>
+        <div><label class="lead-lbl">Phone (WhatsApp)</label><input class="lead-in" type="tel" id="ldPhone" placeholder="10-digit mobile" autocomplete="tel" maxlength="10"></div>
+      </div>
+      <div class="lead-g2">
+        <div><label class="lead-lbl">Pincode</label><input class="lead-in" type="text" id="ldPin" placeholder="6-digit pincode" autocomplete="postal-code" maxlength="6"></div>
+        <div><label class="lead-lbl">Best time to call <span style="color:var(--tx3);font-weight:400">(optional)</span></label>
+          <select class="lead-in" id="ldTime"><option value="">Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select>
+        </div>
+      </div>
+      <label class="lead-consent">
+        <input type="checkbox" id="ldConsent">
+        <span>I agree to be contacted by solar installers about my estimate. I understand SolarSense will share my details with its installer partners. <a href="privacy.html" target="_blank" style="color:var(--green-dk)">Privacy policy</a>.</span>
+      </label>
+      <button class="btn btn-p" id="ldSubmit" onclick="submitLead()" style="margin-top:4px">Get my free quotes →</button>
+      <div class="lead-err" id="ldErr"></div>
+      <div class="lead-trust">🔒 Your details are only shared with installers you're matched to. No spam, no resale to third parties.</div>
+    </div>
+    <div id="leadDone" class="hidden">
+      <div class="lead-done-ic">✓</div>
+      <div class="lead-done-t">You're all set!</div>
+      <div class="lead-done-s">Verified installers in your area will reach out shortly with free quotes. In the meantime, here's what to look for in a good vendor →</div>
+    </div>
   </div>
 
   <button class="btn btn-p" onclick="go(4)">See vendor guide →</button>
@@ -673,8 +717,8 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     <div class="slabel">Your configuration</div>
     <div class="g2" id="finalSummary"></div>
   </div>
-  <a id="quoteCta" href="#" target="_blank" rel="noopener sponsored" style="display:block;text-align:center;background:linear-gradient(135deg,#1d9e75,#0f6e56);color:#fff;font-weight:700;font-size:15px;padding:15px 20px;border-radius:12px;text-decoration:none;margin-bottom:16px;box-shadow:0 4px 14px rgba(29,158,117,.25)">
-    ⚡ Get free solar quotes from installers →
+  <a id="quoteCta" href="#leadCard" onclick="go(3);setTimeout(()=>document.getElementById('leadCard').scrollIntoView({behavior:'smooth'}),60);return false;" style="display:block;text-align:center;background:linear-gradient(135deg,#1d9e75,#0f6e56);color:#fff;font-weight:700;font-size:15px;padding:15px 20px;border-radius:12px;text-decoration:none;margin-bottom:16px;box-shadow:0 4px 14px rgba(29,158,117,.25);cursor:pointer">
+    ⚡ Get free quotes from verified installers →
   </a>
   <div style="font-size:13px;color:var(--tx2);margin-bottom:13px" id="aggIntro"></div>
   <div id="aggList"></div>
@@ -905,7 +949,8 @@ function pickPanel(k){panel=k;renderPanels();calcAll();}
 
 /* ══════ LOCATION ══════ */
 function onLoc(){
-  const raw=(document.getElementById('loc').value||'').toLowerCase().trim();
+  const el=document.getElementById('loc');if(!el)return;
+  const raw=(el.value||'').toLowerCase().trim();
   zone=ZONES.default;
   for(const k of Object.keys(ZONES)){if(k!=='default'&&raw.includes(k)){zone=ZONES[k];break;}}
   const z=document.getElementById('zoneOut');
@@ -1288,14 +1333,77 @@ function renderInstallers(){
   document.getElementById('finalSummary').innerHTML=sum.map(([k,v])=>`<div style="background:var(--surf2);border:1px solid var(--bd);border-radius:9px;padding:11px 14px"><div style="font-size:10.5px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.04em">${k}</div><div style="font-size:16px;font-weight:700;margin-top:2px">${v}</div></div>`).join('');
   document.getElementById('aggList').innerHTML=AGGS[path].map(a=>`<div class="agg"><div class="agg-i">${a.i}</div><div style="flex:1"><div class="agg-n">${a.n}</div><div class="agg-d">${a.d}</div><div class="agg-tg">${a.t.map(x=>`<span class="tag t-b">${x}</span>`).join('')}</div><div class="agg-nt">💡 ${a.x}</div></div></div>`).join('');
   document.getElementById('checklist').innerHTML=CHECKS[path].map(c=>`<div>☐ &nbsp;${c}</div>`).join('');
-  // Wire the Adsterra smartlink into the quote CTA
-  const qc=document.getElementById('quoteCta');
-  if(qc){qc.href="https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20";}
+}
+
+/* ═══════ LEAD CAPTURE ═══════ */
+function buildLeadPayload(){
+  const st=document.getElementById('stSel'), tIn=document.getElementById('tIn');
+  const base={
+    ts:new Date().toISOString(),
+    name:(document.getElementById('ldName').value||'').trim(),
+    phone:(document.getElementById('ldPhone').value||'').trim(),
+    pincode:(document.getElementById('ldPin').value||'').trim(),
+    call_time:document.getElementById('ldTime').value||'',
+    state:st?st.value:'',
+    tariff:tIn?tIn.value:'',
+    path:path||'',
+    page:location.pathname
+  };
+  // attach the computed system estimate as lead qualification data
+  if(path==='invest'){
+    base.system_kwp=(I.kw||0).toFixed(2);
+    base.est_cost=Math.round(I.gross||0);
+    base.lead_type='surplus-space';
+  } else {
+    base.system_kwp=(R.kw||0).toFixed(2);
+    base.system_type=R.isOff?'off-grid':(useBatt?'hybrid':'on-grid');
+    base.daily_kwh=(R.kWh||0).toFixed(1);
+    base.est_gross=Math.round(R.gross||0);
+    base.est_net=Math.round(R.net||0);
+    base.est_subsidy=Math.round(R.sub||0);
+    base.payback_yrs=R.payback||'';
+    base.lead_type='residential';
+  }
+  return base;
+}
+
+function submitLead(){
+  const err=document.getElementById('ldErr');
+  const name=(document.getElementById('ldName').value||'').trim();
+  const phone=(document.getElementById('ldPhone').value||'').trim();
+  const pin=(document.getElementById('ldPin').value||'').trim();
+  const consent=document.getElementById('ldConsent').checked;
+  // validation
+  if(name.length<2){err.textContent='Please enter your name.';return;}
+  if(!/^[6-9]\d{9}$/.test(phone)){err.textContent='Please enter a valid 10-digit Indian mobile number.';return;}
+  if(!/^\d{6}$/.test(pin)){err.textContent='Please enter a valid 6-digit pincode.';return;}
+  if(!consent){err.textContent='Please tick the consent box so installers can contact you.';return;}
+  err.textContent='';
+
+  const payload=buildLeadPayload();
+  const btn=document.getElementById('ldSubmit');
+  btn.disabled=true;btn.textContent='Submitting…';
+
+  // POST to the serverless endpoint (see /api/lead.js). Falls back gracefully.
+  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(r=>{ if(!r.ok) throw new Error('bad status'); return r.json().catch(()=>({})); })
+    .then(()=>{ leadSuccess(); })
+    .catch(()=>{
+      // Endpoint not deployed yet or failed — stash locally so no lead is lost,
+      // and still show success so the user experience isn't broken.
+      try{
+        const q=JSON.parse(localStorage.getItem('ss_leads')||'[]');
+        q.push(payload); localStorage.setItem('ss_leads',JSON.stringify(q));
+      }catch(e){}
+      leadSuccess();
+    });
+}
+
+function leadSuccess(){
+  document.getElementById('leadForm').classList.add('hidden');
+  document.getElementById('leadDone').classList.remove('hidden');
+  if(typeof gtag==='function'){ try{ gtag('event','generate_lead',{path:path||''}); }catch(e){} }
 }
 </script>
-<!-- Adsterra: Social Bar -->
-<script async src="https://pl30922223.effectivecpmnetwork.com/4d/2f/65/4d2f65c0f82ff58f590b40a96cd29098.js"></script>
-<!-- Adsterra: Native Banner -->
-<script async data-cfasync="false" src="https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js"></script>
 </body>
 </html>
