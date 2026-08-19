@@ -11,8 +11,7 @@
     LIVE: true,
     NATIVE_CONTAINER: "container-e652af360a94c45808f52efc91ed70ff",
     NATIVE_SRC: "https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js",
-    SOCIALBAR_SRC: "",
-    SMARTLINK: ""
+    SMARTLINK: "https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20"
   };
   // expose smartlink for buttons/links across the site
   window.SS_SMARTLINK = AD.SMARTLINK;
@@ -44,14 +43,6 @@
     for(let i=1;i<slots.length;i++){ slots[i].style.display='none'; }
   };
 
-  // Load Popunder + Social Bar once, site-wide
-  window.SS_loadGlobalAds = function(){
-    if(!AD.LIVE) return;
-    [AD.SOCIALBAR_SRC].forEach(src=>{
-      const s=document.createElement('script'); s.async=true; s.src=src;
-      document.body.appendChild(s);
-    });
-  };
 
   const nav = `
   <nav class="topnav">
@@ -115,6 +106,5 @@
     const n = document.getElementById('site-nav');    if(n) n.outerHTML = nav;
     const f = document.getElementById('site-footer'); if(f) f.outerHTML = footer;
     if(window.SS_renderAds) window.SS_renderAds();
-    if(window.SS_loadGlobalAds) window.SS_loadGlobalAds();
   });
 })();
