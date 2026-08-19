@@ -3,15 +3,6 @@
 (function(){
   const BASE = window.SS_BASE || "";
 
-  /* ── Ads: currently disabled ──────────────────────────────────────
-     All Adsterra formats (popunder, social bar, native banner) were
-     removed — they hijacked clicks and redirected users. Ad slots now
-     render as empty/hidden. Re-add a clean network here when ready.
-  ────────────────────────────────────────────────────────────────── */
-  window.SS_renderAds = function(){
-    // Hide all ad slots — no ad network currently active
-    document.querySelectorAll('.ad[data-ad]').forEach(el=>{ el.style.display='none'; });
-  };
 
   const nav = `
   <nav class="topnav">
@@ -74,6 +65,5 @@
   document.addEventListener('DOMContentLoaded', function(){
     const n = document.getElementById('site-nav');    if(n) n.outerHTML = nav;
     const f = document.getElementById('site-footer'); if(f) f.outerHTML = footer;
-    if(window.SS_renderAds) window.SS_renderAds();
   });
 })();

@@ -684,12 +684,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
         <div><label class="lead-lbl">Your name</label><input class="lead-in" type="text" id="ldName" placeholder="Full name" autocomplete="name"></div>
         <div><label class="lead-lbl">Phone (WhatsApp)</label><input class="lead-in" type="tel" id="ldPhone" placeholder="10-digit mobile" autocomplete="tel" maxlength="10"></div>
       </div>
-      <div class="lead-g2">
-        <div><label class="lead-lbl">Pincode</label><input class="lead-in" type="text" id="ldPin" placeholder="6-digit pincode" autocomplete="postal-code" maxlength="6"></div>
-        <div><label class="lead-lbl">Best time to call <span style="color:var(--tx3);font-weight:400">(optional)</span></label>
-          <select class="lead-in" id="ldTime"><option value="">Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select>
-        </div>
-      </div>
+      <div style="margin-bottom:12px"><label class="lead-lbl">Pincode</label><input class="lead-in" type="text" id="ldPin" placeholder="6-digit pincode" autocomplete="postal-code" maxlength="6"></div>
       <label class="lead-consent">
         <input type="checkbox" id="ldConsent">
         <span>I agree to be contacted by solar installers about my estimate. I understand SolarSense will share my details with its installer partners. <a href="privacy.html" target="_blank" style="color:var(--green-dk)">Privacy policy</a>.</span>
@@ -1343,7 +1338,6 @@ function buildLeadPayload(){
     name:(document.getElementById('ldName').value||'').trim(),
     phone:(document.getElementById('ldPhone').value||'').trim(),
     pincode:(document.getElementById('ldPin').value||'').trim(),
-    call_time:document.getElementById('ldTime').value||'',
     state:st?st.value:'',
     tariff:tIn?tIn.value:'',
     path:path||'',

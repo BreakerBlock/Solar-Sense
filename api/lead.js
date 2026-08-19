@@ -1,22 +1,14 @@
-// Vercel Serverless Function — receives a lead from the calculator and stores it.
+// Vercel Serverless Function — receives a lead from the calculator and stores it
+// in Supabase (Postgres table: `leads`).
 //
-// ─────────────────────────────────────────────────────────────────────────────
-// SETUP (pick ONE storage option below and set the matching env vars in Vercel):
+// Required environment variables (set these in Vercel → Project → Settings →
+// Environment Variables, NOT in code):
+//   SUPABASE_URL          e.g. https://xxxxxxxx.supabase.co
+//   SUPABASE_SERVICE_KEY  the service_role key (server-side only — never expose)
 //
-//   Option A — Vercel KV (easiest; free tier). Set env: KV_REST_API_URL,
-//              KV_REST_API_TOKEN. Uncomment the KV block.
-//   Option B — Supabase (Postgres, free tier). Set env: SUPABASE_URL,
-//              SUPABASE_SERVICE_KEY. Uncomment the Supabase block.
-//   Option C — Email each lead to yourself via Resend. Set env: RESEND_API_KEY,
-//              LEAD_EMAIL_TO, LEAD_EMAIL_FROM. Uncomment the email block.
-//
-// You can enable more than one at a time (e.g. store in KV AND email yourself).
-// With NONE configured, the function still returns 200 and logs the lead, so the
-// site works the moment you deploy — you just wire real storage when ready.
-// ─────────────────────────────────────────────────────────────────────────────
+// The table is created as `leads`. See LEADS_SETUP.md for the schema.
 
 export default async function handler(req, res) {
-  // CORS (same-origin in prod; permissive here so preview deploys work)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -38,61 +30,56 @@ export default async function handler(req, res) {
   if (!/^[6-9]\d{9}$/.test(phone)) return res.status(400).json({ error: 'Invalid phone' });
   if (!/^\d{6}$/.test(pincode)) return res.status(400).json({ error: 'Invalid pincode' });
 
-  // Enrich
+  // Build the row. Only include columns that exist in the `leads` table.
   const record = {
-    ...lead,
-    name, phone, pincode,
+    ts: lead.ts || new Date().toISOString(),
+    name,
+    phone,
+    pincode,
+    state: lead.state || null,
+    tariff: lead.tariff ? Number(lead.tariff) : null,
+    system_kwp: lead.system_kwp ? Number(lead.system_kwp) : null,
+    system_type: lead.system_type || null,
+    daily_kwh: lead.daily_kwh ? Number(lead.daily_kwh) : null,
+    est_gross: lead.est_gross != null ? Math.round(Number(lead.est_gross)) : (lead.est_cost != null ? Math.round(Number(lead.est_cost)) : null),
+    est_net: lead.est_net != null ? Math.round(Number(lead.est_net)) : null,
+    est_subsidy: lead.est_subsidy != null ? Math.round(Number(lead.est_subsidy)) : null,
+    payback_yrs: lead.payback_yrs != null ? String(lead.payback_yrs) : null,
+    lead_type: lead.lead_type || null,
     ip: (req.headers['x-forwarded-for'] || '').split(',')[0] || null,
     ua: req.headers['user-agent'] || null,
     received_at: new Date().toISOString(),
   };
 
-  // Always log (visible in Vercel → your project → Logs)
-  console.log('NEW LEAD:', JSON.stringify(record));
+  console.log('NEW LEAD:', JSON.stringify({ ...record, ip: undefined, ua: undefined }));
+
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.error('Supabase env vars missing — lead logged only.');
+    return res.status(200).json({ ok: true, warning: 'storage not configured' });
+  }
 
   try {
-    // ── Option A: Vercel KV ────────────────────────────────────────────────
-    // import { kv } from '@vercel/kv';
-    // const id = `lead:${Date.now()}:${phone}`;
-    // await kv.set(id, record);
-    // await kv.lpush('leads:all', id);
-
-    // ── Option B: Supabase ─────────────────────────────────────────────────
-    // const r = await fetch(`${process.env.SUPABASE_URL}/rest/v1/leads`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     apikey: process.env.SUPABASE_SERVICE_KEY,
-    //     Authorization: `Bearer ${process.env.SUPABASE_SERVICE_KEY}`,
-    //     Prefer: 'return=minimal',
-    //   },
-    //   body: JSON.stringify(record),
-    // });
-    // if (!r.ok) throw new Error('Supabase insert failed: ' + (await r.text()));
-
-    // ── Option C: Email via Resend ─────────────────────────────────────────
-    // if (process.env.RESEND_API_KEY) {
-    //   await fetch('https://api.resend.com/emails', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-    //     },
-    //     body: JSON.stringify({
-    //       from: process.env.LEAD_EMAIL_FROM,
-    //       to: process.env.LEAD_EMAIL_TO,
-    //       subject: `New solar lead — ${name} (${pincode})`,
-    //       text: Object.entries(record).map(([k, v]) => `${k}: ${v}`).join('\n'),
-    //     }),
-    //   });
-    // }
-
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify(record),
+    });
+    if (!r.ok) {
+      const detail = await r.text();
+      throw new Error(`Supabase insert failed (${r.status}): ${detail}`);
+    }
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Lead store error:', err);
-    // Still return 200 so the user sees success; the lead is in the logs and the
-    // client also keeps a localStorage backup. Change to 500 once storage is live
-    // if you'd rather surface failures.
+    // Return 200 so the visitor still sees success; lead is in the logs and the
+    // client keeps a localStorage backup. Switch to 500 if you'd rather surface it.
     return res.status(200).json({ ok: true, warning: 'stored to logs only' });
   }
 }
