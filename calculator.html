@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-adsense-account" content="ca-pub-3644986071654119">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVHCK1EZ2Q"></script>
 <script>
@@ -656,6 +655,12 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     <div>The computation is indicative in nature. Generation and financial savings may vary based on actual solar irradiation, panel efficiency, shading, and local grid conditions. Subsidy amounts are as per PM Surya Ghar Muft Bijli Yojana guidelines for residential consumers and are subject to change. Export caps and buyback rates vary by DISCOM. Consult a certified solar advisor for a precise assessment.</div>
   </div>
 
+  <!-- Adsterra Native Banner -->
+  <div style="margin:20px 0">
+    <div style="font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;text-align:center">Advertisement</div>
+    <div id="container-e652af360a94c45808f52efc91ed70ff"></div>
+  </div>
+
   <button class="btn btn-p" onclick="go(4)">See vendor guide →</button>
   <button class="btn btn-s" onclick="go(2)">← Back to panels</button>
 </div>
@@ -668,6 +673,9 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     <div class="slabel">Your configuration</div>
     <div class="g2" id="finalSummary"></div>
   </div>
+  <a id="quoteCta" href="#" target="_blank" rel="noopener sponsored" style="display:block;text-align:center;background:linear-gradient(135deg,#1d9e75,#0f6e56);color:#fff;font-weight:700;font-size:15px;padding:15px 20px;border-radius:12px;text-decoration:none;margin-bottom:16px;box-shadow:0 4px 14px rgba(29,158,117,.25)">
+    ⚡ Get free solar quotes from installers →
+  </a>
   <div style="font-size:13px;color:var(--tx2);margin-bottom:13px" id="aggIntro"></div>
   <div id="aggList"></div>
   <div class="card">
@@ -1280,7 +1288,15 @@ function renderInstallers(){
   document.getElementById('finalSummary').innerHTML=sum.map(([k,v])=>`<div style="background:var(--surf2);border:1px solid var(--bd);border-radius:9px;padding:11px 14px"><div style="font-size:10.5px;color:var(--tx3);font-weight:600;text-transform:uppercase;letter-spacing:.04em">${k}</div><div style="font-size:16px;font-weight:700;margin-top:2px">${v}</div></div>`).join('');
   document.getElementById('aggList').innerHTML=AGGS[path].map(a=>`<div class="agg"><div class="agg-i">${a.i}</div><div style="flex:1"><div class="agg-n">${a.n}</div><div class="agg-d">${a.d}</div><div class="agg-tg">${a.t.map(x=>`<span class="tag t-b">${x}</span>`).join('')}</div><div class="agg-nt">💡 ${a.x}</div></div></div>`).join('');
   document.getElementById('checklist').innerHTML=CHECKS[path].map(c=>`<div>☐ &nbsp;${c}</div>`).join('');
+  // Wire the Adsterra smartlink into the quote CTA
+  const qc=document.getElementById('quoteCta');
+  if(qc){qc.href="https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20";}
 }
 </script>
+<!-- Adsterra: Popunder + Social Bar -->
+<script async src="https://pl30922222.effectivecpmnetwork.com/2a/9d/53/2a9d53e22f8da47dd6928278407e2a19.js"></script>
+<script async src="https://pl30922223.effectivecpmnetwork.com/4d/2f/65/4d2f65c0f82ff58f590b40a96cd29098.js"></script>
+<!-- Adsterra: Native Banner -->
+<script async data-cfasync="false" src="https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js"></script>
 </body>
 </html>

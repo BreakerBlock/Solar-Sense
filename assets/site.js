@@ -3,48 +3,54 @@
 (function(){
   const BASE = window.SS_BASE || "";
 
-  /* ── AdSense config ──────────────────────────────────────────────
-     1. After AdSense approval, set PUBLISHER_ID below (ca-pub-XXXX).
-     2. Create ad units in your AdSense dashboard and paste each slot
-        ID into AD_SLOTS.
-     3. Set LIVE = true. Until then, tidy labelled placeholders show
-        with the correct reserved size, so layout never shifts when
-        real ads switch on.
+  /* ── Adsterra config ─────────────────────────────────────────────
+     LIVE = true loads real Adsterra ads. The Native Banner renders
+     into each on-page ad slot; Popunder + Social Bar load site-wide.
   ────────────────────────────────────────────────────────────────── */
   const AD = {
-    LIVE: false,
-    PUBLISHER_ID: "ca-pub-3644986071654119",
-    AD_SLOTS: {
-      home_top:      "0000000001",
-      home_mid:      "0000000002",
-      calc_top:      "0000000003",
-      calc_results:  "0000000004",
-      article:       "0000000005",
-      tariff:        "0000000006",
+    LIVE: true,
+    NATIVE_CONTAINER: "container-e652af360a94c45808f52efc91ed70ff",
+    NATIVE_SRC: "https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js",
+    POPUNDER_SRC: "https://pl30922222.effectivecpmnetwork.com/2a/9d/53/2a9d53e22f8da47dd6928278407e2a19.js",
+    SOCIALBAR_SRC: "https://pl30922223.effectivecpmnetwork.com/4d/2f/65/4d2f65c0f82ff58f590b40a96cd29098.js",
+    SMARTLINK: "https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20"
+  };
+  // expose smartlink for buttons/links across the site
+  window.SS_SMARTLINK = AD.SMARTLINK;
+
+  // The Adsterra Native Banner invoke.js targets ONE container id. To show it
+  // in the first on-page slot, we give that slot the container id and load the
+  // script once. Remaining slots collapse (Adsterra native is one-per-page).
+  window.SS_renderAds = function(){
+    const slots = document.querySelectorAll('.ad[data-ad]');
+    if(!slots.length) return;
+    if(!AD.LIVE){
+      slots.forEach(el=>{
+        const fmt = el.getAttribute('data-format') || 'inarticle';
+        el.classList.add('ad-'+fmt,'placeholder');
+        el.innerHTML = '<span class="ad-label">Advertisement</span><div class="ad-box">Ad space ('+fmt+')</div>';
+      });
+      return;
     }
+    // Use the first slot on the page for the native banner
+    const first = slots[0];
+    const fmt = first.getAttribute('data-format') || 'inarticle';
+    first.classList.add('ad-'+fmt);
+    first.innerHTML = '<span class="ad-label">Advertisement</span><div id="'+AD.NATIVE_CONTAINER+'"></div>';
+    const s = document.createElement('script');
+    s.async = true; s.setAttribute('data-cfasync','false');
+    s.src = AD.NATIVE_SRC;
+    document.body.appendChild(s);
+    // Hide any additional slots so we don't leave empty labelled boxes
+    for(let i=1;i<slots.length;i++){ slots[i].style.display='none'; }
   };
 
-  // Render every <div class="ad" data-ad="slotKey" data-format="leaderboard|inarticle|rect">
-  window.SS_renderAds = function(){
-    document.querySelectorAll('.ad[data-ad]').forEach(el=>{
-      const key = el.getAttribute('data-ad');
-      const fmt = el.getAttribute('data-format') || 'inarticle';
-      el.classList.add('ad-'+fmt);
-      const slot = AD.AD_SLOTS[key] || "";
-      if(AD.LIVE && AD.PUBLISHER_ID.indexOf('XXXX')===-1){
-        el.innerHTML =
-          '<span class="ad-label">Advertisement</span>'+
-          '<ins class="adsbygoogle" style="display:block" '+
-          'data-ad-client="'+AD.PUBLISHER_ID+'" '+
-          'data-ad-slot="'+slot+'" '+
-          'data-ad-format="auto" data-full-width-responsive="true"></ins>';
-        try{ (adsbygoogle=window.adsbygoogle||[]).push({}); }catch(e){}
-      } else {
-        el.classList.add('placeholder');
-        el.innerHTML =
-          '<span class="ad-label">Advertisement</span>'+
-          '<div class="ad-box">Ad space ('+fmt+')</div>';
-      }
+  // Load Popunder + Social Bar once, site-wide
+  window.SS_loadGlobalAds = function(){
+    if(!AD.LIVE) return;
+    [AD.POPUNDER_SRC, AD.SOCIALBAR_SRC].forEach(src=>{
+      const s=document.createElement('script'); s.async=true; s.src=src;
+      document.body.appendChild(s);
     });
   };
 
@@ -109,14 +115,7 @@
   document.addEventListener('DOMContentLoaded', function(){
     const n = document.getElementById('site-nav');    if(n) n.outerHTML = nav;
     const f = document.getElementById('site-footer'); if(f) f.outerHTML = footer;
-    // load AdSense library only when live and configured
-    if(AD.LIVE && AD.PUBLISHER_ID.indexOf('XXXX')===-1){
-      const s=document.createElement('script');
-      s.async=true;
-      s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+AD.PUBLISHER_ID;
-      s.crossOrigin='anonymous';
-      document.head.appendChild(s);
-    }
     if(window.SS_renderAds) window.SS_renderAds();
+    if(window.SS_loadGlobalAds) window.SS_loadGlobalAds();
   });
 })();
