@@ -12,7 +12,7 @@
     NATIVE_CONTAINER: "container-e652af360a94c45808f52efc91ed70ff",
     NATIVE_SRC: "https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js",
     SOCIALBAR_SRC: "https://pl30922223.effectivecpmnetwork.com/4d/2f/65/4d2f65c0f82ff58f590b40a96cd29098.js",
-    SMARTLINK: "https://www.effectivecpmnetwork.com/teb70asz3?key=acb05aa0a2c7515522d9e65b0362fd20"
+    SMARTLINK: ""
   };
   // expose smartlink for buttons/links across the site
   window.SS_SMARTLINK = AD.SMARTLINK;
