@@ -4,7 +4,7 @@
 // Required environment variables (set these in Vercel → Project → Settings →
 // Environment Variables, NOT in code):
 //   SUPABASE_URL          e.g. https://xxxxxxxx.supabase.co
-//   SUPABASE_SERVICE_KEY  the service_role key (server-side only — never expose)
+//   SUPABASE_SERVICE_ROLE_KEY  the service_role key (server-side only — never expose)
 //
 // The table is created as `leads`. See LEADS_SETUP.md for the schema.
 
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   console.log('NEW LEAD:', JSON.stringify({ ...record, ip: undefined, ua: undefined }));
 
   const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     console.error('Supabase env vars missing — lead logged only.');
     return res.status(200).json({ ok: true, warning: 'storage not configured' });
