@@ -3,46 +3,15 @@
 (function(){
   const BASE = window.SS_BASE || "";
 
-  /* ── Adsterra config ─────────────────────────────────────────────
-     LIVE = true loads real Adsterra ads. The Native Banner renders
-     into each on-page ad slot; Popunder + Social Bar load site-wide.
+  /* ── Ads: currently disabled ──────────────────────────────────────
+     All Adsterra formats (popunder, social bar, native banner) were
+     removed — they hijacked clicks and redirected users. Ad slots now
+     render as empty/hidden. Re-add a clean network here when ready.
   ────────────────────────────────────────────────────────────────── */
-  const AD = {
-    LIVE: true,
-    NATIVE_CONTAINER: "container-e652af360a94c45808f52efc91ed70ff",
-    NATIVE_SRC: "https://pl30922225.effectivecpmnetwork.com/e652af360a94c45808f52efc91ed70ff/invoke.js",
-    SMARTLINK: ""
-  };
-  // expose smartlink for buttons/links across the site
-  window.SS_SMARTLINK = AD.SMARTLINK;
-
-  // The Adsterra Native Banner invoke.js targets ONE container id. To show it
-  // in the first on-page slot, we give that slot the container id and load the
-  // script once. Remaining slots collapse (Adsterra native is one-per-page).
   window.SS_renderAds = function(){
-    const slots = document.querySelectorAll('.ad[data-ad]');
-    if(!slots.length) return;
-    if(!AD.LIVE){
-      slots.forEach(el=>{
-        const fmt = el.getAttribute('data-format') || 'inarticle';
-        el.classList.add('ad-'+fmt,'placeholder');
-        el.innerHTML = '<span class="ad-label">Advertisement</span><div class="ad-box">Ad space ('+fmt+')</div>';
-      });
-      return;
-    }
-    // Use the first slot on the page for the native banner
-    const first = slots[0];
-    const fmt = first.getAttribute('data-format') || 'inarticle';
-    first.classList.add('ad-'+fmt);
-    first.innerHTML = '<span class="ad-label">Advertisement</span><div id="'+AD.NATIVE_CONTAINER+'"></div>';
-    const s = document.createElement('script');
-    s.async = true; s.setAttribute('data-cfasync','false');
-    s.src = AD.NATIVE_SRC;
-    document.body.appendChild(s);
-    // Hide any additional slots so we don't leave empty labelled boxes
-    for(let i=1;i<slots.length;i++){ slots[i].style.display='none'; }
+    // Hide all ad slots — no ad network currently active
+    document.querySelectorAll('.ad[data-ad]').forEach(el=>{ el.style.display='none'; });
   };
-
 
   const nav = `
   <nav class="topnav">
