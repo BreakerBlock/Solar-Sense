@@ -45,7 +45,7 @@ job — then you'd add them under GitHub → repo → Settings → Secrets and v
 | Variable | Where to get it | Notes |
 |---|---|---|
 | `SUPABASE_URL` | Supabase → Project Settings → API → Project URL | e.g. `https://abcd.supabase.co` |
-| `SUPABASE_SERVICE_KEY` | Supabase → Project Settings → API → `service_role` key | Secret. Server-side only. Never expose to the browser. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → `service_role` key | Secret. Server-side only. Never expose to the browser. |
 | `LEADS_ADMIN_TOKEN` | You invent it | Any long random string. Guards the export URL. |
 
 After adding them, **redeploy** so the functions pick them up.

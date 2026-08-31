@@ -4,7 +4,7 @@
 //   https://yourdomain.com/api/leads-export?token=YOUR_SECRET&format=csv
 //
 // Reads from the Supabase `leads` table. Requires the same SUPABASE_URL and
-// SUPABASE_SERVICE_KEY env vars as lead.js, plus LEADS_ADMIN_TOKEN.
+// SUPABASE_SERVICE_ROLE_KEY env vars as lead.js, plus LEADS_ADMIN_TOKEN.
 
 export default async function handler(req, res) {
   const token = req.query.token || '';
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   const SUPABASE_URL = process.env.SUPABASE_URL;
-  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY;
+  const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return res.status(500).json({ error: 'Supabase env vars not configured' });
   }
