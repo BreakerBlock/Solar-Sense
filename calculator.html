@@ -69,13 +69,15 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .m-v{font-size:20px;font-weight:700;line-height:1.15;letter-spacing:-.01em}
 .metric.acc .m-v{color:var(--green-dk)}.metric.amb .m-v{color:var(--amber)}.metric.pur .m-v{color:var(--purple)}
 .m-u{font-size:11px;color:var(--tx2);margin-top:2px}
-.ap-hdr,.ap-row{display:grid;grid-template-columns:1.9fr 86px 62px 66px 30px;gap:7px;align-items:center}
+.ap-hdr{display:grid;grid-template-columns:1.9fr 86px 62px 66px 30px;gap:7px;align-items:center}
 .ap-hdr{padding:7px 0;border-bottom:1.5px solid var(--bd2)}
-.ap-row{padding:8px 0;border-bottom:1px solid var(--bd)}
+.ap-row{display:grid;grid-template-columns:1.9fr auto;gap:7px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)}
+.ap-ctrls{display:grid;grid-template-columns:86px 62px 66px 30px;gap:7px;align-items:center}
+.ap-fld-l{display:none}
 .ap-h{font-size:10.5px;color:var(--tx3);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 .ap-n{font-size:13px;display:flex;align-items:center;gap:6px;min-width:0}
 .ap-n>span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ap-in{padding:5px 7px !important;font-size:12px !important}
+.ap-in{padding:5px 7px !important;font-size:12px !important;width:100%}
 .qw{display:flex;align-items:center;gap:4px}
 .qb{width:25px;height:25px;border-radius:7px;border:1px solid var(--bd2);background:var(--surf2);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;color:var(--tx)}
 .qb:hover{background:var(--bg)}
@@ -217,17 +219,34 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .lead-done-s{font-size:13.5px;color:var(--tx2);line-height:1.6;text-align:center;max-width:420px;margin:0 auto}
 /* ── Mobile patches ── */
 @media(max-width:480px){
-  /* Appliance selector card */
   #appCard .card-s{margin-bottom:4px}
-  #appCard .ap-hdr{font-size:11px}
-  #appCard .ap-h{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  #appList .ap-r{grid-template-columns:1fr 50px 50px 60px 60px}
-  #appList .ap-q{padding:8px 8px;font-size:13px;text-align:center}
-  #appList select{
-    font-size:13px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    padding-right:20px;
+
+  /* Hide the 5-column header on mobile — labels move inline */
+  #appCard .ap-hdr{display:none}
+
+  /* Stack each appliance: name on top, controls below */
+  #appList .ap-row{
+    display:block;
+    padding:12px 0;
+    border-bottom:1px solid var(--bd);
   }
+  #appList .ap-n{
+    display:flex;align-items:center;gap:7px;
+    font-size:14px;font-weight:600;
+    margin-bottom:9px;
+    white-space:normal;overflow:visible;
+  }
+  #appList .ap-n span{white-space:normal;overflow:visible;text-overflow:clip}
+
+  /* Controls row: Qty stepper | Hrs | Watts | Off */
+  #appList .ap-ctrls{
+    display:grid;
+    grid-template-columns:auto 1fr 1fr auto;
+    gap:8px;align-items:center;
+  }
+  #appList .ap-ctrls .ap-in{width:100%;text-align:center;font-size:13px;padding:9px 6px}
+  #appList .ap-fld{display:flex;flex-direction:column;gap:3px}
+  #appList .ap-fld-l{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.03em;font-weight:600}
 }
 </style>
 </head>
@@ -457,11 +476,9 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     </div>
 
     <div class="card" id="appCard">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">
-        <div class="card-t">Your appliances</div>
-        <div style="font-size:11px;color:var(--tx3)">✎ Watts column is editable</div>
-      </div>
+      <div class="card-t">Your appliances</div>
       <div class="card-s">Set quantity, daily hours, and wattage. Click ✕ to skip any item.</div>
+      <div style="font-size:11px;color:var(--tx3);margin-bottom:8px">✎ Watts column is editable</div>
       <div class="ap-hdr"><div class="ap-h">Appliance</div><div class="ap-h">Qty</div><div class="ap-h">Hrs/day</div><div class="ap-h">Watts ✎</div><div class="ap-h">Off</div></div>
       <div id="appList"></div>
       <button class="btn-add" onclick="addApp()">+ Add custom appliance</button>
@@ -930,10 +947,12 @@ function renderApps(){
     const dim=excl.has(i)||(exHigh&&a.hi);const ev=a.n.includes('EV');
     return `<div class="ap-row${dim?' dim':''}">
       <div class="ap-n"><span title="${a.n}">${a.n}</span>${a.hi?`<span class="tag ${ev?'t-b':'t-a'}">${ev?'EV':'High'}</span>`:''}</div>
+      <div class="ap-ctrls">
       <div class="qw"><button class="qb" onclick="q(${i},-1)">−</button><div class="qv" id="q${i}">${a.q}</div><button class="qb" onclick="q(${i},1)">+</button></div>
-      <input type="number" class="ap-in" min="0" max="24" step="0.5" value="${a.h}" onchange="apps[${i}].h=parseFloat(this.value)||0;calcAll()">
-      <input type="number" class="ap-in" min="1" max="20000" value="${a.w}" onchange="apps[${i}].w=parseInt(this.value)||1;calcAll()">
-      <button class="xb${excl.has(i)?' on':''}" onclick="xc(${i})">✕</button></div>`;
+      <div class="ap-fld"><span class="ap-fld-l">Hrs/day</span><input type="number" class="ap-in" min="0" max="24" step="0.5" value="${a.h}" onchange="apps[${i}].h=parseFloat(this.value)||0;calcAll()"></div>
+      <div class="ap-fld"><span class="ap-fld-l">Watts ✎</span><input type="number" class="ap-in" min="1" max="20000" value="${a.w}" onchange="apps[${i}].w=parseInt(this.value)||1;calcAll()"></div>
+      <button class="xb${excl.has(i)?' on':''}" onclick="xc(${i})">✕</button>
+      </div></div>`;
   }).join('');
 }
 function q(i,d){apps[i].q=Math.max(0,apps[i].q+d);document.getElementById('q'+i).textContent=apps[i].q;calcAll();}
