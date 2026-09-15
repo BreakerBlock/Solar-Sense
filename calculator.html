@@ -249,6 +249,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
   #appList .ap-fld-l{font-size:10px;color:var(--tx3);text-transform:uppercase;letter-spacing:.03em;font-weight:600}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="page">
@@ -731,6 +732,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
     </div>
   </div>
 
+  <button class="btn" onclick="downloadPDF()" id="pdfBtn" style="background:#1a1c19;color:#fff;margin-bottom:10px">⬇ Download my report (PDF)</button>
   <button class="btn btn-p" onclick="go(4)">See vendor guide →</button>
   <button class="btn btn-s" onclick="go(2)">← Back to panels</button>
 </div>
@@ -1364,6 +1366,119 @@ function renderInstallers(){
 }
 
 /* ═══════ LEAD CAPTURE ═══════ */
+/* ═══════ PDF REPORT ═══════ */
+function downloadPDF(){
+  if(typeof window.jspdf==='undefined'){alert('PDF library still loading — please try again in a moment.');return;}
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:'pt',format:'a4'});
+  const W = doc.internal.pageSize.getWidth();      // 595
+  const M = 42;                                     // margin
+  let y = 0;
+
+  // palette
+  const green=[29,158,117], greenDk=[15,110,86], dark=[25,28,23], grey=[120,124,116], line=[225,228,222];
+
+  // ── Header band ──
+  doc.setFillColor(...greenDk); doc.rect(0,0,W,86,'F');
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold'); doc.setFontSize(22);
+  doc.text('SolarSense India', M, 42);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+  doc.setTextColor(210,235,225);
+  doc.text('Your personalised solar estimate', M, 60);
+  const dstr=new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+  doc.text(dstr, W-M, 60, {align:'right'});
+  y = 118;
+
+  // helper: section title
+  function section(t){
+    doc.setFont('helvetica','bold'); doc.setFontSize(13); doc.setTextColor(...greenDk);
+    doc.text(t, M, y); y += 8;
+    doc.setDrawColor(...green); doc.setLineWidth(1.5);
+    doc.line(M, y, M+40, y); y += 20;
+  }
+  // helper: a label/value row
+  function row(label, value, bold){
+    doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(...grey);
+    doc.text(label, M, y);
+    doc.setFont('helvetica', bold?'bold':'normal'); doc.setTextColor(...dark);
+    doc.text(String(value), W-M, y, {align:'right'});
+    y += 7; doc.setDrawColor(...line); doc.setLineWidth(0.5); doc.line(M,y,W-M,y); y += 15;
+  }
+  function gap(px){ y += (px||6); }
+
+  const invest = (path==='invest');
+
+  // ── Config summary line ──
+  const st=document.getElementById('stSel'); const stName=st?st.value:'—';
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(...grey);
+
+  if(!invest){
+    const r=R;
+    const typ = r.isOff?'Off-grid':(useBatt?'Hybrid (with battery)':'On-grid');
+    doc.text(`${typ} system   |   ${stName}   |   Rs ${r.tariff}/kWh tariff`, M, y); y += 24;
+
+    section('System summary');
+    row('Daily electricity load', r.kWh.toFixed(1)+' kWh/day');
+    row('Recommended system size', r.kw.toFixed(2)+' kWp', true);
+    row('Rooftop area needed', fN(r.area.sqft)+' sq ft  ('+r.area.sqm+' sq m)');
+    row('Panel type', r.p.n);
+    row('Est. annual generation', fN(r.annGen)+' kWh/year');
+
+    section('Costs & subsidy');
+    row('Gross system cost', 'Rs '+fN(r.gross));
+    row('PM Surya Ghar subsidy', r.isOff?'Not eligible (off-grid)':'- Rs '+fN(r.sub));
+    row('Net cost to you', 'Rs '+fN(r.net), true);
+    if(r.battKwh){ row('Battery included', r.battKwh.toFixed(1)+' kWh ('+r.battChem.n+')'); }
+
+    section('Savings & payback');
+    row('Annual savings / benefit', 'Rs '+fN(r.annBenefit), true);
+    row('Payback period', r.payback+' years');
+    row('25-year net benefit', 'Rs '+fN(r.annBenefit*25 - r.net));
+
+    section('Environmental impact (25 years)');
+    row('CO2 emissions avoided', fN(r.co2)+' tonnes');
+    row('Equivalent trees planted', fN(r.trees));
+  } else {
+    const r=I;
+    doc.text(`Surplus-space project   |   ${r.T.n}   |   ${stName}`, M, y); y += 24;
+
+    section('Project summary');
+    row('Usable space', r.isLand? (r.rawSpace+' acres') : (fN(r.sqft)+' sq ft'));
+    row('System size', r.kw.toFixed(2)+' kWp', true);
+    row('Panel type', r.p.n);
+    row('Est. annual generation', fN(r.annGen)+' kWh/year');
+
+    section('Costs');
+    row('Gross project cost', 'Rs '+fN(r.gross));
+    if(r.sub){ row('Subsidy', '- Rs '+fN(r.sub)); }
+    row('Net investment', 'Rs '+fN(r.net), true);
+
+    section('Returns');
+    row('Annual earning', 'Rs '+fN(r.annEarn), true);
+    row('Payback period', r.payback+' years');
+    row('25-year total return', 'Rs '+fN(r.total25));
+
+    section('Environmental impact (25 years)');
+    row('CO2 emissions avoided', fN(r.co2)+' tonnes');
+    row('Equivalent trees planted', fN(r.trees));
+  }
+
+  // ── Footer ──
+  const ph=doc.internal.pageSize.getHeight();
+  doc.setDrawColor(...line); doc.setLineWidth(0.5); doc.line(M, ph-58, W-M, ph-58);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(...grey);
+  doc.text('Generated at solarsense.dev — free rooftop solar calculator for India.', M, ph-40);
+  doc.text('Estimates are indicative and based on standard assumptions. Actual figures vary by site, DISCOM and vendor.', M, ph-28);
+  doc.text('Not financial or engineering advice. Please get quotes from certified installers before deciding.', M, ph-16);
+
+  // filename
+  const size = invest ? (I.kw||0).toFixed(1) : (R.kw||0).toFixed(1);
+  doc.save(`SolarSense-estimate-${size}kWp.pdf`);
+
+  if(typeof gtag==='function'){ try{ gtag('event','download_pdf',{path:path||''}); }catch(e){} }
+}
+
 function buildLeadPayload(){
   const st=document.getElementById('stSel'), tIn=document.getElementById('tIn');
   const base={
