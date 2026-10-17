@@ -55,8 +55,8 @@ as "Data updated ..." across the tariff pages.
 1. **AdSense:** after approval, paste your AdSense `<script>` into the `<head>`
    of each page (or better, add it once to `site.js`). Replace the `.adslot`
    placeholder divs with real ad units.
-2. **Privacy policy:** replace `privacy@solarsense.in` with a real, monitored
-   email address. The DPDP Act requires a reachable grievance contact.
+2. **Privacy policy:** grievance contact is `utkarsh.khurana11@gmail.com`
+   (privacy.html §12). The DPDP Act requires a reachable grievance contact.
 3. **Domain:** buy the domain and update the `<link rel="canonical">` URLs and
    `sitemap.xml` / `robots.txt` if your domain differs from `solarsense.in`.
 4. **Submit sitemap** to Google Search Console once live.

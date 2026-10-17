@@ -101,5 +101,5 @@ Next: P1 calculator explanatory content + FAQ; OG image; BreadcrumbList/Article 
 - [ ] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.
 - [ ] Bing Webmaster Tools: import from Search Console.
-- [ ] README/privacy: check the privacy contact address (README still mentions `privacy@solarsense.in`).
+- [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
 - [ ] Backlinks: list the calculator on Indian solar/energy forums, Reddit r/india / r/IndiaInvestments answers, Quora, and local RWA/housing-society newsletters; reach out to personal-finance bloggers.
