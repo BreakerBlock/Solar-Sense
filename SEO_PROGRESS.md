@@ -25,9 +25,9 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ Visible H1 "Solar Calculator India: Rooftop Solar Cost, Subsidy & Payback" + intro paragraph with internal links (2026-10-17)
 - ✅ WebApplication + BreadcrumbList JSON-LD (2026-10-17)
 - ✅ Open Graph / Twitter tags (2026-10-17)
-- ⬜ Below-the-tool explanatory content: "How this solar calculator works" (inputs, assumptions, formulas, tariff sources) — long-form, for smart consumers
-- ⬜ FAQ section on calculator ("How many kW do I need for a ₹3,000 bill?", "How much does a 3 kW system cost after subsidy?", "Payback period in India?" …) + FAQPage JSON-LD (note: Google only shows FAQ rich results for gov/health sites since 2023, but the content itself targets long-tail queries)
-- ⬜ Step questions (`.step-q`) → semantic `<h2>` (keep same styling)
+- ✅ Below-the-tool "How this solar calculator works" section (usage → size → generation → cost → subsidy → savings/payback, with the real formulas and constants from the calculator code, plus limitations) (2026-10-17 run 3)
+- ✅ 7-question FAQ on calculator + FAQPage JSON-LD generated from the visible text; worked examples are actual calculator outputs (2026-10-17 run 3). Note: Google only shows FAQ rich results for gov/health sites; value is long-tail content.
+- ✅ Step questions (`.step-q`) → semantic `<h2>`, same class/styling (2026-10-17 run 3)
 - ✅ Performance: jsPDF (~350 KB) no longer render-blocking — `defer` (2026-10-17 run 2). Further option: load only on PDF click
 
 ### P2 — Structured data & social sitewide
@@ -46,7 +46,7 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ⬜ Homepage: anchor-text variety on calculator links ("rooftop solar calculator", "solar panel cost calculator")
 
 ### P4 — Internal linking
-- ⬜ Every guide and tariff page links to calculator.html with a varied "solar calculator" anchor in body copy (not just nav)
+- ✅ Every guide and tariff page links to calculator.html with a varied anchor in body copy — tariff pages rotate "rooftop solar / solar panel cost / solar subsidy / solar calculator for {State}" (2026-10-17 run 3)
 - ⬜ Related-guides block at the end of guides; neighbouring-state links on tariff pages
 
 ### P5 — Performance / Core Web Vitals
@@ -93,10 +93,23 @@ PDF download tested end-to-end with the deferred library (valid PDF produced, no
 
 Next: P1 calculator explanatory content + FAQ; OG image; BreadcrumbList/Article schema on guides & tariffs; lazy-load jsPDF.
 
+### 2026-10-17 (run 3, scheduled)
+Push access confirmed — runs 1–2 are live on main.
+
+Done:
+1. calculator.html: new "How this solar calculator works" section below the tool (six steps describing the exact formulas: sizing = daily kWh ÷ peak sun hours, ×1.35 off-grid; generation × 0.78 performance ratio; ₹65k/₹52k per kW benchmark cost split; PM Surya Ghar slabs; 65% self-consumption; payback = net cost ÷ year-1 benefit) + "what it leaves out" note, linking subsidy, tariffs and on/off-grid guides.
+2. calculator.html: 7-question FAQ (₹3,000 bill sizing, 3 kW cost after subsidy, payback, subsidy eligibility, export vs self-use, roof space, accuracy) + FAQPage node in the existing JSON-LD graph. Subsidy slabs (₹30k/kW to 2 kW, ₹18k 3rd kW, ₹78k cap) re-verified by web search; every worked figure is reproduced by the calculator itself (e.g. Delhi, 430 units/month → 2.7 kW, ₹1.17 L net, 4.8-yr payback). Payback range checked across all 22 states × 200–600 units (4.4–10.6 yrs).
+3. Step questions are now `<h2 class="step-q">` (same styling; ids kept for JS).
+4. Internal linking: body-copy calculator links with varied anchors on all 22 state tariff pages and all 5 guides (generic "calculator" anchors replaced in on-grid, off-grid, panel-types; one sentence added to hybrid and surplus-space).
+
+Verification: all JSON-LD parses; html5lib errors not increased on any of 33 pages; one title/canonical/description/H1 per page; all internal links resolve (only the pre-existing JS template string in index.html is flagged); sitemap well-formed, all locs exist; all 33 pages load in headless Chromium at 390px with 0 console/page errors and no horizontal scroll (calculator also checked on results for all three paths); calculator state (R/I objects) for on-grid bill, on-grid appliances, off-grid, surplus roof and surplus commercial is byte-identical before/after.
+
+Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders per state — large, do a few states per run); P3 `?state=` preselect + per-state entry links; P2 OG image + Article schema with dateModified; P4 related-guides / neighbouring-state blocks; lazy-load jsPDF on click.
+
 ---
 
 ## Owner action items
-- [ ] **Grant this scheduled task push access to BreakerBlock/Solar-Sense** (add the repo to the task's sources/repositories), or apply the patch from the 2026-10-17 run manually (`git am`). Without this nothing reaches the live site.
+- [x] Push access for the scheduled task (runs 1–2 are on main as of run 3)
 - [ ] In Vercel → Domains: make `solarsense.dev` (apex) the primary domain and redirect `www.solarsense.dev` → apex (or tell the SEO run to use www, but don't mix).
 - [ ] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.

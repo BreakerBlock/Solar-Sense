@@ -57,6 +57,70 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://solarsense.dev/"},
         {"@type": "ListItem", "position": 2, "name": "Solar Calculator", "item": "https://solarsense.dev/calculator.html"}
       ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://solarsense.dev/calculator.html#faq",
+      "url": "https://solarsense.dev/calculator.html",
+      "inLanguage": "en-IN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many kW of solar do I need for a ₹3,000 monthly electricity bill?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At ₹7 per unit, a ₹3,000 bill is about 430 units a month, or 14.3 kWh a day. Divided by Delhi's 5.5 peak sun hours, that is a 2.7 kW system. In a lower-sunshine state with 4.5 hours, it is closer to 3.2 kW. As a rule of thumb, at 5 peak sun hours the calculator sizes about 1 kW for every 150 units of monthly use. Enter your own bill above for your state's figure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a 3 kW rooftop solar system cost after subsidy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Using the calculator's benchmark rates, a 3 kW on-grid system costs about ₹2.0–2.1 lakh before subsidy with polycrystalline or Mono PERC panels, including the net meter. After the ₹78,000 PM Surya Ghar subsidy, you pay roughly ₹1.25–1.32 lakh. Quotes typically vary 15–25% by city and installer, and premium panels cost more."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the payback period for rooftop solar in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most homes on grid-connected solar, it is roughly 4–8 years in most states, and up to about 10 years where tariffs are low. For example, the Delhi household above, with a 2.7 kW system costing ₹1.17 lakh after a ₹72,600 subsidy, generates about 4,200 units a year. It saves around ₹24,000 a year in bill savings and export credit, a payback of about 4.8 years. Higher tariffs, more daytime use and sunnier states all shorten payback. Panels are usually warrantied for 25–30 years, so most of their life is free electricity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the PM Surya Ghar subsidy apply to off-grid or commercial solar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The PM Surya Ghar subsidy is for grid-connected rooftop systems on residential connections, installed through a vendor registered on the national portal. Off-grid battery systems and commercial or industrial connections are not eligible, so the calculator shows ₹0 subsidy for them. Businesses can instead claim accelerated depreciation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is exporting solar power worth less than using it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under net metering, your DISCOM credits exported units at a buyback rate that is usually ₹2–3.5 per unit, well below the ₹4–7.5 you pay for grid power. Every unit you use yourself is worth your full tariff. That is why shifting loads such as washing, water heating or EV charging to daytime often improves returns more than adding panels."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much roof space do I need for solar panels?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The panels themselves take about 55 sq ft per kW with Mono PERC (about 50 sq ft with TOPCon, 67 sq ft with polycrystalline). Including walkways and spacing to avoid shading, plan for roughly 80–100 sq ft of shadow-free roof per kW. A typical 3 kW home system therefore needs about 240–300 sq ft."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate is this solar panel cost calculator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is designed for a realistic first estimate, not a binding quote. Sizing and generation use state-level sunshine data and a standard loss factor, while costs use national benchmark rates. Your actual quote depends on roof type, cable runs, panel and inverter brand, and local DISCOM charges. Use the estimate to judge whether quotes are in the right range."
+          }
+        }
+      ]
     }
   ]
 }
@@ -302,6 +366,13 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .calc-intro p{font-size:14px;color:var(--tx2);line-height:1.6;max-width:720px}
 .calc-intro a{color:var(--green-dk)}
 @media(max-width:600px){.calc-intro h1{font-size:20px}}
+.calc-explain{margin-top:44px;padding-top:28px;border-top:1px solid var(--bd);max-width:760px}
+.calc-explain h2{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+.calc-explain h3{font-size:15.5px;font-weight:700;margin:20px 0 6px}
+.calc-explain p{font-size:14px;color:var(--tx2);line-height:1.7;margin-bottom:8px}
+.calc-explain a{color:var(--green-dk)}
+.calc-explain strong{color:var(--tx)}
+.ce-note{margin-top:18px;padding:13px 16px;border-radius:10px;background:var(--green-tint);border:1px solid #cfe7dc;font-size:13px;color:var(--tx2);line-height:1.65}
 </style>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -340,7 +411,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <!-- ═══════ STEP 0 ═══════ -->
 <div id="s0">
   <div class="step-badge"><div class="step-num">1</div><div class="step-lbl">Step One</div></div>
-  <div class="step-q">What kind of solar setup do you want?</div>
+  <h2 class="step-q">What kind of solar setup do you want?</h2>
 
   <div class="path-grid">
     <div class="path-card" id="pc-ongrid" onclick="pickPath('ongrid')">
@@ -493,7 +564,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <!-- ═══════ STEP 1 — CONFIGURE ═══════ -->
 <div id="s1" class="hidden">
   <div class="step-badge"><div class="step-num">2</div><div class="step-lbl">Step Two</div></div>
-  <div class="step-q" id="s1q">Configure your system</div>
+  <h2 class="step-q" id="s1q">Configure your system</h2>
 
   <!-- Common: state -->
   <div class="card">
@@ -654,7 +725,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <!-- ═══════ STEP 2 — PANELS ═══════ -->
 <div id="s2" class="hidden">
   <div class="step-badge"><div class="step-num">3</div><div class="step-lbl">Step Three</div></div>
-  <div class="step-q">Choose your panel technology</div>
+  <h2 class="step-q">Choose your panel technology</h2>
 
   <div class="card">
     <div class="card-t">Panel type</div>
@@ -684,7 +755,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <!-- ═══════ STEP 3 — RESULTS ═══════ -->
 <div id="s3" class="hidden">
   <div class="step-badge"><div class="step-num">4</div><div class="step-lbl">Step Four</div></div>
-  <div class="step-q" id="resTitle">Your system</div>
+  <h2 class="step-q" id="resTitle">Your system</h2>
 
   <div id="resResi">
     <div class="g3" style="margin-bottom:11px" id="rm1"></div>
@@ -799,7 +870,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 <!-- ═══════ STEP 4 — INSTALLERS ═══════ -->
 <div id="s4" class="hidden">
   <div class="step-badge"><div class="step-num">5</div><div class="step-lbl">Step Five</div></div>
-  <div class="step-q">What kind of vendor to look for</div>
+  <h2 class="step-q">What kind of vendor to look for</h2>
   <div class="card">
     <div class="slabel">Your configuration</div>
     <div class="g2" id="finalSummary"></div>
@@ -817,6 +888,56 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
   <button class="btn btn-s" onclick="go(3)">← Back to results</button>
   <button class="btn btn-s" onclick="location.reload()">Start over</button>
 </div>
+
+<section class="calc-explain" id="how-it-works" aria-labelledby="how-h">
+  <h2 id="how-h">How this solar calculator works</h2>
+  <p>Every number above is worked out in your browser from a handful of transparent assumptions. Here is exactly what the rooftop solar calculator does with your inputs, so you can check it against any installer's quote.</p>
+
+  <h3>1. Your daily electricity use</h3>
+  <p>In <strong>bill mode</strong>, monthly units are divided by 30 to get kWh per day. If you enter a rupee amount instead, it is first divided by your tariff (₹/kWh) to estimate units. In <strong>appliance mode</strong>, each appliance's watts × quantity × hours per day are added up and divided by 1,000. Appliances you exclude, or high-draw loads you switch off, are left out.</p>
+
+  <h3>2. System size (kWp)</h3>
+  <p>System size = daily use ÷ peak sun hours for your state, rounded up to the next 0.1 kW (minimum 0.5 kW). Peak sun hours range from about 4.5 (Kerala, West Bengal) to 6.5 (Rajasthan); India averages 4.5–5.5. Off-grid systems are oversized by 35% to cover cloudy days and battery charging losses. For surplus space, size is set by your shadow-free area and panel efficiency instead, and capped by your sanctioned load × the DISCOM's permitted percentage.</p>
+
+  <h3>3. Generation</h3>
+  <p>Daily generation = kWp × peak sun hours × 0.78. The 0.78 performance ratio accounts for real-world losses from heat, dust, wiring and the inverter. In practice, 1 kW of panels produces about 4 units a day, or roughly 1,400 units a year, at 5 peak sun hours. Panel area is estimated as kWp × 100 ÷ panel efficiency (in m²), which works out to roughly 55 sq ft of panels per kW for Mono PERC. Leave extra room for walkways and shade-free spacing.</p>
+
+  <h3>4. Cost</h3>
+  <p>Installed cost starts from benchmark rates of ₹65,000 per kW for on-grid and ₹52,000 per kW for off-grid (before batteries). These are split into panels (42%), inverter (18% on-grid, 22% off-grid), mounting structure (12%), balance of system such as cables and protection (14%) and installation labour (14%). Panel cost is then adjusted for the technology you choose (TOPCon +22%, bifacial HJT +38%, and so on), and on-grid systems add ₹8,000 for the net meter. Batteries are priced per kWh of usable storage needed for your days of autonomy. Surplus-space projects use separate per-kW rates, with scale discounts above 25, 50 and 100 kW.</p>
+
+  <h3>5. Subsidy (PM Surya Ghar)</h3>
+  <p>For residential on-grid systems, the solar subsidy calculator applies the central PM Surya Ghar Muft Bijli Yojana support: <strong>₹30,000 per kW for the first 2 kW, ₹18,000 for the third kW, capped at ₹78,000</strong> for any system of 3 kW or more. Off-grid systems and commercial connections receive no residential subsidy. Commercial roofs and ground mounts instead show the year-one tax benefit of 40% accelerated depreciation, assuming a 30% tax rate. See the <a href="subsidy.html">PM Surya Ghar subsidy guide</a> for slab-by-slab examples and how to claim it.</p>
+
+  <h3>6. Savings, export income and payback</h3>
+  <p>On-grid, the calculator assumes you use 65% of what the panels produce, up to your own consumption, and export the rest. Units you use save your full tariff, while exported units earn only your DISCOM's buyback rate. Both are prefilled from <a href="tariffs/index.html">state-wise electricity tariffs</a> and can be edited. Off-grid savings also include an allowance for generator diesel you no longer buy. Payback = net cost after subsidy ÷ first-year benefit. The surplus-space path also projects 25 years of cash flow with 3% annual tariff growth, panel degradation and 1% yearly maintenance.</p>
+
+  <div class="ce-note"><strong>What it leaves out:</strong> state top-up subsidies, loan interest, roof repairs, and DISCOM fees beyond the meter. Treat the result as a well-informed starting point, compare at least three quotes, and read the <a href="guides/on-grid.html">on-grid solar guide</a> or <a href="guides/off-grid.html">off-grid solar guide</a> before you buy.</div>
+</section>
+
+<section class="calc-explain calc-faq" id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Solar calculator FAQ</h2>
+
+  <h3>How many kW of solar do I need for a ₹3,000 monthly electricity bill?</h3>
+  <p>At ₹7 per unit, a ₹3,000 bill is about 430 units a month, or 14.3 kWh a day. Divided by Delhi's 5.5 peak sun hours, that is a <strong>2.7 kW</strong> system. In a lower-sunshine state with 4.5 hours, it is closer to 3.2 kW. As a rule of thumb, at 5 peak sun hours the calculator sizes about 1 kW for every 150 units of monthly use. Enter your own bill above for your state's figure.</p>
+
+  <h3>How much does a 3 kW rooftop solar system cost after subsidy?</h3>
+  <p>Using the calculator's benchmark rates, a 3 kW on-grid system costs about <strong>₹2.0–2.1 lakh</strong> before subsidy with polycrystalline or Mono PERC panels, including the net meter. After the ₹78,000 PM Surya Ghar subsidy, you pay roughly <strong>₹1.25–1.32 lakh</strong>. Quotes typically vary 15–25% by city and installer, and premium panels cost more.</p>
+
+  <h3>What is the payback period for rooftop solar in India?</h3>
+  <p>For most homes on grid-connected solar, it is roughly 4–8 years in most states, and up to about 10 years where tariffs are low. For example, the Delhi household above, with a 2.7 kW system costing ₹1.17 lakh after a ₹72,600 subsidy, generates about 4,200 units a year. It saves around ₹24,000 a year in bill savings and export credit, a payback of about <strong>4.8 years</strong>. Higher tariffs, more daytime use and sunnier states all shorten payback. Panels are usually warrantied for 25–30 years, so most of their life is free electricity.</p>
+
+  <h3>Does the PM Surya Ghar subsidy apply to off-grid or commercial solar?</h3>
+  <p>No. The PM Surya Ghar subsidy is for grid-connected rooftop systems on residential connections, installed through a vendor registered on the national portal. Off-grid battery systems and commercial or industrial connections are not eligible, so the calculator shows ₹0 subsidy for them. Businesses can instead claim accelerated depreciation.</p>
+
+  <h3>Why is exporting solar power worth less than using it?</h3>
+  <p>Under net metering, your DISCOM credits exported units at a buyback rate that is usually ₹2–3.5 per unit, well below the ₹4–7.5 you pay for grid power. Every unit you use yourself is worth your full tariff. That is why shifting loads such as washing, water heating or EV charging to daytime often improves returns more than adding panels.</p>
+
+  <h3>How much roof space do I need for solar panels?</h3>
+  <p>The panels themselves take about 55 sq ft per kW with Mono PERC (about 50 sq ft with TOPCon, 67 sq ft with polycrystalline). Including walkways and spacing to avoid shading, plan for roughly 80–100 sq ft of shadow-free roof per kW. A typical 3 kW home system therefore needs about 240–300 sq ft.</p>
+
+  <h3>How accurate is this solar panel cost calculator?</h3>
+  <p>It is designed for a realistic first estimate, not a binding quote. Sizing and generation use state-level sunshine data and a standard loss factor, while costs use national benchmark rates. Your actual quote depends on roof type, cable runs, panel and inverter brand, and local DISCOM charges. Use the estimate to judge whether quotes are in the right range.</p>
+</section>
 
 </div>
 
