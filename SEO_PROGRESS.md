@@ -28,13 +28,13 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ⬜ Below-the-tool explanatory content: "How this solar calculator works" (inputs, assumptions, formulas, tariff sources) — long-form, for smart consumers
 - ⬜ FAQ section on calculator ("How many kW do I need for a ₹3,000 bill?", "How much does a 3 kW system cost after subsidy?", "Payback period in India?" …) + FAQPage JSON-LD (note: Google only shows FAQ rich results for gov/health sites since 2023, but the content itself targets long-tail queries)
 - ⬜ Step questions (`.step-q`) → semantic `<h2>` (keep same styling)
-- ⬜ Performance: jsPDF (~350 KB) is render-blocking in `<head>`; load it lazily on "Download PDF" click or with `defer`
+- ✅ Performance: jsPDF (~350 KB) no longer render-blocking — `defer` (2026-10-17 run 2). Further option: load only on PDF click
 
 ### P2 — Structured data & social sitewide
 - ✅ Organization + WebSite JSON-LD on homepage (2026-10-17)
-- 🟡 OG/Twitter tags: home + calculator done; add to subsidy, guides, tariffs, privacy
+- ✅ OG/Twitter tags on all 33 pages (2026-10-17 run 2)
 - ⬜ Shareable OG image (1200×630 PNG, `assets/og-image.png`) and `og:image` / `twitter:card=summary_large_image` sitewide
-- ⬜ BreadcrumbList on guides/* and tariffs/*
+- ✅ BreadcrumbList JSON-LD on every page with a visible breadcrumb (subsidy, privacy, guides/*, tariffs/*) — generated from the on-page crumb so they always match (2026-10-17 run 2)
 - ⬜ Article (with `dateModified`) on guides/* and subsidy.html
 - ⬜ Raster logo (PNG ≥112×112) for Organization `logo` (currently SVG)
 
@@ -78,6 +78,18 @@ no horizontal scroll at 390px.
 **Not deployed:** the push was refused — this run's session was not authorised to write to BreakerBlock/Solar-Sense
 (the git proxy rejected the push with 403). The commit was prepared and delivered to the owner as a patch file instead.
 Next run should re-check that `SEO_PROGRESS.md` exists on the default branch; if it doesn't, today's patch was not applied.
+
+### 2026-10-17 (run 2, manual demo run)
+Push access still missing (git proxy 403), so run 1's commit is still unpublished; today's work was stacked as a second commit on top and both are delivered as patch files.
+
+Done:
+1. Open Graph + Twitter tags on the remaining 31 pages (og:url = canonical; og:type article for content pages, website for index pages).
+2. BreadcrumbList JSON-LD on the same 31 pages, built from each page's existing visible breadcrumb; every crumb URL is in the sitemap.
+3. calculator.html: jsPDF script now `defer` (removes a ~350 KB render-blocking script from the critical path). The existing "PDF library still loading" guard covers the edge case.
+
+Verification: all JSON-LD parses; html5lib reports 0 parse errors on all 33 pages; one title/canonical/description/og:url/og:title per page; no duplicate script tags;
+all 33 pages load in headless Chromium with 0 errors; calculator on-grid / off-grid / surplus flows give the same results as before;
+PDF download tested end-to-end with the deferred library (valid PDF produced, no errors).
 
 Next: P1 calculator explanatory content + FAQ; OG image; BreadcrumbList/Article schema on guides & tariffs; lazy-load jsPDF.
 
