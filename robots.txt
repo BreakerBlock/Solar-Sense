@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://solarsense.in/sitemap.xml
+Sitemap: https://solarsense.dev/sitemap.xml
