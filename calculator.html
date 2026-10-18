@@ -1053,6 +1053,14 @@ const RATES={ongrid:65000,offgrid:52000};
   const s=document.getElementById('stSel');
   Object.keys(TARIFFS).sort().forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;s.appendChild(o);});
   renderApps();renderPanels();
+  /* ?state=<slug> (from state tariff pages) preselects the state; same as choosing it in the dropdown */
+  document.addEventListener('DOMContentLoaded',function(){
+    try{
+      const qs=(new URLSearchParams(location.search).get('state')||'').toLowerCase();
+      const hit=qs&&Object.keys(TARIFFS).find(k=>k.toLowerCase().replace(/ +/g,'-')===qs);
+      if(hit){s.value=hit;onState();}
+    }catch(e){}
+  });
 })();
 
 /* ══════ NAV ══════ */
