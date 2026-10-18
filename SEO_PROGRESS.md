@@ -17,7 +17,7 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ Fix wrong domain: all canonicals, sitemap `<loc>`s and robots.txt `Sitemap:` pointed at `solarsense.in` (2026-10-17)
 - ✅ Canonical tag on every page, self-referencing and matching the sitemap URL exactly (2026-10-17)
 - ✅ sitemap.xml + robots.txt on the correct domain (2026-10-17)
-- ⬜ Confirm apex `solarsense.dev` is the primary Vercel domain and `www.` 308-redirects to it (see Owner action items)
+- ✅ (owner confirmed 2026-10-18) Confirm apex `solarsense.dev` is the primary Vercel domain and `www.` 308-redirects to it (see Owner action items)
 - ⬜ Consider `cleanUrls` in vercel.json (e.g. `/calculator`) — only together with 301s from `.html`, canonical + sitemap + internal link updates in one change. Low priority; `.html` URLs are fine for ranking.
 
 ### P1 — Money page: calculator.html
@@ -110,8 +110,8 @@ Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders per 
 
 ## Owner action items
 - [x] Push access for the scheduled task (runs 1–2 are on main as of run 3)
-- [ ] In Vercel → Domains: make `solarsense.dev` (apex) the primary domain and redirect `www.solarsense.dev` → apex (or tell the SEO run to use www, but don't mix).
-- [ ] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
+- [x] In Vercel → Domains: make `solarsense.dev` (apex) the primary domain and redirect `www.solarsense.dev` → apex (or tell the SEO run to use www, but don't mix).
+- [x] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.
 - [ ] Bing Webmaster Tools: import from Search Console.
 - [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
