@@ -35,15 +35,15 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ OG/Twitter tags on all 33 pages (2026-10-17 run 2)
 - ⬜ Shareable OG image (1200×630 PNG, `assets/og-image.png`) and `og:image` / `twitter:card=summary_large_image` sitewide
 - ✅ BreadcrumbList JSON-LD on every page with a visible breadcrumb (subsidy, privacy, guides/*, tariffs/*) — generated from the on-page crumb so they always match (2026-10-17 run 2)
-- ✅ Article JSON-LD (headline/description from the page, `datePublished` = first commit, `dateModified`, Organization author/publisher) on the 5 guides + subsidy.html (2026-10-18). Bump `dateModified` whenever those pages change
+- ✅ Article JSON-LD (headline/description from the page, `datePublished` = first commit, `dateModified`, Organization author/publisher) on the 5 guides + subsidy.html (2026-10-18); also on the 2 new guides, which add FAQPage JSON-LD built from their visible FAQ (2026-10-19). Bump `dateModified` whenever those pages change
 - ⬜ Raster logo (PNG ≥112×112) for Organization `logo` (currently SVG)
 
 ### P3 — On-page & content
 - ⬜ Tariff page titles still say "(January 2026)" — refresh data date and retitle toward "Solar Calculator {State}: Tariff, Subsidy & Payback" variants
 - ✅ Per-state calculator entry points: `calculator.html?state={slug}` preselects the state (same as choosing it in the dropdown); each tariff page's CTA uses it — "Open the {State} solar calculator →" (2026-10-18). Body-copy calculator links still point at the clean canonical URL
 - ✅ Subsidy page: "Solar subsidy calculator: how your amount is worked out" section — pro-rata formula, 6 worked sizes with subsidy-per-kW, sizing advice, links to calculator + tariffs (2026-10-18)
-- ⬜ New content: "solar panel cost in India (per kW, 2026)", "how many solar panels do I need", "net metering explained", commercial/business rooftop solar sizing
-- ⬜ Homepage: anchor-text variety on calculator links ("rooftop solar calculator", "solar panel cost calculator")
+- 🟡 New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ⬜ "solar panel cost in India (per kW, 2026)" (needs verified 2026 market prices), ⬜ commercial/business rooftop solar sizing
+- ✅ Homepage: anchor-text variety on calculator links — tools tile "Rooftop Solar Calculator", final CTA "Open the solar panel cost calculator →" (2026-10-19)
 
 ### P4 — Internal linking
 - ✅ Every guide and tariff page links to calculator.html with a varied anchor in body copy — tariff pages rotate "rooftop solar / solar panel cost / solar subsidy / solar calculator for {State}" (2026-10-17 run 3)
@@ -120,6 +120,19 @@ Noticed (not changed): calculator FAQ says a ₹3,000 Delhi bill sizes to 2.7 kW
 
 Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — a few states per run); P3 new content pages (solar panel cost per kW 2026, how many panels do I need, net metering explained); P3 homepage anchor variety; P2 OG image + raster logo; lazy-load jsPDF on click.
 
+### 2026-10-19 (run 5, scheduled)
+Done:
+1. New guide `guides/how-many-solar-panels.html` ("How Many Solar Panels Do I Need?"): units → kW (monthly units ÷ 30 ÷ peak sun hours, the calculator's own rule), kW → panel count (÷ wattage, rounded up), table for 100–600 units/month (kW, 400 W / 550 W panel counts, panel area, roof to plan, units/year), 300-units table by state sun hours (links to 8 tariff pages), roof space, off-grid +35%, sanctioned load, subsidy cap; 4-question FAQ. Every size/count/generation figure was computed with the calculator's formula (Kerala 300 units → 2.3 kW reproduced in the live calculator). Explains honestly that this sizing covers ~80% of annual use (0.78 PR) and how to size for ~100%.
+2. New guide `guides/net-metering.html` ("Net Metering in India, Explained"): bi-directional meter, worked month, net metering vs net billing vs gross metering table, national rules, surplus-credit settlement, how the calculator values exports (Delhi 2.7 kW: ₹24,450/yr at buyback vs ~₹29,600 if all exports offset at full tariff — so the calculator is conservative), how to apply, tips; 4-question FAQ.
+   Facts verified by web search: Electricity (Rights of Consumers) Amendment Rules 2021 — net metering up to 500 kW or sanctioned load, whichever is lower; gross metering above 500 kW; commissions may introduce ToD tariffs for prosumers. 2024 amendment — no technical feasibility study up to 10 kW, study within 15 days above that, DISCOM commissioning timeline 30 → 15 days. PM Surya Ghar requires DCR modules for the subsidy (non-subsidy installs not bound by DCR); subsidy computed on rated installed panel capacity; central slabs unchanged (₹30k/kW to 2 kW, ₹18k 3rd kW, ₹78k cap). Typical residential module wattages 400–450 W and 500–550 W.
+3. Both guides: Article + BreadcrumbList + FAQPage JSON-LD (FAQ generated from visible text), OG/Twitter, canonical on https://solarsense.dev. Linked from guides index (2 new tiles), the "Related guides" block of all 5 existing guides, the on-grid guide's "net metering" mention, and the calculator's "how it works" section (panel-count link in step 3; note that valuing exports at buyback is cautious, linking net metering). Added to sitemap.
+4. Calculator FAQ (visible + FAQPage JSON-LD): ₹3,000 Delhi bill now "2.6–2.7 kW" with the reason (rupee entry vs 430 units, rounding up to 0.1 kW) — fixes the inconsistency noted in run 4. Text only; no calculation code touched.
+5. Homepage calculator anchors varied (tile + final CTA). `dateModified` → 2026-10-19 on the 5 existing guides; sitemap lastmod → 2026-10-19 for the 10 changed/new pages.
+
+Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib errors not increased on any page (new pages 0); exactly one title/canonical/description/H1/og:url per page (35 pages); every relative internal link resolves; sitemap well-formed, 35 locs, all exist and match canonicals; all 35 pages load in headless Chromium at 390px with 0 console/page errors and no horizontal scroll (tables scroll inside `.tbl-wrap`); calculator R/I state + results text for on-grid units (Delhi 430, Kerala 300), on-grid ₹3,000 bill (Delhi), on-grid appliances (Maharashtra), off-grid (Rajasthan), surplus roof (Gujarat), surplus commercial (Tamil Nadu) and `?state=kerala` byte-identical before/after.
+
+Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — a few states per run); P3 "solar panel cost in India per kW (2026)" page (needs verified market prices) and commercial rooftop sizing; P2 OG image + raster logo; lazy-load jsPDF on click; P5 PageSpeed measurement.
+
 ---
 
 ## Owner action items
@@ -128,5 +141,6 @@ Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — 
 - [x] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.
 - [ ] Bing Webmaster Tools: import from Search Console.
+- [ ] Search Console: request indexing for the two new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`) once deployed.
 - [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
 - [ ] Backlinks: list the calculator on Indian solar/energy forums, Reddit r/india / r/IndiaInvestments answers, Quora, and local RWA/housing-society newsletters; reach out to personal-finance bloggers.
