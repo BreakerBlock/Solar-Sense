@@ -33,16 +33,16 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 ### P2 — Structured data & social sitewide
 - ✅ Organization + WebSite JSON-LD on homepage (2026-10-17)
 - ✅ OG/Twitter tags on all 33 pages (2026-10-17 run 2)
-- ⬜ Shareable OG image (1200×630 PNG, `assets/og-image.png`) and `og:image` / `twitter:card=summary_large_image` sitewide
+- ✅ Shareable OG image `assets/og-image.png` (1200×630, rendered from the brand mark + "Solar Calculator India") with `og:image` (+width/height/alt), `twitter:card=summary_large_image` and `twitter:image` on all 36 pages (2026-10-20). Per-page images (e.g. per state) are a possible later upgrade
 - ✅ BreadcrumbList JSON-LD on every page with a visible breadcrumb (subsidy, privacy, guides/*, tariffs/*) — generated from the on-page crumb so they always match (2026-10-17 run 2)
 - ✅ Article JSON-LD (headline/description from the page, `datePublished` = first commit, `dateModified`, Organization author/publisher) on the 5 guides + subsidy.html (2026-10-18); also on the 2 new guides, which add FAQPage JSON-LD built from their visible FAQ (2026-10-19). Bump `dateModified` whenever those pages change
-- ⬜ Raster logo (PNG ≥112×112) for Organization `logo` (currently SVG)
+- ✅ Raster logo `assets/logo.png` (512×512 icon mark on white) used for the Organization `logo` and every Article `publisher.logo` (2026-10-20)
 
 ### P3 — On-page & content
 - ⬜ Tariff page titles still say "(January 2026)" — refresh data date and retitle toward "Solar Calculator {State}: Tariff, Subsidy & Payback" variants
 - ✅ Per-state calculator entry points: `calculator.html?state={slug}` preselects the state (same as choosing it in the dropdown); each tariff page's CTA uses it — "Open the {State} solar calculator →" (2026-10-18). Body-copy calculator links still point at the clean canonical URL
 - ✅ Subsidy page: "Solar subsidy calculator: how your amount is worked out" section — pro-rata formula, 6 worked sizes with subsidy-per-kW, sizing advice, links to calculator + tariffs (2026-10-18)
-- 🟡 New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ⬜ "solar panel cost in India (per kW, 2026)" (needs verified 2026 market prices), ⬜ commercial/business rooftop solar sizing
+- 🟡 New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ⬜ "solar panel cost in India (per kW, 2026)" (needs verified 2026 market prices)
 - ✅ Homepage: anchor-text variety on calculator links — tools tile "Rooftop Solar Calculator", final CTA "Open the solar panel cost calculator →" (2026-10-19)
 
 ### P4 — Internal linking
@@ -133,6 +133,18 @@ Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib 
 
 Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — a few states per run); P3 "solar panel cost in India per kW (2026)" page (needs verified market prices) and commercial rooftop sizing; P2 OG image + raster logo; lazy-load jsPDF on click; P5 PageSpeed measurement.
 
+### 2026-10-20 (run 6, scheduled)
+Done:
+1. New guide `guides/commercial-rooftop-solar.html` ("Commercial Rooftop Solar in India: Sizing, Cost & Payback"): how business solar differs (daytime use, no residential subsidy, ToD tariffs, scale), sizing rule (monthly units ÷ 30 ÷ peak sun hours, ~1 kW per 165 units at 5.5 h) with a 1,500–50,000 units/month table (kW, panel area, roof to plan, units/yr), cost per kW from the calculator's commercial benchmark and scale discounts (~₹52.5k/kW at 20 kW, ₹49k at 40 kW, ₹44.5k at 100 kW), accelerated depreciation, DCR not required without subsidy, net metering limits, worked payback table (20/40/100 kW in Maharashtra at ₹10 and ₹8/kWh, 90% self-use; plus 40 kW at 50% self-use), a pre-signing checklist, 4-question FAQ. Every cost/generation/payback figure is an actual output of the calculator's Commercial roof mode (inputs stated on the page).
+   Facts verified by web search: solar power generating systems are in the 40% depreciation block (renewable energy devices); from 1 April 2026 under Section 34 of the Income-tax Act 2025 (replacing s.32 of the 1961 Act, same rate/WDV), half rate if used < 180 days in the year of installation. Electricity (Rights of Consumers) Amendment Rules 2023: ToD tariff for C&I consumers with max demand > 10 kW from 1 April 2024; solar-hours energy charge at least 20% below normal, C&I peak at least 1.20×, applies to the energy charge, solar hours = 8 h set by the SERC. Net metering up to 500 kW or sanctioned load (whichever lower) and 2024 feasibility-study timelines re-used from run 5's verification. GST on solar was researched but sources were inconsistent after the 2025 rate changes, so the guide does not state a GST rate.
+2. Guide JSON-LD: Article + BreadcrumbList + FAQPage (FAQ generated from the visible text). Linked from the guides index (new tile), the "Related guides" block of all 7 other guides, the surplus-space guide's commercial-roof row, and the calculator's "how it works" subsidy/depreciation step. Added to sitemap.
+3. Sitewide social/brand: `assets/og-image.png` (1200×630) and `assets/logo.png` (512×512) rendered in headless Chromium from the existing logo mark; `og:image` (+width/height/alt), `twitter:card=summary_large_image`, `twitter:image` on all 36 pages; Organization `logo` and Article `publisher.logo` → PNG.
+4. `dateModified` → 2026-10-20 on the 7 existing guides; sitemap lastmod → 2026-10-20 for the 10 pages whose visible content changed (calculator, guides index, 8 guides). Head-only OG changes on other pages did not bump lastmod.
+
+Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib errors not increased on any page; exactly one title/canonical/description/H1/og:url/og:image/twitter:card/twitter:image per page (36 pages); every relative internal link resolves; sitemap well-formed, 36 locs, each matches a page canonical and vice versa; all 36 pages load in headless Chromium at 390px with 0 console/page errors (external analytics blocked in sandbox ignored) and no horizontal scroll; calculator R/I state + results text for on-grid units (Delhi 430, Kerala 300), on-grid ₹3,000 bill (Delhi), on-grid appliances (Maharashtra), off-grid (Rajasthan), surplus roof (Gujarat), surplus commercial (Tamil Nadu) and `?state=kerala` byte-identical before/after. OG image and logo inspected visually.
+
+Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — a few states per run); P3 "solar panel cost in India per kW (2026)" page (needs verified market prices); lazy-load jsPDF on click; P5 PageSpeed measurement + cache headers; consider per-state OG images.
+
 ---
 
 ## Owner action items
@@ -141,6 +153,7 @@ Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — 
 - [x] Google Search Console: add a Domain property for `solarsense.dev`, submit `https://solarsense.dev/sitemap.xml`, and request indexing for `/` and `/calculator.html` after the fix is live.
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.
 - [ ] Bing Webmaster Tools: import from Search Console.
-- [ ] Search Console: request indexing for the two new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`) once deployed.
+- [ ] Search Console: request indexing for the new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`, `/guides/commercial-rooftop-solar.html`) once deployed.
+- [ ] Optional: check the new share preview with a link-preview tool (e.g. paste a page URL into WhatsApp/LinkedIn) after deploy; social caches may hold the old text-only card for a few days.
 - [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
 - [ ] Backlinks: list the calculator on Indian solar/energy forums, Reddit r/india / r/IndiaInvestments answers, Quora, and local RWA/housing-society newsletters; reach out to personal-finance bloggers.
