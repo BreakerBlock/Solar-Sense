@@ -28,7 +28,7 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ Below-the-tool "How this solar calculator works" section (usage → size → generation → cost → subsidy → savings/payback, with the real formulas and constants from the calculator code, plus limitations) (2026-10-17 run 3)
 - ✅ 7-question FAQ on calculator + FAQPage JSON-LD generated from the visible text; worked examples are actual calculator outputs (2026-10-17 run 3). Note: Google only shows FAQ rich results for gov/health sites; value is long-tail content.
 - ✅ Step questions (`.step-q`) → semantic `<h2>`, same class/styling (2026-10-17 run 3)
-- ✅ Performance: jsPDF (~350 KB) no longer render-blocking — `defer` (2026-10-17 run 2). Further option: load only on PDF click
+- ✅ Performance: jsPDF (~350 KB) no longer render-blocking — `defer` (2026-10-17 run 2); now not loaded at all until a report is requested — injected on PDF click, warmed on hover/touch/focus of the button, with a retry-able error message if the CDN fails (2026-10-21)
 
 ### P2 — Structured data & social sitewide
 - ✅ Organization + WebSite JSON-LD on homepage (2026-10-17)
@@ -39,10 +39,10 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ Raster logo `assets/logo.png` (512×512 icon mark on white) used for the Organization `logo` and every Article `publisher.logo` (2026-10-20)
 
 ### P3 — On-page & content
-- ⬜ Tariff page titles still say "(January 2026)" — refresh data date and retitle toward "Solar Calculator {State}: Tariff, Subsidy & Payback" variants
+- 🟡 Tariff pages: ✅ retitled to "Solar Calculator {State}: Tariff, Subsidy & Payback" (title/og/twitter) and H1 "Rooftop Solar in {State}: Cost, Subsidy & Payback" on all 22 (2026-10-21); the visible "data as of January 2026" notes were kept because the figures were not refreshed. ⬜ Data refresh: needs verified FY2026-27 tariff orders, and the same numbers live in the calculator's `TARIFFS` table and `assets/data.js`, so refreshing them changes calculator results — owner decision (see Owner action items)
 - ✅ Per-state calculator entry points: `calculator.html?state={slug}` preselects the state (same as choosing it in the dropdown); each tariff page's CTA uses it — "Open the {State} solar calculator →" (2026-10-18). Body-copy calculator links still point at the clean canonical URL
 - ✅ Subsidy page: "Solar subsidy calculator: how your amount is worked out" section — pro-rata formula, 6 worked sizes with subsidy-per-kW, sizing advice, links to calculator + tariffs (2026-10-18)
-- 🟡 New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ⬜ "solar panel cost in India (per kW, 2026)" (needs verified 2026 market prices)
+- ✅ New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ✅ "solar panel cost in India (per kW, 2026)" (`guides/solar-panel-cost.html`, 2026-10-21)
 - ✅ Homepage: anchor-text variety on calculator links — tools tile "Rooftop Solar Calculator", final CTA "Open the solar panel cost calculator →" (2026-10-19)
 
 ### P4 — Internal linking
@@ -145,6 +145,21 @@ Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib 
 
 Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — a few states per run); P3 "solar panel cost in India per kW (2026)" page (needs verified market prices); lazy-load jsPDF on click; P5 PageSpeed measurement + cache headers; consider per-state OG images.
 
+### 2026-10-21 (run 7, scheduled)
+Done:
+1. New guide `guides/solar-panel-cost.html` ("Solar Panel Cost in India (2026): Price per kW and After Subsidy"): 2026 market range per kW, a 1–10 kW price list (market range, calculator estimate, subsidy, net cost, net cost per kW), why net cost per kW rises with size (subsidy stops at 3 kW), Delhi payback range 4.5–6.7 yrs, the calculator's itemised 3 kW breakdown (panels ₹88,452 / inverter ₹35,100 / structure ₹23,400 / BoS ₹27,300 / labour ₹27,300 / net meter ₹8,000 = ₹2,09,552), DCR vs non-DCR panel prices, TOPCon effect (+5.5% system cost, 147 vs 166 sq ft), battery prices and a 3 kW hybrid example (6.8 kWh LFP adds ₹1,90,400; payback 4.8 → 11.8 yrs), a quote-comparison checklist, 4-question FAQ. Every calculator figure is an actual output of the live calculator (Delhi, on-grid, bill mode, units chosen to land on whole kW; Mono PERC unless stated).
+   Facts verified by web search (Oct 2026): installed residential on-grid ₹55–85/W, 3 kW ~₹1.6–2.4 L gross and ~₹1–1.5 L after subsidy (price guides dated Mar/Apr 2026; a Jul 2026 news report gives ₹1.5–2 L for a typical 3 kW); retail panels DCR ₹24–34/W vs non-DCR ₹18–26/W (Oct 2026 retail survey); LFP ₹20k–35k/kWh, lead-acid ₹8k–15k/kWh (Jul 2026); PM Surya Ghar slabs unchanged as of Jul 2026 (₹30k/kW to 2 kW, ₹18k 3rd kW, ₹78k cap). No vendor names. GST rate and ALMM List-II (cells, effective 1 Jun 2026 with exemptions still being clarified by MNRE) deliberately not stated — sources inconsistent/evolving.
+2. Guide JSON-LD: Article + BreadcrumbList + FAQPage (FAQ generated from the visible text). Linked from the guides index (new tile), the "Related guides" block of all 8 other guides, the on-grid guide's cost paragraph and the calculator's "how it works" cost step. Added to sitemap.
+3. Tariff pages (22): title/og:title/twitter:title → "Solar Calculator {State}: Tariff, Subsidy & Payback", H1 → "Rooftop Solar in {State}: Cost, Subsidy & Payback". Data, description and the "January 2026" data notes unchanged.
+4. calculator.html: jsPDF `<script defer>` removed; the library is injected on the first PDF click (and pre-warmed on hover/touch/focus of the button). Button shows "Preparing your PDF…" while loading; a CDN failure shows an alert and leaves the button usable. PDF generation code unchanged.
+5. `dateModified` → 2026-10-21 on the 8 existing guides; sitemap lastmod → 2026-10-21 for the 33 pages whose visible content changed (calculator, guides index, 9 guides, 22 tariff pages).
+
+Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib errors not increased on any page (new page 0); exactly one title/canonical/description/H1/og:url/og:image/twitter:card per page (37 pages); every relative internal link resolves; sitemap well-formed, 37 locs, each matches a page canonical and vice versa; all 37 pages load in headless Chromium at 390px with 0 console/page errors (external analytics blocked in sandbox ignored) and no horizontal scroll (calculator results view also checked); calculator R/I state + results text for on-grid units (Delhi 430, Kerala 300), on-grid ₹3,000 bill (Delhi), on-grid appliances (Maharashtra), hybrid (Karnataka 350), off-grid (Rajasthan), surplus roof (Gujarat), surplus commercial (Tamil Nadu) and `?state=kerala` byte-identical before/after. jsPDF is not requested on page load; first click loads it once and downloads a valid PDF identical to the previous version's (ignoring timestamps); second click reuses it; failure path tested (alert, button restored). The sandbox blocks cdnjs, so the library was served from the identical npm `jspdf@2.5.1` build during the test.
+
+Noticed (not changed): the on-grid guide still says "₹55,000–70,000 per kWp"; 2026 sources put the upper end nearer ₹85,000. Consider widening it in a later run (it now links to the cost guide).
+
+Next: P3 tariff data refresh (owner decision first — see action items); P5 PageSpeed/Lighthouse measurement for home + calculator, then move calculator inline CSS to a cached stylesheet if it helps; P5 versioned asset filenames before any `immutable` cache header; on-grid guide cost range; consider per-state OG images.
+
 ---
 
 ## Owner action items
@@ -154,6 +169,8 @@ Next: P3 tariff page titles/date refresh (needs verified 2026 tariff orders — 
 - [ ] If `solarsense.in` is owned, 301-redirect it to `solarsense.dev`; if it isn't, nothing else needed after the canonical fix.
 - [ ] Bing Webmaster Tools: import from Search Console.
 - [ ] Search Console: request indexing for the new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`, `/guides/commercial-rooftop-solar.html`) once deployed.
+- [ ] Search Console: request indexing for `/guides/solar-panel-cost.html` once deployed.
+- [ ] Decide on the state tariff refresh: the tariff pages, `assets/data.js` and the calculator's built-in table all use January 2026 figures. Updating them to FY2026-27 tariff orders will change calculator results, so the SEO run won't do it without your go-ahead. Tick this box to approve, and later runs will refresh a few verified states at a time (pages, data.js and calculator together).
 - [ ] Optional: check the new share preview with a link-preview tool (e.g. paste a page URL into WhatsApp/LinkedIn) after deploy; social caches may hold the old text-only card for a few days.
 - [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
 - [ ] Backlinks: list the calculator on Indian solar/energy forums, Reddit r/india / r/IndiaInvestments answers, Quora, and local RWA/housing-society newsletters; reach out to personal-finance bloggers.

@@ -379,7 +379,6 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .calc-explain strong{color:var(--tx)}
 .ce-note{margin-top:18px;padding:13px 16px;border-radius:10px;background:var(--green-tint);border:1px solid #cfe7dc;font-size:13px;color:var(--tx2);line-height:1.65}
 </style>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div class="page">
@@ -908,7 +907,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
   <p>Daily generation = kWp × peak sun hours × 0.78. The 0.78 performance ratio accounts for real-world losses from heat, dust, wiring and the inverter. In practice, 1 kW of panels produces about 4 units a day, or roughly 1,400 units a year, at 5 peak sun hours. Panel area is estimated as kWp × 100 ÷ panel efficiency (in m²), which works out to roughly 55 sq ft of panels per kW for Mono PERC. Leave extra room for walkways and shade-free spacing. For panel counts by monthly usage and state, see <a href="guides/how-many-solar-panels.html">how many solar panels do I need</a>.</p>
 
   <h3>4. Cost</h3>
-  <p>Installed cost starts from benchmark rates of ₹65,000 per kW for on-grid and ₹52,000 per kW for off-grid (before batteries). These are split into panels (42%), inverter (18% on-grid, 22% off-grid), mounting structure (12%), balance of system such as cables and protection (14%) and installation labour (14%). Panel cost is then adjusted for the technology you choose (TOPCon +22%, bifacial HJT +38%, and so on), and on-grid systems add ₹8,000 for the net meter. Batteries are priced per kWh of usable storage needed for your days of autonomy. Surplus-space projects use separate per-kW rates, with scale discounts above 25, 50 and 100 kW.</p>
+  <p>Installed cost starts from benchmark rates of ₹65,000 per kW for on-grid and ₹52,000 per kW for off-grid (before batteries). These are split into panels (42%), inverter (18% on-grid, 22% off-grid), mounting structure (12%), balance of system such as cables and protection (14%) and installation labour (14%). Panel cost is then adjusted for the technology you choose (TOPCon +22%, bifacial HJT +38%, and so on), and on-grid systems add ₹8,000 for the net meter. Batteries are priced per kWh of usable storage needed for your days of autonomy. Surplus-space projects use separate per-kW rates, with scale discounts above 25, 50 and 100 kW. Our <a href="guides/solar-panel-cost.html">solar panel cost guide</a> compares these benchmarks with 2026 market quotes for 1–10 kW.</p>
 
   <h3>5. Subsidy (PM Surya Ghar)</h3>
   <p>For residential on-grid systems, the solar subsidy calculator applies the central PM Surya Ghar Muft Bijli Yojana support: <strong>₹30,000 per kW for the first 2 kW, ₹18,000 for the third kW, capped at ₹78,000</strong> for any system of 3 kW or more. Off-grid systems and commercial connections receive no residential subsidy. Commercial roofs and ground mounts instead show the year-one tax benefit of 40% accelerated depreciation, assuming a 30% tax rate (our <a href="guides/commercial-rooftop-solar.html">commercial rooftop solar guide</a> covers sizing, ToD tariffs and payback for businesses). See the <a href="subsidy.html">PM Surya Ghar subsidy guide</a> for slab-by-slab examples and how to claim it.</p>
@@ -1560,8 +1559,35 @@ function renderInstallers(){
 
 /* ═══════ LEAD CAPTURE ═══════ */
 /* ═══════ PDF REPORT ═══════ */
+/* jsPDF (~350 KB) is loaded only when a report is requested (warmed on hover/touch of the button) */
+const JSPDF_SRC='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+let jspdfLoading=null;
+function loadJsPDF(){
+  if(typeof window.jspdf!=='undefined')return Promise.resolve();
+  if(!jspdfLoading){
+    jspdfLoading=new Promise(function(res,rej){
+      const sc=document.createElement('script');sc.src=JSPDF_SRC;sc.async=true;
+      sc.onload=res;sc.onerror=function(){jspdfLoading=null;sc.remove();rej();};
+      document.head.appendChild(sc);
+    });
+  }
+  return jspdfLoading;
+}
+(function(){
+  const b=document.getElementById('pdfBtn');if(!b)return;
+  const warm=function(){loadJsPDF().catch(function(){});};
+  b.addEventListener('pointerenter',warm,{once:true});
+  b.addEventListener('touchstart',warm,{once:true,passive:true});
+  b.addEventListener('focus',warm,{once:true});
+})();
 function downloadPDF(){
-  if(typeof window.jspdf==='undefined'){alert('PDF library still loading — please try again in a moment.');return;}
+  if(typeof window.jspdf==='undefined'){
+    const b=document.getElementById('pdfBtn'),lbl=b?b.textContent:'';
+    if(b){b.disabled=true;b.textContent='Preparing your PDF…';}
+    loadJsPDF().then(function(){if(b){b.disabled=false;b.textContent=lbl;}downloadPDF();})
+      .catch(function(){if(b){b.disabled=false;b.textContent=lbl;}alert('Could not load the PDF library — please check your connection and try again.');});
+    return;
+  }
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({unit:'pt',format:'a4'});
   const W = doc.internal.pageSize.getWidth();      // 595
