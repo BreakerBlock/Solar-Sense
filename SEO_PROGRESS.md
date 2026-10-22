@@ -42,7 +42,7 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - 🟡 Tariff pages: ✅ retitled to "Solar Calculator {State}: Tariff, Subsidy & Payback" (title/og/twitter) and H1 "Rooftop Solar in {State}: Cost, Subsidy & Payback" on all 22 (2026-10-21); the visible "data as of January 2026" notes were kept because the figures were not refreshed. ⬜ Data refresh: needs verified FY2026-27 tariff orders, and the same numbers live in the calculator's `TARIFFS` table and `assets/data.js`, so refreshing them changes calculator results — owner decision (see Owner action items)
 - ✅ Per-state calculator entry points: `calculator.html?state={slug}` preselects the state (same as choosing it in the dropdown); each tariff page's CTA uses it — "Open the {State} solar calculator →" (2026-10-18). Body-copy calculator links still point at the clean canonical URL
 - ✅ Subsidy page: "Solar subsidy calculator: how your amount is worked out" section — pro-rata formula, 6 worked sizes with subsidy-per-kW, sizing advice, links to calculator + tariffs (2026-10-18)
-- ✅ New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ✅ "solar panel cost in India (per kW, 2026)" (`guides/solar-panel-cost.html`, 2026-10-21)
+- ✅ New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ✅ "solar panel cost in India (per kW, 2026)" (`guides/solar-panel-cost.html`, 2026-10-21); ✅ "how many units does 1 kW solar generate" (`guides/solar-generation-per-kw.html`, state-wise table, 2026-10-22)
 - ✅ Homepage: anchor-text variety on calculator links — tools tile "Rooftop Solar Calculator", final CTA "Open the solar panel cost calculator →" (2026-10-19)
 
 ### P4 — Internal linking
@@ -50,8 +50,9 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - ✅ "Related guides" block on all 5 guides (other guides + subsidy + tariffs) and "Compare neighbouring states" block on all 22 tariff pages (bordering states only, with tariff/buyback/sun hours from each page's own data) (2026-10-18)
 
 ### P5 — Performance / Core Web Vitals
-- ⬜ Measure LCP/CLS/INP with PageSpeed Insights for home + calculator
-- ⬜ Calculator: ~500 lines of inline CSS; consider moving to cached stylesheet
+- 🟡 Measure LCP/CLS/INP: ✅ local Lighthouse 12 lab run, mobile (2026-10-22): home 99→100 (LCP 1.5 s, CLS 0.074→0), calculator 99 (FCP 1.4 s, LCP 2.0 s, TBT 20–40 ms, CLS 0), guides 99→100. ⬜ Field data (CrUX / PageSpeed Insights on the live site, INP) — owner or a run with network access to PSI
+- ✅ Sitewide CLS fix: `#site-nav` placeholder reserves the 61 px nav height before `site.js` injects the nav (was a 0.074 shift on every page using the shared nav) (2026-10-22)
+- ✅ (decided, no change) Calculator inline CSS: Lighthouse reports no render-blocking resources on calculator.html; moving the CSS to an external file would add a render-blocking request for first-time visitors, so it stays inline (2026-10-22)
 - ⬜ Set longer cache + `immutable` for versioned assets
 
 ---
@@ -160,6 +161,21 @@ Noticed (not changed): the on-grid guide still says "₹55,000–70,000 per kWp"
 
 Next: P3 tariff data refresh (owner decision first — see action items); P5 PageSpeed/Lighthouse measurement for home + calculator, then move calculator inline CSS to a cached stylesheet if it helps; P5 versioned asset filenames before any `immutable` cache header; on-grid guide cost range; consider per-state OG images.
 
+### 2026-10-22 (run 8, scheduled)
+Done:
+1. New guide `guides/solar-generation-per-kw.html` ("How Many Units Does a 1 kW Solar System Generate in India?"): formula (kW × peak sun hours × 0.78, the calculator's own), state-wise table for all 22 states (1 kW per day/month/year, 3 kW per day/year, each state linked to its tariff page), generation by system size 1–10 kW at 5 h, comparison with published estimates, seasonal dips from the calculator's monthly profiles (Kerala July ≈ half of March, Maharashtra Jul–Aug ≈ 60%, Tamil Nadu weakest Oct–Dec, Delhi December ≈ two-thirds of May), what lowers output (direction/tilt, shade, dust, heat, ageing, inverter downtime), what the units are worth (Delhi 3 kW: 4,709 units/yr, ₹27,195/yr, net ₹1.32 L, 4.8-yr payback — actual calculator output), how to check performance; 4-question FAQ. Every generation figure is the calculator formula with each state's own peak sun hours (spot-checked in the live calculator: Delhi 495 units → 3 kW, 12.9/day, 4,709/yr; Rajasthan 150 units → 0.8 kW, 4.1/day; Kerala 300 units → 2.3 kW, 8.1/day).
+   Facts checked by web search (Oct 2026): installer guides quote 4–5 units/day per kW and ~1,400–1,500 units/kW/yr in Delhi/Mumbai, higher in Rajasthan/Gujarat, lower in the North-East (page updated Oct 2026; it cites the NIWE solar atlas at ~3.8–5.2 kWh/kWp/day) — the calculator's 1,424 (5 h) and 1,570 (Delhi) sit in that range, and the page says its Rajasthan 1,861 is the optimistic end. Panel degradation: NREL median ~0.5%/yr, faster at hot/dusty Indian sites (pv magazine India) — stated without a specific Indian figure; noted that the calculator doesn't model degradation.
+2. Guide JSON-LD: Article + BreadcrumbList + FAQPage (FAQ generated from the visible text), OG/Twitter, canonical on https://solarsense.dev. Linked from the guides index (new tile), the "Related guides" block of all 9 other guides, the how-many-panels guide's "4 units a day" sentence and the calculator's "how it works" generation step. Added to sitemap.
+3. On-grid guide cost paragraph: ₹55,000–70,000/kWp → ₹55,000–85,000/kWp ("some budget quotes come in lower"), 3 kWp ₹1.8–2.1 L → ₹1.6–2.4 L gross — now matches the solar panel cost guide. Re-verified Oct 2026: 3 kW ₹1.9–2.2 L turnkey (page updated 2 Oct 2026), ₹2.3–2.4 L for a 3.3 kWp DCR example (Oct 2026 quotes), ₹95k–1.18 L for 2 kW (Aug 2026), one Oct 2026 guide as low as ₹40–55/W.
+4. P5: local Lighthouse 12 (mobile, lab, analytics blocked) — home 99, calculator 99, guide 99; only issue a 0.074 CLS on every page with the shared nav (content shifted 61 px when `site.js` injected the nav). Fixed with a `#site-nav{height:61px}` placeholder in style.css (same background/border as the nav): CLS 0, scores 100. Calculator has no render-blocking resources, so its inline CSS stays inline (moving it out would add a blocking request).
+5. `dateModified` → 2026-10-22 on the 9 existing guides; sitemap lastmod → 2026-10-22 for the 12 pages whose visible content changed (calculator, guides index, 10 guides). The CSS-only placeholder change did not bump lastmod.
+
+Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib errors not increased on any page (new page 0); exactly one title/canonical/description/H1/og:url/og:image/twitter:card per page (38 pages), og:url = canonical; every relative internal link resolves; sitemap well-formed, 38 locs, each matches a page canonical and vice versa; all 38 pages load in headless Chromium at 390px with 0 console/page errors (external requests blocked) and no horizontal scroll; post-load nav height and the position of the first content element identical to the previous version on all 38 pages; calculator R/I state + results text for on-grid units (Delhi 430 and 495, Kerala 300, Rajasthan 150), on-grid ₹3,000 bill (Delhi), on-grid appliances (Maharashtra), off-grid (Rajasthan), surplus roof (Gujarat), surplus commercial (Tamil Nadu) and `?state=kerala` byte-identical before/after.
+
+Noticed (not changed): October 2026 price sources range from ~₹40–55/W (one budget-tier guide) to ~₹70–80/W; the cost guide's ₹55–85k/kW typical range still fits most of them, but if more sources move lower, widen its lower bound (cost guide tables + FAQ + on-grid guide together).
+
+Next: P3 tariff data refresh (owner decision first — see action items); P5 field data (PSI/CrUX) once the site has traffic; P5 versioned asset filenames before any `immutable` cache header; more long-tail content using the calculator's own numbers (e.g. "solar for a 1.5-ton AC / per appliance", "solar EMI and PM Surya Ghar loans" — needs verified loan terms); consider per-state OG images.
+
 ---
 
 ## Owner action items
@@ -170,6 +186,8 @@ Next: P3 tariff data refresh (owner decision first — see action items); P5 Pag
 - [ ] Bing Webmaster Tools: import from Search Console.
 - [ ] Search Console: request indexing for the new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`, `/guides/commercial-rooftop-solar.html`) once deployed.
 - [ ] Search Console: request indexing for `/guides/solar-panel-cost.html` once deployed.
+- [ ] Search Console: request indexing for `/guides/solar-generation-per-kw.html` once deployed.
+- [ ] Optional: run PageSpeed Insights on https://solarsense.dev/ and /calculator.html in a few weeks to see field (real-user) Core Web Vitals; the lab scores are 99–100.
 - [ ] Decide on the state tariff refresh: the tariff pages, `assets/data.js` and the calculator's built-in table all use January 2026 figures. Updating them to FY2026-27 tariff orders will change calculator results, so the SEO run won't do it without your go-ahead. Tick this box to approve, and later runs will refresh a few verified states at a time (pages, data.js and calculator together).
 - [ ] Optional: check the new share preview with a link-preview tool (e.g. paste a page URL into WhatsApp/LinkedIn) after deploy; social caches may hold the old text-only card for a few days.
 - [x] Privacy contact set to utkarsh.khurana11@gmail.com (2026-10-17)
