@@ -56,6 +56,9 @@
         <a href="${BASE}guides/on-grid.html">On-Grid Solar</a>
         <a href="${BASE}guides/off-grid.html">Off-Grid Solar</a>
         <a href="${BASE}guides/surplus-space.html">Earn from Surplus Space</a>
+        <a href="${BASE}guides/solar-panel-cost.html">Solar Panel Cost</a>
+        <a href="${BASE}guides/how-many-solar-panels.html">How Many Panels Do I Need?</a>
+        <a href="${BASE}guides/solar-for-ac.html">Solar for AC</a>
         <a href="${BASE}privacy.html">Privacy Policy</a>
       </div>
     </div>

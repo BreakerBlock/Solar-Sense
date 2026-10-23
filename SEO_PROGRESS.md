@@ -42,18 +42,19 @@ Status: ✅ done · 🟡 partial · ⬜ todo
 - 🟡 Tariff pages: ✅ retitled to "Solar Calculator {State}: Tariff, Subsidy & Payback" (title/og/twitter) and H1 "Rooftop Solar in {State}: Cost, Subsidy & Payback" on all 22 (2026-10-21); the visible "data as of January 2026" notes were kept because the figures were not refreshed. ⬜ Data refresh: needs verified FY2026-27 tariff orders, and the same numbers live in the calculator's `TARIFFS` table and `assets/data.js`, so refreshing them changes calculator results — owner decision (see Owner action items)
 - ✅ Per-state calculator entry points: `calculator.html?state={slug}` preselects the state (same as choosing it in the dropdown); each tariff page's CTA uses it — "Open the {State} solar calculator →" (2026-10-18). Body-copy calculator links still point at the clean canonical URL
 - ✅ Subsidy page: "Solar subsidy calculator: how your amount is worked out" section — pro-rata formula, 6 worked sizes with subsidy-per-kW, sizing advice, links to calculator + tariffs (2026-10-18)
-- ✅ New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ✅ "solar panel cost in India (per kW, 2026)" (`guides/solar-panel-cost.html`, 2026-10-21); ✅ "how many units does 1 kW solar generate" (`guides/solar-generation-per-kw.html`, state-wise table, 2026-10-22)
+- ✅ New content: ✅ "how many solar panels do I need" (`guides/how-many-solar-panels.html`) and ✅ "net metering explained" (`guides/net-metering.html`) (2026-10-19); ✅ commercial/business rooftop solar sizing (`guides/commercial-rooftop-solar.html`, 2026-10-20); ✅ "solar panel cost in India (per kW, 2026)" (`guides/solar-panel-cost.html`, 2026-10-21); ✅ "how many units does 1 kW solar generate" (`guides/solar-generation-per-kw.html`, state-wise table, 2026-10-22); ✅ "solar for AC / appliances" (`guides/solar-for-ac.html`, 2026-10-23); ⬜ "solar EMI / PM Surya Ghar loans" (needs verified loan terms)
 - ✅ Homepage: anchor-text variety on calculator links — tools tile "Rooftop Solar Calculator", final CTA "Open the solar panel cost calculator →" (2026-10-19)
 
 ### P4 — Internal linking
 - ✅ Every guide and tariff page links to calculator.html with a varied anchor in body copy — tariff pages rotate "rooftop solar / solar panel cost / solar subsidy / solar calculator for {State}" (2026-10-17 run 3)
 - ✅ "Related guides" block on all 5 guides (other guides + subsidy + tariffs) and "Compare neighbouring states" block on all 22 tariff pages (bordering states only, with tariff/buyback/sun hours from each page's own data) (2026-10-18)
+- ✅ Sitewide footer "Learn" column (in `assets/site.js`) now also links the cost guide, how-many-panels guide and solar-for-AC guide (2026-10-23). Note: calculator.html has no shared footer and tariffs/index.html has its own inline footer, so those two don't carry it
 
 ### P5 — Performance / Core Web Vitals
 - 🟡 Measure LCP/CLS/INP: ✅ local Lighthouse 12 lab run, mobile (2026-10-22): home 99→100 (LCP 1.5 s, CLS 0.074→0), calculator 99 (FCP 1.4 s, LCP 2.0 s, TBT 20–40 ms, CLS 0), guides 99→100. ⬜ Field data (CrUX / PageSpeed Insights on the live site, INP) — owner or a run with network access to PSI
 - ✅ Sitewide CLS fix: `#site-nav` placeholder reserves the 61 px nav height before `site.js` injects the nav (was a 0.074 shift on every page using the shared nav) (2026-10-22)
 - ✅ (decided, no change) Calculator inline CSS: Lighthouse reports no render-blocking resources on calculator.html; moving the CSS to an external file would add a render-blocking request for first-time visitors, so it stays inline (2026-10-22)
-- ⬜ Set longer cache + `immutable` for versioned assets
+- ⬜ Set longer cache + `immutable` for versioned assets. Deferred (2026-10-23): assets are not versioned, so `immutable` would need `?v=` on every page's style.css/site.js reference plus a rule that every later edit bumps it; the gain over the current 1-day cache is small at lab scores of 99–100
 
 ---
 
@@ -176,6 +177,18 @@ Noticed (not changed): October 2026 price sources range from ~₹40–55/W (one 
 
 Next: P3 tariff data refresh (owner decision first — see action items); P5 field data (PSI/CrUX) once the site has traffic; P5 versioned asset filenames before any `immutable` cache header; more long-tail content using the calculator's own numbers (e.g. "solar for a 1.5-ton AC / per appliance", "solar EMI and PM Surya Ghar loans" — needs verified loan terms); consider per-state OG images.
 
+### 2026-10-23 (run 9, scheduled)
+Done:
+1. New guide `guides/solar-for-ac.html` ("How Much Solar Do You Need to Run an AC in India?"): real-world units/hour for a 1.5 ton AC by type (5-star inverter ~0.8–1.1, 3-star inverter ~1.0–1.3, non-inverter/older window ~1.5–1.8) and units/month at 8 h; why the BEE label figure (1,600 h/yr test basis) reads lower; kW needed by AC type in Delhi (1.5 / 1.8 / 2.4 kW; two ACs 3.0 kW) with net cost and payback; hours-per-day table (4–10 h at 5 sun hours: 0.8–2.0 kW); "size for the year, not for May" under net metering; the 78–80% coverage caveat (1.9 kW for full coverage); running an AC at night (on-grid vs off-grid: 2.0 kW + 14.1 kWh LFP, ₹5.06 L vs ₹63,776 on-grid; hybrid); the calculator's default appliance list as a units/day table (25.2 units, 5.1 kW at 5 h; Delhi 4.6 kW, or 2.0 kW with high-draw loads excluded); ways to cut AC units; 4-question FAQ. Every size/cost/payback/battery figure is an actual output of the calculator in appliance mode with only the AC enabled (Delhi defaults ₹7 / ₹3.50; no-state defaults ₹7 / ₹2.50; Mono PERC).
+   Facts checked by web search (Oct 2026): 1.5 ton 5-star inverter ~0.7–0.9 units/h, 3-star inverter 0.9–1.2, non-inverter ~1.8 (installer guide, Sep/Oct 2026); 5-star inverter 1.05–1.1, 3-star inverter 1.25–1.35, 3-star non-inverter ~1.5, window/older 1.5–1.8 (manufacturer blog, May 2026); BEE label basis 1,600 h/yr with 1.5 ton 3-star ~1,100 kWh/yr vs 5-star ~840 kWh/yr (Mar 2026). The page uses the overlapping ranges and says they are typical, not exact. No figures for 1 ton / 2 ton ACs were stated (not verified).
+2. Guide JSON-LD: Article + BreadcrumbList + FAQPage (FAQ generated from the visible text), OG/Twitter, canonical on https://solarsense.dev. Linked from the guides index (new tile), the "Related guides" block of all 10 other guides, the calculator's "how it works" step 1 (a note that the 1,500 W × 8 h AC default assumes near-full draw, and ~1,000 W is closer for a 5-star inverter AC — text only) and the sitewide footer. Added to sitemap.
+3. Sitewide footer (`assets/site.js`) "Learn" column: + Solar Panel Cost, How Many Panels Do I Need?, Solar for AC.
+4. `dateModified` → 2026-10-23 on the 10 existing guides; sitemap lastmod → 2026-10-23 for the 13 pages whose visible content changed (calculator, guides index, 10 guides, new guide). Footer-only changes on other pages did not bump lastmod.
+
+Verification: all JSON-LD parses and uses only https://solarsense.dev; html5lib errors not increased on any page; exactly one title/canonical/description/H1/og:url per page (39 pages), og:url = canonical; every relative internal link resolves, including the footer's; sitemap well-formed, 39 locs, each matches a page canonical and vice versa; all 39 pages load in headless Chromium at 390px with 0 console/page errors (external requests blocked) and no horizontal scroll; new footer links present on every page using the shared footer; new guide checked visually at 390px. Calculator R/I state + results text byte-identical before/after for on-grid units (Delhi 430, Kerala 300, Rajasthan 150), on-grid ₹3,000 bill (Delhi), on-grid appliances (Maharashtra, default Delhi list with and without high-draw loads, no state), hybrid (Karnataka 350), off-grid (Rajasthan; AC-only Delhi), surplus roof (Gujarat), surplus commercial (Tamil Nadu) and the 11 AC-only scenarios behind the guide's tables.
+
+Next: P3 tariff data refresh (owner decision first — see action items); "solar EMI / PM Surya Ghar loans" guide (verify current collateral-free loan terms first; no lender listings); P5 field data (PSI/CrUX) once the site has traffic; consider per-state OG images; consider giving calculator.html the shared footer (adds sitewide guide links to the money page).
+
 ---
 
 ## Owner action items
@@ -187,6 +200,7 @@ Next: P3 tariff data refresh (owner decision first — see action items); P5 fie
 - [ ] Search Console: request indexing for the new guides (`/guides/how-many-solar-panels.html`, `/guides/net-metering.html`, `/guides/commercial-rooftop-solar.html`) once deployed.
 - [ ] Search Console: request indexing for `/guides/solar-panel-cost.html` once deployed.
 - [ ] Search Console: request indexing for `/guides/solar-generation-per-kw.html` once deployed.
+- [ ] Search Console: request indexing for `/guides/solar-for-ac.html` once deployed.
 - [ ] Optional: run PageSpeed Insights on https://solarsense.dev/ and /calculator.html in a few weeks to see field (real-user) Core Web Vitals; the lab scores are 99–100.
 - [ ] Decide on the state tariff refresh: the tariff pages, `assets/data.js` and the calculator's built-in table all use January 2026 figures. Updating them to FY2026-27 tariff orders will change calculator results, so the SEO run won't do it without your go-ahead. Tick this box to approve, and later runs will refresh a few verified states at a time (pages, data.js and calculator together).
 - [ ] Optional: check the new share preview with a link-preview tool (e.g. paste a page URL into WhatsApp/LinkedIn) after deploy; social caches may hold the old text-only card for a few days.
