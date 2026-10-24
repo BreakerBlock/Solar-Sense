@@ -377,6 +377,9 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 .calc-explain p{font-size:14px;color:var(--tx2);line-height:1.7;margin-bottom:8px}
 .calc-explain a{color:var(--green-dk)}
 .calc-explain strong{color:var(--tx)}
+.calc-explain ul{margin:6px 0 10px 18px;font-size:14px;color:var(--tx2);line-height:1.8}
+.calc-explain .state-links{font-size:13.5px;color:var(--tx2);line-height:1.9}
+.calc-explain .state-links a{white-space:nowrap}
 .ce-note{margin-top:18px;padding:13px 16px;border-radius:10px;background:var(--green-tint);border:1px solid #cfe7dc;font-size:13px;color:var(--tx2);line-height:1.65}
 </style>
 </head>
@@ -915,7 +918,7 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
   <h3>6. Savings, export income and payback</h3>
   <p>On-grid, the calculator assumes you use 65% of what the panels produce, up to your own consumption, and export the rest. Units you use save your full tariff, while exported units earn only your DISCOM's buyback rate. Valuing every export at the buyback rate is cautious, because under <a href="guides/net-metering.html">net metering</a> exports offset within a billing cycle are worth your full tariff. Tariff and buyback rate are both prefilled from <a href="tariffs/index.html">state-wise electricity tariffs</a> and can be edited. Off-grid savings also include an allowance for generator diesel you no longer buy. Payback = net cost after subsidy ÷ first-year benefit. The surplus-space path also projects 25 years of cash flow with 3% annual tariff growth, panel degradation and 1% yearly maintenance.</p>
 
-  <div class="ce-note"><strong>What it leaves out:</strong> state top-up subsidies, loan interest, roof repairs, and DISCOM fees beyond the meter. Treat the result as a well-informed starting point, compare at least three quotes, and read the <a href="guides/on-grid.html">on-grid solar guide</a> or <a href="guides/off-grid.html">off-grid solar guide</a> before you buy.</div>
+  <div class="ce-note"><strong>What it leaves out:</strong> state top-up subsidies, loan interest (see the <a href="guides/solar-loan-emi.html">solar loan EMI guide</a>), roof repairs, and DISCOM fees beyond the meter. Treat the result as a well-informed starting point, compare at least three quotes, and read the <a href="guides/on-grid.html">on-grid solar guide</a> or <a href="guides/off-grid.html">off-grid solar guide</a> before you buy.</div>
 </section>
 
 <section class="calc-explain calc-faq" id="faq" aria-labelledby="faq-h">
@@ -941,6 +944,23 @@ input[type=range]{width:100%;accent-color:var(--green);cursor:pointer}
 
   <h3>How accurate is this solar panel cost calculator?</h3>
   <p>It is designed for a realistic first estimate, not a binding quote. Sizing and generation use state-level sunshine data and a standard loss factor, while costs use national benchmark rates. Your actual quote depends on roof type, cable runs, panel and inverter brand, and local DISCOM charges. Use the estimate to judge whether quotes are in the right range.</p>
+</section>
+
+<section class="calc-explain" id="more" aria-labelledby="more-h">
+  <h2 id="more-h">More solar guides and state calculators</h2>
+  <ul>
+    <li><a href="guides/solar-panel-cost.html">Solar panel cost in India (2026)</a>: price per kW and a 1–10 kW price list after subsidy</li>
+    <li><a href="guides/how-many-solar-panels.html">How many solar panels do I need?</a>: units to kW, panel count and roof space</li>
+    <li><a href="guides/solar-generation-per-kw.html">Solar generation per kW</a>: units per day and year in every state</li>
+    <li><a href="guides/solar-loan-emi.html">Solar loan and EMI</a>: PM Surya Ghar loan terms and EMI vs monthly savings</li>
+    <li><a href="guides/solar-for-ac.html">Solar for AC and appliances</a>: how many kW a 1.5 ton AC needs</li>
+    <li><a href="guides/net-metering.html">Net metering explained</a>: how exported units are credited</li>
+    <li><a href="guides/commercial-rooftop-solar.html">Commercial rooftop solar</a>: sizing, depreciation and payback for businesses</li>
+    <li><a href="guides/index.html">All solar guides</a></li>
+  </ul>
+  <h3>Solar calculator by state</h3>
+  <p>Each state page lists the domestic tariff, buyback rate, peak sun hours and typical payback, with a link that opens this calculator prefilled for that state.</p>
+  <p class="state-links"><a href="tariffs/andhra-pradesh.html">Andhra Pradesh</a> · <a href="tariffs/assam.html">Assam</a> · <a href="tariffs/bihar.html">Bihar</a> · <a href="tariffs/chhattisgarh.html">Chhattisgarh</a> · <a href="tariffs/delhi.html">Delhi</a> · <a href="tariffs/goa.html">Goa</a> · <a href="tariffs/gujarat.html">Gujarat</a> · <a href="tariffs/haryana.html">Haryana</a> · <a href="tariffs/himachal-pradesh.html">Himachal Pradesh</a> · <a href="tariffs/jharkhand.html">Jharkhand</a> · <a href="tariffs/karnataka.html">Karnataka</a> · <a href="tariffs/kerala.html">Kerala</a> · <a href="tariffs/madhya-pradesh.html">Madhya Pradesh</a> · <a href="tariffs/maharashtra.html">Maharashtra</a> · <a href="tariffs/odisha.html">Odisha</a> · <a href="tariffs/punjab.html">Punjab</a> · <a href="tariffs/rajasthan.html">Rajasthan</a> · <a href="tariffs/tamil-nadu.html">Tamil Nadu</a> · <a href="tariffs/telangana.html">Telangana</a> · <a href="tariffs/uttar-pradesh.html">Uttar Pradesh</a> · <a href="tariffs/uttarakhand.html">Uttarakhand</a> · <a href="tariffs/west-bengal.html">West Bengal</a></p>
 </section>
 
 </div>
