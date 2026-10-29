@@ -59,7 +59,10 @@
         <a href="${BASE}guides/solar-panel-cost.html">Solar Panel Cost</a>
         <a href="${BASE}guides/how-many-solar-panels.html">How Many Panels Do I Need?</a>
         <a href="${BASE}guides/solar-for-ac.html">Solar for AC</a>
+        <a href="${BASE}guides/1kw-2kw-solar-system.html">1 kW &amp; 2 kW Solar</a>
         <a href="${BASE}guides/3kw-vs-5kw-solar.html">3 kW vs 5 kW Solar</a>
+        <a href="${BASE}guides/5kw-solar-system.html">5 kW Solar System</a>
+        <a href="${BASE}guides/10kw-solar-system.html">10 kW Solar System</a>
         <a href="${BASE}guides/housing-society-solar.html">Housing Society Solar</a>
         <a href="${BASE}privacy.html">Privacy Policy</a>
       </div>
