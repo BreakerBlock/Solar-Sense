@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://solarsense.dev/</loc><lastmod>2026-10-19</lastmod><priority>1</priority></url>
-  <url><loc>https://solarsense.dev/calculator.html</loc><lastmod>2026-10-29</lastmod><priority>0.9</priority></url>
+  <url><loc>https://solarsense.dev/calculator.html</loc><lastmod>2026-10-30</lastmod><priority>0.9</priority></url>
   <url><loc>https://solarsense.dev/subsidy.html</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://solarsense.dev/privacy.html</loc><lastmod>2026-10-17</lastmod><priority>0.3</priority></url>
-  <url><loc>https://solarsense.dev/guides/index.html</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority></url>
-  <url><loc>https://solarsense.dev/guides/on-grid.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/off-grid.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/hybrid.html</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority></url>
-  <url><loc>https://solarsense.dev/guides/surplus-space.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/panel-types.html</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority></url>
-  <url><loc>https://solarsense.dev/guides/how-many-solar-panels.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/net-metering.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/index.html</loc><lastmod>2026-10-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://solarsense.dev/guides/on-grid.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/off-grid.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/hybrid.html</loc><lastmod>2026-10-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://solarsense.dev/guides/surplus-space.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/panel-types.html</loc><lastmod>2026-10-30</lastmod><priority>0.7</priority></url>
+  <url><loc>https://solarsense.dev/guides/how-many-solar-panels.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/net-metering.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://solarsense.dev/guides/commercial-rooftop-solar.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/solar-panel-cost.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/solar-generation-per-kw.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/solar-for-ac.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/solar-loan-emi.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/3kw-vs-5kw-solar.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/housing-society-solar.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/1kw-2kw-solar-system.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/5kw-solar-system.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
-  <url><loc>https://solarsense.dev/guides/10kw-solar-system.html</loc><lastmod>2026-10-29</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/solar-panel-cost.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/solar-generation-per-kw.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/solar-for-ac.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/solar-loan-emi.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/3kw-vs-5kw-solar.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/housing-society-solar.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/1kw-2kw-solar-system.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/5kw-solar-system.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/solar-for-units-per-month.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
+  <url><loc>https://solarsense.dev/guides/10kw-solar-system.html</loc><lastmod>2026-10-30</lastmod><priority>0.8</priority></url>
   <url><loc>https://solarsense.dev/tariffs/index.html</loc><lastmod>2026-10-25</lastmod><priority>0.7</priority></url>
   <url><loc>https://solarsense.dev/tariffs/andhra-pradesh.html</loc><lastmod>2026-10-29</lastmod><priority>0.6</priority></url>
   <url><loc>https://solarsense.dev/tariffs/assam.html</loc><lastmod>2026-10-29</lastmod><priority>0.6</priority></url>
