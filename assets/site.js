@@ -60,6 +60,7 @@
         <a href="${BASE}guides/how-many-solar-panels.html">How Many Panels Do I Need?</a>
         <a href="${BASE}guides/solar-for-ac.html">Solar for AC</a>
         <a href="${BASE}guides/solar-for-units-per-month.html">Solar by Monthly Units</a>
+        <a href="${BASE}guides/solar-for-2bhk-3bhk-home.html">Solar for 2 BHK / 3 BHK</a>
         <a href="${BASE}guides/solar-for-ev-charging.html">Solar for EV Charging</a>
         <a href="${BASE}guides/1kw-2kw-solar-system.html">1 kW &amp; 2 kW Solar</a>
         <a href="${BASE}guides/3kw-vs-5kw-solar.html">3 kW vs 5 kW Solar</a>
