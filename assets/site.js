@@ -55,6 +55,7 @@
         <h4>Learn</h4>
         <a href="${BASE}guides/on-grid.html">On-Grid Solar</a>
         <a href="${BASE}guides/off-grid.html">Off-Grid Solar</a>
+        <a href="${BASE}guides/hybrid.html">Hybrid Solar &amp; Battery Size</a>
         <a href="${BASE}guides/surplus-space.html">Earn from Surplus Space</a>
         <a href="${BASE}guides/solar-panel-cost.html">Solar Panel Cost</a>
         <a href="${BASE}guides/how-many-solar-panels.html">How Many Panels Do I Need?</a>
@@ -67,6 +68,7 @@
         <a href="${BASE}guides/5kw-solar-system.html">5 kW Solar System</a>
         <a href="${BASE}guides/10kw-solar-system.html">10 kW Solar System</a>
         <a href="${BASE}guides/housing-society-solar.html">Housing Society Solar</a>
+        <a href="${BASE}guides/solar-inverter-size.html">Solar Inverter Size</a>
         <a href="${BASE}privacy.html">Privacy Policy</a>
       </div>
     </div>
