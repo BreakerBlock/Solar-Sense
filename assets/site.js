@@ -69,6 +69,7 @@
         <a href="${BASE}guides/10kw-solar-system.html">10 kW Solar System</a>
         <a href="${BASE}guides/housing-society-solar.html">Housing Society Solar</a>
         <a href="${BASE}guides/solar-inverter-size.html">Solar Inverter Size</a>
+        <a href="${BASE}guides/solar-water-pump.html">Solar Water Pump (PM-KUSUM)</a>
         <a href="${BASE}privacy.html">Privacy Policy</a>
       </div>
     </div>
