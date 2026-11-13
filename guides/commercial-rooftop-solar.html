@@ -70,7 +70,7 @@
   "description": "Commercial rooftop solar for Indian shops, offices and factories: size to daytime use, 3–10 kW shop systems and 20–100 kW costs, 40% accelerated depreciation instead of subsidy, net metering limits and payback.",
   "inLanguage": "en-IN",
   "datePublished": "2026-10-20",
-  "dateModified": "2026-11-11",
+  "dateModified": "2026-11-13",
   "author": {
     "@type": "Organization",
     "@id": "https://solarsense.dev/#organization",
@@ -145,6 +145,14 @@
         "@type": "Answer",
         "text": "Not on a commercial connection. PM Surya Ghar is only for residential connections, so a shop or office with its own commercial meter gets no subsidy. It can claim 40% accelerated depreciation instead if the business has taxable income; our calculator shows this as about 12% of the system cost. Small commercial systems up to 10 kW also need no technical feasibility study and are usually billed without a time-of-day tariff."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Is rooftop solar worth it for a school or hospital?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually, yes, because both use most of their power in daylight. In our calculator, a 25 kW school system in Maharashtra at ₹8 a unit pays back in about 4.2–5.0 years with the depreciation benefit, depending on whether 70% or 50% of the output is used on site, and 4.8–5.7 years for a tax-exempt trust that cannot claim depreciation. A 50 kW hospital system using 90% of its output at ₹10 a unit pays back in about 2.8 years (3.2 without depreciation). Neither gets the PM Surya Ghar subsidy, and on-grid solar does not replace a hospital's backup power. See solar for schools and hospitals."
+      }
     }
   ]
 }
@@ -161,7 +169,7 @@
   <h1 style="font-size:28px;font-weight:800;margin-bottom:10px">Commercial Rooftop Solar in India: Sizing, Cost &amp; Payback</h1>
   <p class="lead">Shops, offices, clinics, schools, warehouses and small factories use most of their electricity in daylight, on a higher tariff than homes. That makes rooftop solar work very differently for a business. Here is how to size a commercial system, what it costs, how the tax benefit replaces the home subsidy, and what payback to expect.</p>
 
-  <div class="info i-g"><strong>Quick answer:</strong> size a commercial system to the electricity you use <strong>during the day</strong>, not to your roof. At 5.5 peak sun hours, about <strong>1 kW for every 165 units</strong> a month. A business using 6,600 units a month needs about 40 kW and 3,200–4,000 sq ft of shadow-free roof. There is no PM Surya Ghar subsidy for commercial connections, but 40% accelerated depreciation usually brings payback to 3–5 years when most of the output is used on site. Small shops and offices usually need 3–10 kW: see <a href="#shops-small-offices">solar for shops and small offices</a>.</div>
+  <div class="info i-g"><strong>Quick answer:</strong> size a commercial system to the electricity you use <strong>during the day</strong>, not to your roof. At 5.5 peak sun hours, about <strong>1 kW for every 165 units</strong> a month. A business using 6,600 units a month needs about 40 kW and 3,200–4,000 sq ft of shadow-free roof. There is no PM Surya Ghar subsidy for commercial connections, but 40% accelerated depreciation usually brings payback to 3–5 years when most of the output is used on site. Small shops and offices usually need 3–10 kW: see <a href="#shops-small-offices">solar for shops and small offices</a>. Schools and hospitals: see <a href="#schools-hospitals">solar for schools and hospitals</a>.</div>
 
   <h2>How commercial solar differs from home solar</h2>
   <ul>
@@ -241,6 +249,31 @@
   <p><strong>If less of the output is used in the shop:</strong> at ₹10 a unit, a 5 kW system with 70% used on site saves ₹61,850 in year one (payback 3.8 years), and with 50% used on site ₹51,009 (4.6 years). A 10 kW system at 70% saves ₹1,23,986 (3.7 years).</p>
   <p><strong>Things to check first for a shop or office:</strong> who owns the roof (in a market complex or a rented unit you need the building owner's or association's written permission, and often a share of a common terrace); which connection the system will be on (the subsidy and the net meter follow the connection on your bill, and a shop on its own commercial meter gets no PM Surya Ghar subsidy); and whether the business has taxable income to use the depreciation. Without it, use the cost before depreciation: the 5 kW payback at ₹10 then becomes about 3.7 years.</p>
 
+  <h2 id="schools-hospitals">Solar for schools and hospitals</h2>
+  <p>Schools, colleges, hospitals and nursing homes use most of their power in daylight, like a business, but a few things change the arithmetic, above all how much of the output they can use on site and whether they can use the depreciation benefit.</p>
+  <ul>
+    <li><strong>Schools lose part of the output to holidays.</strong> A school is shut on Sundays and holidays, and its long summer break usually falls in the sunniest months, so much of that output is exported at the buyback rate. Plan on using roughly half to two-thirds of the output on site, not the 90% a shop open all week can manage. Size to the term-time daytime load, not the yearly average.</li>
+    <li><strong>Hospitals use almost everything.</strong> Wards, operating theatres, labs and air-conditioning run every day of the year, so nearly all of the solar output replaces bought units. The limit is usually roof space, not demand.</li>
+    <li><strong>On-grid solar is not backup power.</strong> A grid-tied system switches off during a power cut for safety. Critical hospital loads still need their UPS and generator; batteries add cost (see <a href="hybrid.html">hybrid solar and battery size</a>).</li>
+    <li><strong>The tax benefit may not apply.</strong> Many schools and hospitals are run by trusts or societies whose income is tax-exempt. Without taxable income, the 40% accelerated depreciation (Step 2) is worth nothing, so judge payback on the full system cost. The table shows both.</li>
+    <li><strong>No PM Surya Ghar subsidy.</strong> The subsidy is only for residential connections, and a school or hospital is billed on a non-residential connection. Check the category and the per-unit energy charge on your bill: institutions are often on a different rate from shops.</li>
+  </ul>
+  <p>The table shows calculator results for Maharashtra (Earn from Surplus Space → Commercial roof, sanctioned load equal to the system size, net metering cap 100%, Mono PERC panels, ₹3.06/kWh export rate). "Without depreciation" is the system cost divided by year-1 savings, for a tax-exempt institution.</p>
+  <div class="tbl-wrap">
+    <table class="data">
+      <thead><tr><th>Building</th><th>System</th><th>Suits (units/month)</th><th>System cost</th><th>Used on site</th><th>Tariff</th><th>Year-1 savings</th><th>Payback with depreciation</th><th>Payback without depreciation</th></tr></thead>
+      <tbody>
+        <tr><td>School</td><td>10 kW</td><td>~1,650</td><td>₹5.26 L</td><td>50%</td><td>₹8</td><td>₹86,597</td><td>5.3 years</td><td>6.1 years</td></tr>
+        <tr><td>School</td><td>10 kW</td><td>~1,650</td><td>₹5.26 L</td><td>70%</td><td>₹8</td><td>₹1,02,064</td><td>4.5 years</td><td>5.1 years</td></tr>
+        <tr><td>School</td><td>25 kW</td><td>~4,125</td><td>₹12.3 L</td><td>50%</td><td>₹8</td><td>₹2,16,585</td><td>5.0 years</td><td>5.7 years</td></tr>
+        <tr><td>School</td><td>25 kW</td><td>~4,125</td><td>₹12.3 L</td><td>70%</td><td>₹8</td><td>₹2,55,280</td><td>4.2 years</td><td>4.8 years</td></tr>
+        <tr><td>Hospital</td><td>50 kW</td><td>~8,250</td><td>₹23.3 L</td><td>90%</td><td>₹10</td><td>₹7,28,597</td><td>2.8 years</td><td>3.2 years</td></tr>
+        <tr><td>Hospital</td><td>100 kW</td><td>~16,500</td><td>₹44.5 L</td><td>90%</td><td>₹10</td><td>₹14,57,183</td><td>2.7 years</td><td>3.1 years</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>At ₹10 a unit, the 25 kW school system saves ₹2,55,751 a year at 50% used on site (4.2 years with depreciation, 4.8 without) and ₹3,10,112 at 70% (3.5 and 4.0 years). At ₹12, the 50 kW hospital system pays back in 2.4 years with depreciation and 2.7 without. Enter your own tariff and on-site share in the <a href="../calculator.html">solar calculator</a>; for a school, the on-site share is the figure to be most careful with.</p>
+
   <h2>Before you sign: a checklist for businesses</h2>
   <ul>
     <li><strong>Own the roof, or have a long lease.</strong> The system pays for itself over years. If you rent, get the landlord's written consent and a lease that runs past the payback.</li>
@@ -258,6 +291,7 @@
   <details class="faq"><summary>What is the payback period for commercial rooftop solar?</summary><div class="faq-body">In our calculator, a business in Maharashtra paying ₹10 a unit and using 90% of its solar output on site pays back a 20–100 kW system in about 2.7–3.2 years after the depreciation benefit. At ₹8 a unit it is 3.3–3.9 years, and using only half the output on site stretches a 40 kW system to 4.2–5.0 years.</div></details>
   <details class="faq"><summary>What size solar system does a small shop or office need?</summary><div class="faq-body">At 5.5 peak sun hours, about 1 kW for every 165 units a month: 3 kW suits a shop using about 500 units a month, 5 kW about 825 and 10 kW about 1,650. Net metering stops at your sanctioned load, so a shop with a 5 kW connection should plan for 5 kW or raise its load first. In our calculator, a 5 kW system for a Maharashtra shop costs about ₹2.67 lakh and pays back in about 3.2 years at ₹10 a unit.</div></details>
   <details class="faq"><summary>Can a shop get the PM Surya Ghar solar subsidy?</summary><div class="faq-body">Not on a commercial connection. PM Surya Ghar is only for residential connections, so a shop or office with its own commercial meter gets no subsidy. It can claim 40% accelerated depreciation instead if the business has taxable income; our calculator shows this as about 12% of the system cost. Small commercial systems up to 10 kW also need no technical feasibility study and are usually billed without a time-of-day tariff.</div></details>
+  <details class="faq"><summary>Is rooftop solar worth it for a school or hospital?</summary><div class="faq-body">Usually, yes, because both use most of their power in daylight. In our calculator, a 25 kW school system in Maharashtra at ₹8 a unit pays back in about 4.2–5.0 years with the depreciation benefit, depending on whether 70% or 50% of the output is used on site, and 4.8–5.7 years for a tax-exempt trust that cannot claim depreciation. A 50 kW hospital system using 90% of its output at ₹10 a unit pays back in about 2.8 years (3.2 without depreciation). Neither gets the PM Surya Ghar subsidy, and on-grid solar does not replace a hospital's backup power. See <a href="#schools-hospitals">solar for schools and hospitals</a>.</div></details>
 
   <h2>Related guides</h2>
   <ul>
