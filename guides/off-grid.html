@@ -70,7 +70,7 @@
   "description": "Off-grid solar with batteries in India: battery size for days of autonomy, 2026 prices for 1–10 kW, lead-acid vs lithium lifetime cost and diesel savings.",
   "inLanguage": "en-IN",
   "datePublished": "2026-08-06",
-  "dateModified": "2026-11-10",
+  "dateModified": "2026-11-14",
   "author": {
     "@type": "Organization",
     "@id": "https://solarsense.dev/#organization",
@@ -143,6 +143,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "1.5 days is the practical minimum for most of India. Monsoon-heavy or remote/critical sites should use 2–3 days. More autonomy means a bigger, costlier battery bank, so it's a direct trade-off against budget."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which solar system is best for a farmhouse?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the grid. If the farmhouse has a domestic connection that mostly works and someone lives there, on-grid is the cheapest: in our calculator a Maharashtra farmhouse using 150 units a month pays ₹45,184 after subsidy for 1.0 kW, with about a 5.4-year payback. With long power cuts, a hybrid system adds a battery for essentials (₹1,03,984 for the same home). Off-grid (₹3,18,975 with 8.8 kWh of LFP battery) makes sense only where there is no grid line. For a weekend farmhouse, on-grid with net metering lets the weekday output count as credit instead of being lost once a battery is full."
       }
     }
   ]
@@ -282,6 +290,31 @@
     <li><strong>Higher maintenance</strong> than on-grid — a strong local service network matters more than a big brand name.</li>
   </ul>
 
+  <h2 id="farmhouse">Solar for a farmhouse: on-grid, hybrid or off-grid?</h2>
+  <p>A farmhouse is the classic off-grid example, but many have a grid connection, and then off-grid is usually the most expensive choice. Three questions decide it: is there a working grid connection, how long are the outages, and does someone live there or only visit at weekends?</p>
+  <ul>
+    <li><strong>Grid connection that mostly works, and you live there:</strong> go on-grid. The subsidy follows the connection: a farmhouse on a domestic (residential) connection can claim PM Surya Ghar like any other home; one on a commercial or agricultural connection cannot.</li>
+    <li><strong>Grid connection with long cuts:</strong> a <a href="hybrid.html">hybrid</a> system keeps the subsidy on the panels and adds a battery for lights, fans, the fridge and the water pump of the house.</li>
+    <li><strong>No grid line, or a new line would cost more than the battery:</strong> off-grid, sized with the battery formula above.</li>
+    <li><strong>Weekend or holiday farmhouse:</strong> the panels work all week while nobody is there. Off-grid, the battery is full by Monday and the rest of the week's output is lost. On-grid with net metering, the weekday units go to the grid as credit against the units you use at weekends and at night. Size it to the units on your bill, not to the size of the house.</li>
+    <li><strong>Farm pump on an agricultural connection:</strong> that is a separate connection and a separate scheme; see the <a href="solar-water-pump.html">solar water pump guide</a>.</li>
+  </ul>
+  <p>The calculator's results for a Maharashtra farmhouse lived in all year (bill mode, Mono PERC panels, ₹6.5 per unit, 5.5 sun hours; off-grid with an LFP battery for 1.5 days; hybrid is on-grid with "Add battery backup" on):</p>
+  <div class="tbl-wrap">
+    <table class="data">
+      <thead><tr><th>Monthly units</th><th>On-grid</th><th>Hybrid</th><th>Off-grid</th></tr></thead>
+      <tbody>
+        <tr><td>150: system</td><td>1.0 kW</td><td>1.0 kW + 2.1 kWh</td><td>1.3 kW + 8.8 kWh</td></tr>
+        <tr><td>150: you pay</td><td>₹45,184 after subsidy</td><td>₹1,03,984 after subsidy</td><td>₹3,18,975 (no subsidy)</td></tr>
+        <tr><td>150: payback</td><td>5.4 yrs</td><td>12.5 yrs</td><td>14.7 yrs</td></tr>
+        <tr><td>300: system</td><td>1.9 kW</td><td>1.9 kW + 4.1 kWh</td><td>2.5 kW + 17.6 kWh</td></tr>
+        <tr><td>300: you pay</td><td>₹78,650 after subsidy</td><td>₹1,93,450 after subsidy</td><td>₹6,32,368 (no subsidy)</td></tr>
+        <tr><td>300: payback</td><td>5.0 yrs</td><td>12.2 yrs</td><td>14.6 yrs</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The off-grid paybacks count the calculator's diesel allowance (₹9,855 a year at 150 units); without it, the 150-unit system takes about 27 years, longer than the panels last. So a farmhouse goes off-grid for power where there is no grid, not to save money. Two things matter more on a site nobody watches every day: dust on the panels (clean them every week or two in the dry season, or output falls) and theft, so ask for anti-theft fasteners on the mounting and a monitoring app that shows the day's units on your phone.</p>
+
   <h2>Off-grid solar FAQ</h2>
   <details class="faq"><summary>How much does an off-grid solar system cost in India?</summary><div class="faq-body">An October 2026 price survey put complete off-grid systems at about ₹2.8–3.4 lakh for 3 kW with a tubular lead-acid battery and ₹3.4–4.1 lakh with an LFP lithium battery, and ₹4.5–5.5 lakh or ₹5.4–6.5 lakh for 5 kW. There is no subsidy. The price depends mostly on how many kWh of battery is included: the calculator, which sizes the battery for 1.5 full days, puts a Delhi home using 300 units a month at 2.5 kW with 17.6 kWh of LFP for ₹6,32,368.</div></details>
   <details class="faq"><summary>What size battery do I need for an off-grid solar system?</summary><div class="faq-body">Multiply your daily use by the days of autonomy you want and divide by the battery's usable depth of discharge. A home using 150 units a month uses 5 units a day, so 1.5 days needs 5 × 1.5 ÷ 0.85 = 8.8 kWh of LFP, or 15 kWh of lead-acid at 50% depth. For 300 units a month it is 17.6 kWh of LFP.</div></details>
@@ -289,6 +322,7 @@
   <details class="faq"><summary>Can I get any subsidy for off-grid?</summary><div class="faq-body">Not the residential PM Surya Ghar subsidy — that requires grid connection and net metering. Certain state or sector-specific schemes (agriculture, remote electrification) may apply in some cases, but standard residential off-grid does not qualify.</div></details>
   <details class="faq"><summary>What's the difference from hybrid?</summary><div class="faq-body">A <a href="hybrid.html">hybrid system</a> stays grid-connected and keeps a small battery only for essentials during outages. Off-grid disconnects entirely and must carry your full load on batteries. Hybrid is cheaper and can still claim subsidy on the solar portion; off-grid is for places where the grid is absent or hopeless.</div></details>
   <details class="faq"><summary>How many days of battery backup do I need?</summary><div class="faq-body">1.5 days is the practical minimum for most of India. Monsoon-heavy or remote/critical sites should use 2–3 days. More autonomy means a bigger, costlier battery bank, so it's a direct trade-off against budget.</div></details>
+  <details class="faq"><summary>Which solar system is best for a farmhouse?</summary><div class="faq-body">It depends on the grid. If the farmhouse has a domestic connection that mostly works and someone lives there, on-grid is the cheapest: in our calculator a Maharashtra farmhouse using 150 units a month pays ₹45,184 after subsidy for 1.0 kW, with about a 5.4-year payback. With long power cuts, a <a href="hybrid.html">hybrid system</a> adds a battery for essentials (₹1,03,984 for the same home). Off-grid (₹3,18,975 with 8.8 kWh of LFP battery) makes sense only where there is no grid line. For a weekend farmhouse, on-grid with net metering lets the weekday output count as credit instead of being lost once a battery is full.</div></details>
 
   <h2>Related guides</h2>
   <ul>
