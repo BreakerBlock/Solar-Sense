@@ -159,6 +159,17 @@
 .cta-white:hover{background:#f0faf7;transform:translateY(-1px);text-decoration:none}
 .cta-ghost{display:inline-block;border:1px solid rgba(255,255,255,.4);color:#fff;padding:13px 24px;border-radius:10px;font-size:15px;font-weight:500;margin-left:12px;transition:all .2s}
 .cta-ghost:hover{background:rgba(255,255,255,.1);text-decoration:none}
+
+/* ── Guides by question ── */
+.gq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.gq-grid{grid-template-columns:1fr}}
+.gq-col{background:#fff;border:1px solid #e3e5e0;border-radius:14px;padding:20px 22px}
+.gq-col h3{font-size:15px;font-weight:700;margin:0 0 10px}
+.gq-col ul{list-style:none;margin:0;padding:0}
+.gq-col li{font-size:14px;line-height:1.45;padding:7px 0;border-top:1px solid #f0f1ee}
+.gq-col li:first-child{border-top:0;padding-top:0}
+.gq-col a{color:#0f6e56;font-weight:600}
+.gq-col li span{display:block;font-size:12px;color:#8b8f86;font-weight:400;margin-top:2px}
 </style>
 <script>window.SS_BASE="";</script>
 <script defer src="assets/site.js"></script>
@@ -207,7 +218,7 @@
         <div class="pcard-title">On-Grid Solar</div>
         <div class="pcard-desc">Stay connected to the grid. Cut your bill, export the surplus, claim the PM Surya Ghar subsidy. No batteries needed.</div>
         <div class="pcard-metas">
-          <div class="pcard-meta"><b>Cost:</b> ₹55–70k / kWp</div>
+          <div class="pcard-meta"><b>Cost:</b> ₹55–85k / kWp</div>
           <div class="pcard-meta"><b>Subsidy:</b> Up to ₹78,000</div>
           <div class="pcard-meta"><b>Backup:</b> None during outage</div>
         </div>
@@ -218,7 +229,7 @@
         <div class="pcard-title">Off-Grid Solar</div>
         <div class="pcard-desc">Fully independent with battery storage. Works through every blackout. For farmhouses, rural homes, outage-prone areas.</div>
         <div class="pcard-metas">
-          <div class="pcard-meta"><b>Cost:</b> ₹95–140k / kWp</div>
+          <div class="pcard-meta"><b>Cost:</b> ₹85k–1.4 lakh / kWp</div>
           <div class="pcard-meta"><b>Subsidy:</b> Not eligible</div>
           <div class="pcard-meta"><b>Backup:</b> Full autonomy</div>
         </div>
@@ -230,8 +241,8 @@
         <div class="pcard-desc">Spare terrace, warehouse roof, or idle plot? Oversize the system and sell everything you don't use back to the grid.</div>
         <div class="pcard-metas">
           <div class="pcard-meta"><b>Start from:</b> 500 sq ft</div>
-          <div class="pcard-meta"><b>Yield:</b> 10–16% annually</div>
-          <div class="pcard-meta"><b>Payback:</b> 5–7 years</div>
+          <div class="pcard-meta"><b>Yield:</b> 8–18% a year</div>
+          <div class="pcard-meta"><b>Payback:</b> 5.5–12 years</div>
         </div>
         <div class="pcard-arrow">→</div>
       </a>
@@ -333,6 +344,51 @@
         <h3>State Tariff Comparison</h3>
         <p>Domestic tariff, net-metering buyback rate, and DISCOM for all 22 states — with visual ranking.</p>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── GUIDES BY QUESTION ── -->
+<section class="section section-white">
+  <div class="section-inner">
+    <div class="section-label">Solar guides</div>
+    <h2 style="font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px">Answers to the questions people ask before going solar</h2>
+    <p style="font-size:16px;color:#5a5e56;margin-bottom:28px">Most guides work through examples with the calculator&#39;s own tariffs, subsidy slabs and formulas, so you can reproduce them with your own numbers.</p>
+    <div class="gq-grid">
+      <div class="gq-col">
+        <h3>What size do I need?</h3>
+        <ul>
+          <li><a href="guides/how-many-solar-panels.html">How many solar panels do I need?</a><span>From your bill or units to kW, panel count and roof space</span></li>
+          <li><a href="guides/solar-for-units-per-month.html">Solar for 200, 300 or 500 units a month</a><span>Size, cost after subsidy and payback by usage</span></li>
+          <li><a href="guides/solar-for-2bhk-3bhk-home.html">Solar for a 2 BHK or 3 BHK home</a><span>Typical units, kW and roof space by home size</span></li>
+          <li><a href="guides/1kw-2kw-solar-system.html">1 kW and 2 kW solar system</a><span>For small homes and low bills</span></li>
+          <li><a href="guides/3kw-vs-5kw-solar.html">3 kW vs 5 kW solar</a><span>Which size pays back better for your usage</span></li>
+          <li><a href="guides/5kw-solar-system.html">5 kW solar system</a> and <a href="guides/10kw-solar-system.html">10 kW solar system</a><span>Price, units, subsidy and payback by state</span></li>
+          <li><a href="guides/solar-inverter-size.html">Solar inverter size</a><span>Which inverter kW to pair with your panels</span></li>
+        </ul>
+      </div>
+      <div class="gq-col">
+        <h3>What will it cost and save?</h3>
+        <ul>
+          <li><a href="guides/solar-panel-cost.html">Solar panel cost in India (2026)</a><span>Price per kW and the 1–10 kW price list after subsidy</span></li>
+          <li><a href="guides/net-metering.html">Net metering and buyback rates by state</a><span>What your exported units earn, state by state</span></li>
+          <li><a href="guides/solar-generation-per-kw.html">Units a 1 kW system generates</a><span>Per day, month and year in each state</span></li>
+          <li><a href="guides/solar-loan-emi.html">Solar loan and EMI</a><span>PM Surya Ghar loan terms and EMI vs monthly savings</span></li>
+          <li><a href="guides/panel-types.html">Mono PERC vs TOPCon vs bifacial</a><span>Price per watt and what the extra yield is worth</span></li>
+          <li><a href="guides/hybrid.html">Hybrid solar and battery size</a><span>Backup hours and cost when the grid goes down</span></li>
+        </ul>
+      </div>
+      <div class="gq-col">
+        <h3>Solar for a specific need</h3>
+        <ul>
+          <li><a href="guides/solar-for-ac.html">Solar to run an AC</a><span>Units per AC and the kW to add</span></li>
+          <li><a href="guides/solar-for-ev-charging.html">Solar for EV charging at home</a><span>kW to add for an electric car or scooter</span></li>
+          <li><a href="guides/housing-society-solar.html">Solar for housing societies and RWAs</a><span>The ₹18,000/kW common-area subsidy, size and payback</span></li>
+          <li><a href="guides/commercial-rooftop-solar.html">Solar for shops, offices and factories</a><span>Sizing, depreciation and payback for businesses</span></li>
+          <li><a href="guides/solar-water-pump.html">Solar water pump (PM-KUSUM)</a><span>Scheme status, pump size by HP and solar vs diesel</span></li>
+          <li><a href="guides/off-grid.html#farmhouse">Solar for a farmhouse</a><span>On-grid, hybrid or off-grid by grid and use</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
