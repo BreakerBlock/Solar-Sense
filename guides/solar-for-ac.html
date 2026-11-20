@@ -70,7 +70,7 @@
   "description": "How many kW of rooftop solar a 1.5 ton AC needs in India, its units per hour and per month by star rating, cost and payback, running it at night, and solar for other home appliances.",
   "inLanguage": "en-IN",
   "datePublished": "2026-10-23",
-  "dateModified": "2026-11-01",
+  "dateModified": "2026-11-21",
   "author": {
     "@type": "Organization",
     "@id": "https://solarsense.dev/#organization",
@@ -175,7 +175,38 @@
     </table>
   </div>
   <p>Inputs: <a href="../tariffs/delhi.html">Delhi</a>, on-grid, Mono PERC panels, ₹7/kWh tariff and ₹3.50/kWh buyback (the calculator's Delhi defaults). Net cost is after the PM Surya Ghar subsidy: ₹45,000 for 1.5 kW, ₹54,000 for 1.8 kW, ₹67,200 for 2.4 kW and the ₹78,000 maximum at 3 kW. Payback is barely affected by AC type because the system grows with the load; what changes is the size of the investment and how much roof it needs (about 83 sq ft for 1.5 kW, 132 sq ft for 2.4 kW).</p>
-  <p>In a state with less sun the same AC needs more panels. At the 5-hour average a 5-star inverter AC at 8 hours a day needs 1.6 kW; in <a href="../tariffs/kerala.html">Kerala</a> or <a href="../tariffs/west-bengal.html">West Bengal</a> (4.5 h) it needs 1.8 kW. The <a href="solar-generation-per-kw.html">solar generation per kW</a> guide has every state's sun hours.</p>
+  <p>In a state with less sun the same AC needs more panels. At the 5-hour average a 5-star inverter AC at 8 hours a day needs 1.6 kW; in <a href="../tariffs/kerala.html">Kerala</a> or <a href="../tariffs/west-bengal.html">West Bengal</a> (4.5 h) it needs 1.8 kW. The <a href="solar-generation-per-kw.html">solar generation per kW</a> guide has every state's sun hours, and the <a href="#ac-solar-by-state">table below</a> gives the size for each state.</p>
+  <h3 id="ac-solar-by-state">Solar for a 1.5 ton AC in each state</h3>
+  <p>The same calculator rule (daily units ÷ the state's peak sun hours, rounded up to the next 0.1 kW) for a 1.5 ton AC run 8 hours a day, using each state's sun hours from the calculator. Size for your yearly average, not the summer peak, as explained below, and add the AC to the rest of your home's use rather than sizing it on its own.</p>
+  <div class="tbl-wrap">
+    <table class="data">
+      <thead><tr><th>State</th><th>Peak sun hours</th><th>5-star inverter (8 units/day)</th><th>3-star inverter (9.6 units/day)</th><th>Non-inverter (12.8 units/day)</th></tr></thead>
+      <tbody>
+        <tr><td><a href="../tariffs/andhra-pradesh.html">Andhra Pradesh</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/assam.html">Assam</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/bihar.html">Bihar</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/chhattisgarh.html">Chhattisgarh</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/delhi.html">Delhi</a></td><td>5.5</td><td>1.5 kW</td><td>1.8 kW</td><td>2.4 kW</td></tr>
+        <tr><td><a href="../tariffs/goa.html">Goa</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/gujarat.html">Gujarat</a></td><td>5.8</td><td>1.4 kW</td><td>1.7 kW</td><td>2.3 kW</td></tr>
+        <tr><td><a href="../tariffs/haryana.html">Haryana</a></td><td>5.5</td><td>1.5 kW</td><td>1.8 kW</td><td>2.4 kW</td></tr>
+        <tr><td><a href="../tariffs/himachal-pradesh.html">Himachal Pradesh</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/jharkhand.html">Jharkhand</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/karnataka.html">Karnataka</a></td><td>5.3</td><td>1.6 kW</td><td>1.9 kW</td><td>2.5 kW</td></tr>
+        <tr><td><a href="../tariffs/kerala.html">Kerala</a></td><td>4.5</td><td>1.8 kW</td><td>2.2 kW</td><td>2.9 kW</td></tr>
+        <tr><td><a href="../tariffs/madhya-pradesh.html">Madhya Pradesh</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/maharashtra.html">Maharashtra</a></td><td>5.5</td><td>1.5 kW</td><td>1.8 kW</td><td>2.4 kW</td></tr>
+        <tr><td><a href="../tariffs/odisha.html">Odisha</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/punjab.html">Punjab</a></td><td>5.2</td><td>1.6 kW</td><td>1.9 kW</td><td>2.5 kW</td></tr>
+        <tr><td><a href="../tariffs/rajasthan.html">Rajasthan</a></td><td>6.5</td><td>1.3 kW</td><td>1.5 kW</td><td>2.0 kW</td></tr>
+        <tr><td><a href="../tariffs/tamil-nadu.html">Tamil Nadu</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/telangana.html">Telangana</a></td><td>5.4</td><td>1.5 kW</td><td>1.8 kW</td><td>2.4 kW</td></tr>
+        <tr><td><a href="../tariffs/uttar-pradesh.html">Uttar Pradesh</a></td><td>5.3</td><td>1.6 kW</td><td>1.9 kW</td><td>2.5 kW</td></tr>
+        <tr><td><a href="../tariffs/uttarakhand.html">Uttarakhand</a></td><td>5.0</td><td>1.6 kW</td><td>2.0 kW</td><td>2.6 kW</td></tr>
+        <tr><td><a href="../tariffs/west-bengal.html">West Bengal</a></td><td>4.5</td><td>1.8 kW</td><td>2.2 kW</td><td>2.9 kW</td></tr>
+      </tbody>
+    </table>
+  </div>
   <div class="info i-b"><strong>One honest caveat:</strong> dividing by peak sun hours, as the calculator does, covers about 78–80% of the AC's yearly units once real-world losses are counted (heat, dust, wiring and inverter losses take about 22% off). To cover all of it, divide the size by 0.78: a 5-star AC at 8 hours a day in Delhi then needs about 1.9 kW instead of 1.5 kW.</div>
 
   <h2>How many hours a day you run it matters most</h2>
