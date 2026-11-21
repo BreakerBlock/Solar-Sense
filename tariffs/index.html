@@ -17,14 +17,14 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <title>State Electricity Tariffs & Solar Buyback Rates in India (2026) | SolarSense</title>
-<meta name="description" content="Compare domestic electricity tariffs and solar net-metering buyback rates across 22 Indian states. See which states give the fastest solar payback.">
+<meta name="description" content="Compare electricity tariffs, solar buyback rates and rooftop solar payback in 22 Indian states: 3 kW units, yearly saving and payback for each state from the solar calculator, plus FAQ.">
 <link rel="canonical" href="https://solarsense.dev/tariffs/index.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SolarSense India">
 <meta property="og:locale" content="en_IN">
 <meta property="og:url" content="https://solarsense.dev/tariffs/index.html">
 <meta property="og:title" content="State Electricity Tariffs &amp; Solar Buyback Rates in India (2026)">
-<meta property="og:description" content="Compare domestic electricity tariffs and solar net-metering buyback rates across 22 Indian states. See which states give the fastest solar payback.">
+<meta property="og:description" content="Compare electricity tariffs, solar buyback rates and rooftop solar payback in 22 Indian states: 3 kW units, yearly saving and payback for each state from the solar calculator, plus FAQ.">
 <meta property="og:image" content="https://solarsense.dev/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://solarsense.dev/assets/og-image.png">
 <meta name="twitter:title" content="State Electricity Tariffs &amp; Solar Buyback Rates in India (2026)">
-<meta name="twitter:description" content="Compare domestic electricity tariffs and solar net-metering buyback rates across 22 Indian states. See which states give the fastest solar payback.">
+<meta name="twitter:description" content="Compare electricity tariffs, solar buyback rates and rooftop solar payback in 22 Indian states: 3 kW units, yearly saving and payback for each state from the solar calculator, plus FAQ.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -49,6 +49,55 @@
       "position": 2,
       "name": "State Tariffs",
       "item": "https://solarsense.dev/tariffs/index.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://solarsense.dev/tariffs/index.html#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Which state has the fastest rooftop solar payback?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the solar calculator, Rajasthan: a 3 kW on-grid system there makes about 5,548 units a year at 6.5 peak sun hours and pays back in about 4.5 years. Delhi (4.8 years), Haryana (5.2), Maharashtra (5.3) and Punjab (5.4) follow. The slowest is Goa at about 9.3 years, because its ₹3.9 tariff is the lowest of the 22 states, so each solar unit saves less."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the electricity tariff or the buyback rate matter more for payback?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tariff, for most homes. The calculator assumes about 65% of solar units are used at home, each saving the full tariff, and only 35% exported at the buyback rate. Haryana has the lowest buyback rate of the 22 states (₹2) yet the third-fastest payback, because its tariff is ₹7.2. West Bengal gets less sun than Bihar (4.5 against 5 peak sun hours) but pays back sooner (5.9 against 6.1 years) because its tariff is ₹7.5 against ₹6.1."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the solar subsidy the same in every state?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The central PM Surya Ghar subsidy is the same in most states: ₹30,000 per kW for the first 2 kW and ₹18,000 for the third, up to ₹78,000. Special category states and UTs, including Assam and the other North-Eastern states, Himachal Pradesh and Uttarakhand, get 10% more, up to ₹85,800. Some states also add their own top-up, such as Delhi, Uttar Pradesh, Gujarat, Maharashtra and Rajasthan (see state top-ups). The calculator includes only the general central subsidy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How up to date are these tariff and buyback rates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They are indicative rates from published DISCOM tariffs as of January 2026, and the calculator uses the same figures. State commissions revise tariffs every year, and a few have since set new rooftop solar rates, such as Maharashtra's ₹2.82 per unit for FY2026-27 and Karnataka's 2026 rates for new systems, which the net metering guide covers. Check your latest bill or your DISCOM's current tariff order before deciding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use the solar calculator for my state?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open your state's page from the list above and use its calculator button, or choose your state in the calculator's first step. The calculator then applies that state's tariff, buyback rate and peak sun hours to your bill or appliance list and shows the system size, cost after subsidy, yearly saving and payback."
+      }
     }
   ]
 }
@@ -135,6 +184,13 @@ tr:hover td{background:#F6F7F5}
 .td-high{color:#B5761A;font-weight:700}
 .td-mid{color:#0F6E56;font-weight:600}
 .td-low{color:#1A5FA3}
+/* PAYBACK + FAQ */
+.section-p{font-size:14px;color:#5A5E56;max-width:760px}
+details.faq{background:#fff;border:1px solid #E3E5E0;border-radius:10px;margin-bottom:8px}
+details.faq summary{cursor:pointer;padding:13px 16px;font-weight:600;font-size:14.5px;color:#191B17}
+details.faq .faq-body{padding:0 16px 14px;font-size:14px;color:#5A5E56}
+details.faq + .ctaband{margin-top:32px}
+
 
 /* CTA */
 .ctaband{background:#E8F5EF;border:1px solid #cbe6da;border-radius:16px;padding:32px;text-align:center;margin-bottom:24px}
@@ -295,6 +351,42 @@ footer{background:#fff;border-top:1px solid #E3E5E0;margin-top:40px}
     </table>
   </div>
 
+  <div class="section-label" id="payback-by-state" style="scroll-margin-top:72px">Payback by state</div>
+  <div class="section-title" style="margin-bottom:6px">Rooftop solar payback in all 22 states</div>
+  <p class="section-p">Each row is the solar calculator's own output for that state, the same figures shown on the state's page. A 3 kW on-grid system costs the same everywhere in the calculator (₹2,09,552 including the net meter, ₹1,31,552 after the ₹78,000 PM Surya Ghar subsidy), so the differences come only from sunshine, tariff and buyback rate. It assumes 65% of the units are used at home and the rest exported. The last column is the size and payback for a home using 300 units a month (see <a href="../guides/solar-for-units-per-month.html">solar for 200, 300 or 500 units a month</a>). Tariffs are the January 2026 figures above and state top-up subsidies are not included.</p>
+  <div class="tbl-wrap" style="margin-top:12px">
+    <table>
+      <thead>
+        <tr><th>State</th><th>Peak sun hours</th><th>3 kW: units a year</th><th>3 kW: benefit a year</th><th>3 kW payback</th><th>300 units a month: size, payback</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-state"><a href="rajasthan.html">Rajasthan</a></td><td>6.5</td><td>5,548</td><td>₹28,974</td><td><strong>4.5 yrs</strong></td><td>1.6 kW, 4.4 yrs</td></tr>
+        <tr><td class="td-state"><a href="delhi.html">Delhi</a></td><td>5.5</td><td>4,709</td><td>₹27,195</td><td><strong>4.8 yrs</strong></td><td>1.9 kW, 4.6 yrs</td></tr>
+        <tr><td class="td-state"><a href="haryana.html">Haryana</a></td><td>5.5</td><td>4,709</td><td>₹25,335</td><td><strong>5.2 yrs</strong></td><td>1.9 kW, 4.9 yrs</td></tr>
+        <tr><td class="td-state"><a href="maharashtra.html">Maharashtra</a></td><td>5.5</td><td>4,709</td><td>₹24,940</td><td><strong>5.3 yrs</strong></td><td>1.9 kW, 5.0 yrs</td></tr>
+        <tr><td class="td-state"><a href="punjab.html">Punjab</a></td><td>5.2</td><td>4,453</td><td>₹24,156</td><td><strong>5.4 yrs</strong></td><td>2 kW, 5.1 yrs</td></tr>
+        <tr><td class="td-state"><a href="karnataka.html">Karnataka</a></td><td>5.3</td><td>4,526</td><td>₹23,546</td><td><strong>5.6 yrs</strong></td><td>1.9 kW, 5.2 yrs</td></tr>
+        <tr><td class="td-state"><a href="uttar-pradesh.html">Uttar Pradesh</a></td><td>5.3</td><td>4,526</td><td>₹23,083</td><td><strong>5.7 yrs</strong></td><td>1.9 kW, 5.3 yrs</td></tr>
+        <tr><td class="td-state"><a href="west-bengal.html">West Bengal</a></td><td>4.5</td><td>3,833</td><td>₹22,374</td><td><strong>5.9 yrs</strong></td><td>2.3 kW, 5.6 yrs</td></tr>
+        <tr><td class="td-state"><a href="bihar.html">Bihar</a></td><td>5</td><td>4,271</td><td>₹21,419</td><td><strong>6.1 yrs</strong></td><td>2 kW, 5.8 yrs</td></tr>
+        <tr><td class="td-state"><a href="gujarat.html">Gujarat</a></td><td>5.8</td><td>4,964</td><td>₹21,657</td><td><strong>6.1 yrs</strong></td><td>1.8 kW, 5.8 yrs</td></tr>
+        <tr><td class="td-state"><a href="telangana.html">Telangana</a></td><td>5.4</td><td>4,599</td><td>₹19,867</td><td><strong>6.6 yrs</strong></td><td>1.9 kW, 6.2 yrs</td></tr>
+        <tr><td class="td-state"><a href="jharkhand.html">Jharkhand</a></td><td>5</td><td>4,271</td><td>₹19,454</td><td><strong>6.8 yrs</strong></td><td>2 kW, 6.4 yrs</td></tr>
+        <tr><td class="td-state"><a href="odisha.html">Odisha</a></td><td>5</td><td>4,271</td><td>₹19,454</td><td><strong>6.8 yrs</strong></td><td>2 kW, 6.4 yrs</td></tr>
+        <tr><td class="td-state"><a href="uttarakhand.html">Uttarakhand</a>*</td><td>5</td><td>4,271</td><td>₹18,877</td><td><strong>7.0 yrs</strong></td><td>2 kW, 6.5 yrs</td></tr>
+        <tr><td class="td-state"><a href="assam.html">Assam</a>*</td><td>5</td><td>4,271</td><td>₹18,621</td><td><strong>7.1 yrs</strong></td><td>2 kW, 6.6 yrs</td></tr>
+        <tr><td class="td-state"><a href="kerala.html">Kerala</a></td><td>4.5</td><td>3,833</td><td>₹18,474</td><td><strong>7.1 yrs</strong></td><td>2.3 kW, 6.8 yrs</td></tr>
+        <tr><td class="td-state"><a href="madhya-pradesh.html">Madhya Pradesh</a></td><td>5</td><td>4,271</td><td>₹18,120</td><td><strong>7.3 yrs</strong></td><td>2 kW, 6.8 yrs</td></tr>
+        <tr><td class="td-state"><a href="chhattisgarh.html">Chhattisgarh</a></td><td>5</td><td>4,271</td><td>₹17,212</td><td><strong>7.6 yrs</strong></td><td>2 kW, 7.2 yrs</td></tr>
+        <tr><td class="td-state"><a href="tamil-nadu.html">Tamil Nadu</a></td><td>5</td><td>4,271</td><td>₹17,244</td><td><strong>7.6 yrs</strong></td><td>2 kW, 7.2 yrs</td></tr>
+        <tr><td class="td-state"><a href="andhra-pradesh.html">Andhra Pradesh</a></td><td>5</td><td>4,271</td><td>₹16,230</td><td><strong>8.1 yrs</strong></td><td>2 kW, 7.6 yrs</td></tr>
+        <tr><td class="td-state"><a href="himachal-pradesh.html">Himachal Pradesh</a>*</td><td>5</td><td>4,271</td><td>₹15,120</td><td><strong>8.7 yrs</strong></td><td>2 kW, 8.2 yrs</td></tr>
+        <tr><td class="td-state"><a href="goa.html">Goa</a></td><td>5</td><td>4,271</td><td>₹14,115</td><td><strong>9.3 yrs</strong></td><td>2 kW, 8.8 yrs</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="section-p" style="margin-top:-20px;margin-bottom:32px">* Special category state under PM Surya Ghar: the central subsidy is 10% higher (₹85,800 for 3 kW), so the net cost is about ₹7,800 lower and payback a little shorter than the calculator shows. See <a href="../subsidy.html#special-category">special category states</a>.</p>
+
   <div class="section-label">Use these numbers</div>
   <div class="section-title" style="margin-bottom:12px">Solar guides that use your state's tariff</div>
   <ul class="guide-list">
@@ -311,6 +403,14 @@ footer{background:#fff;border-top:1px solid #E3E5E0;margin-top:40px}
     <li><a href="../guides/commercial-rooftop-solar.html">Commercial rooftop solar</a>: sizing, depreciation and payback for shops, offices and factories, with Maharashtra worked examples and Karnataka's 2026 business export rate</li>
     <li><a href="../subsidy.html">PM Surya Ghar subsidy</a>: slabs, eligibility and how to apply</li>
   </ul>
+
+  <div class="section-label" id="faq" style="scroll-margin-top:72px">FAQ</div>
+  <h2 class="section-title" style="margin-bottom:14px">Solar by state: frequently asked questions</h2>
+  <details class="faq"><summary>Which state has the fastest rooftop solar payback?</summary><div class="faq-body">In the solar calculator, Rajasthan: a 3 kW on-grid system there makes about 5,548 units a year at 6.5 peak sun hours and pays back in about 4.5 years. Delhi (4.8 years), Haryana (5.2), Maharashtra (5.3) and Punjab (5.4) follow. The slowest is Goa at about 9.3 years, because its ₹3.9 tariff is the lowest of the 22 states, so each solar unit saves less.</div></details>
+  <details class="faq"><summary>Does the electricity tariff or the buyback rate matter more for payback?</summary><div class="faq-body">The tariff, for most homes. The calculator assumes about 65% of solar units are used at home, each saving the full tariff, and only 35% exported at the buyback rate. Haryana has the lowest buyback rate of the 22 states (₹2) yet the third-fastest payback, because its tariff is ₹7.2. West Bengal gets less sun than Bihar (4.5 against 5 peak sun hours) but pays back sooner (5.9 against 6.1 years) because its tariff is ₹7.5 against ₹6.1.</div></details>
+  <details class="faq"><summary>Is the solar subsidy the same in every state?</summary><div class="faq-body">The central PM Surya Ghar subsidy is the same in most states: ₹30,000 per kW for the first 2 kW and ₹18,000 for the third, up to ₹78,000. <a href="../subsidy.html#special-category">Special category states and UTs</a>, including Assam and the other North-Eastern states, Himachal Pradesh and Uttarakhand, get 10% more, up to ₹85,800. Some states also add their own top-up, such as Delhi, Uttar Pradesh, Gujarat, Maharashtra and Rajasthan (see <a href="../subsidy.html#state-top-ups">state top-ups</a>). The calculator includes only the general central subsidy.</div></details>
+  <details class="faq"><summary>How up to date are these tariff and buyback rates?</summary><div class="faq-body">They are indicative rates from published DISCOM tariffs as of January 2026, and the calculator uses the same figures. State commissions revise tariffs every year, and a few have since set new rooftop solar rates, such as Maharashtra's ₹2.82 per unit for FY2026-27 and Karnataka's 2026 rates for new systems, which the <a href="../guides/net-metering.html#buyback-by-state">net metering guide</a> covers. Check your latest bill or your DISCOM's current tariff order before deciding.</div></details>
+  <details class="faq"><summary>How do I use the solar calculator for my state?</summary><div class="faq-body">Open your state's page from the list above and use its calculator button, or choose your state in the calculator's first step. The calculator then applies that state's tariff, buyback rate and peak sun hours to your bill or appliance list and shows the system size, cost after subsidy, yearly saving and payback.</div></details>
 
   <div class="ctaband">
     <h2>See your exact savings</h2>

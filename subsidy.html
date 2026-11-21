@@ -64,7 +64,7 @@
   "description": "PM Surya Ghar solar subsidy 2026: exact slabs for 1–10 kW, state top-ups in Delhi, UP, Gujarat, Maharashtra and Rajasthan, eligibility and how to apply.",
   "inLanguage": "en-IN",
   "datePublished": "2026-08-06",
-  "dateModified": "2026-11-19",
+  "dateModified": "2026-11-22",
   "author": {
     "@type": "Organization",
     "@id": "https://solarsense.dev/#organization",
@@ -121,6 +121,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "You still get ₹78,000 — the same as a 3 kW system. No additional central subsidy is available above 3 kW. Larger systems fully qualify for net metering and you can sell surplus to the grid, but the extra capacity is self-funded."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the solar subsidy higher in the North-East and hill states?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, by 10%. In PM Surya Ghar's special category states and UTs (Uttarakhand, Himachal Pradesh, Jammu & Kashmir, Ladakh, the North-Eastern states including Sikkim, Andaman & Nicobar and Lakshadweep) the central subsidy is ₹33,000 per kW for the first 2 kW and ₹19,800 for the third kW, up to ₹85,800 for 3 kW or more, against ₹78,000 elsewhere. Housing societies there get ₹19,800 per kW for common facilities. The calculator uses the general rates, so it understates the subsidy by up to ₹7,800 in these states; see special category states."
       }
     },
     {
@@ -216,11 +224,11 @@ table.data tr:last-child td{border-bottom:none}
   </div>
 
   <div class="info i-g">
-    <strong>Reading this table:</strong> ₹30,000/kW for the first 2 kW. ₹18,000 for the 3rd kW. That's it — ₹78,000 is the hard ceiling. Any system larger than 3 kW gets the same ₹78,000. Some states (Delhi, Uttar Pradesh, Gujarat, Maharashtra, Rajasthan) add their own top-up on top of the central amount — see <a href="#state-top-ups">state solar subsidy top-ups</a> below.
+    <strong>Reading this table:</strong> ₹30,000/kW for the first 2 kW. ₹18,000 for the 3rd kW. That's it — ₹78,000 is the hard ceiling. Any system larger than 3 kW gets the same ₹78,000. The North-East and hill states get 10% more (₹85,800 at 3 kW; see <a href="#special-category">special category states</a> below). Some states (Delhi, Uttar Pradesh, Gujarat, Maharashtra, Rajasthan) add their own top-up on top of the central amount — see <a href="#state-top-ups">state solar subsidy top-ups</a> below.
   </div>
 
   <h2>Solar subsidy calculator: how your amount is worked out</h2>
-  <p>The central subsidy depends only on the capacity of your grid-connected rooftop system. It does not change with the price you pay, the panel brand or your state. The slabs are applied pro rata, so part-kilowatt sizes get a proportional amount. This is the same formula our <a href="calculator.html">solar subsidy calculator</a> uses:</p>
+  <p>The central subsidy depends only on the capacity of your grid-connected rooftop system. It does not change with the price you pay or the panel brand, and it is the same in every state except the special category states below, which get 10% more. The slabs are applied pro rata, so part-kilowatt sizes get a proportional amount. This is the same formula our <a href="calculator.html">solar subsidy calculator</a> uses:</p>
   <ul>
     <li><strong>Up to 2 kW:</strong> capacity × ₹30,000</li>
     <li><strong>Between 2 and 3 kW:</strong> ₹60,000 + (capacity − 2) × ₹18,000</li>
@@ -240,6 +248,20 @@ table.data tr:last-child td{border-bottom:none}
     </table>
   </div>
   <p>The last column is the useful one. Support per kilowatt is highest up to 2 kW and falls quickly beyond 3 kW, so the subsidy covers a large share of a small system and only a small share of a big one. That doesn't mean you should stop at 3 kW: size the system to your electricity use, because unused capacity only earns your DISCOM's lower buyback rate. The <a href="calculator.html">rooftop solar calculator</a> sizes the system from your bill or appliances, applies the subsidy above, and shows your net cost and payback using your <a href="tariffs/index.html">state's electricity tariff</a>.</p>
+  <h3 id="special-category" style="scroll-margin-top:72px">Higher subsidy in special category states (North-East and hill states)</h3>
+  <p>PM Surya Ghar pays 10% more in its <strong>special category states and UTs</strong>: Uttarakhand, Himachal Pradesh, Jammu &amp; Kashmir, Ladakh, the North-Eastern states including Sikkim, Andaman &amp; Nicobar Islands and Lakshadweep. There a home gets <strong>₹33,000 per kW</strong> for the first 2 kW and <strong>₹19,800</strong> for the third kW, and a housing society or RWA gets ₹19,800 per kW for common facilities instead of ₹18,000. The same pro-rata rule applies:</p>
+  <div class="tbl-wrap">
+    <table class="data">
+      <thead><tr><th>System size</th><th>General states</th><th>Special category states</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>1 kW</td><td>₹30,000</td><td><strong>₹33,000</strong></td><td>+₹3,000</td></tr>
+        <tr><td>2 kW</td><td>₹60,000</td><td><strong>₹66,000</strong></td><td>+₹6,000</td></tr>
+        <tr><td>2.5 kW</td><td>₹69,000</td><td><strong>₹75,900</strong></td><td>+₹6,900</td></tr>
+        <tr><td>3 kW or more</td><td>₹78,000</td><td><strong>₹85,800</strong></td><td>+₹7,800</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The calculator applies the general rates in every state, so for homes in <a href="tariffs/assam.html">Assam</a>, <a href="tariffs/himachal-pradesh.html">Himachal Pradesh</a> and <a href="tariffs/uttarakhand.html">Uttarakhand</a> (the special category states it covers) its subsidy is up to ₹7,800 lower than you will actually get, and its net cost and payback slightly pessimistic. Rates are from MNRE's PM Surya Ghar operational guidelines (CFA table and the list of special category states).</p>
   <p>Remember the subsidy is paid after commissioning, so you (or your loan) cover the full cost first; our <a href="guides/solar-loan-emi.html">solar loan and EMI guide</a> shows how to put the subsidy towards the loan when it arrives. State top-ups, where they exist, are added separately and are not included in the calculator's figure.</p>
 
   <h2 id="state-top-ups" style="scroll-margin-top:72px">State solar subsidy top-ups (November 2026)</h2>
@@ -299,6 +321,7 @@ table.data tr:last-child td{border-bottom:none}
   <details class="faq"><summary>Why does the calculator show more than ₹78,000?</summary><div class="faq-body">It shouldn't — we've corrected this. The PM Surya Ghar central subsidy is capped at ₹78,000 for any system 3 kW or larger. Some earlier versions of the calculator incorrectly applied an additional ₹9,000/kW above 3 kW — that figure is wrong. The correct answer is ₹78,000 hard cap.</div></details>
   <details class="faq"><summary>Can I get the subsidy on a hybrid system?</summary><div class="faq-body">Yes, on the solar portion only — provided the system is grid-connected, has export capability, and a net meter is installed. The battery is never subsidised. Rules vary by DISCOM; confirm before assuming.</div></details>
   <details class="faq"><summary>What if my system is larger than 3 kW?</summary><div class="faq-body">You still get ₹78,000 — the same as a 3 kW system. No additional central subsidy is available above 3 kW. Larger systems fully qualify for net metering and you can <a href="guides/surplus-space.html">sell surplus to the grid</a>, but the extra capacity is self-funded.</div></details>
+  <details class="faq"><summary>Is the solar subsidy higher in the North-East and hill states?</summary><div class="faq-body">Yes, by 10%. In PM Surya Ghar's special category states and UTs (Uttarakhand, Himachal Pradesh, Jammu &amp; Kashmir, Ladakh, the North-Eastern states including Sikkim, Andaman &amp; Nicobar and Lakshadweep) the central subsidy is ₹33,000 per kW for the first 2 kW and ₹19,800 for the third kW, up to ₹85,800 for 3 kW or more, against ₹78,000 elsewhere. Housing societies there get ₹19,800 per kW for common facilities. The calculator uses the general rates, so it understates the subsidy by up to ₹7,800 in these states; see <a href="#special-category">special category states</a>.</div></details>
   <details class="faq"><summary>Are there state top-up subsidies?</summary><div class="faq-body">Yes, a few states add their own subsidy on top of the central amount. As of November 2026: Delhi gives up to ₹26,000 per kW (capped at ₹78,000), Uttar Pradesh ₹15,000 per kW (capped at ₹30,000), Gujarat covers the cost above a 10% household share (5% for SC/ST) for systems up to 2.18 kW, Maharashtra's SMART scheme gives ₹10,000–17,500 for 1 kW systems in homes using under 100 units a month, and Rajasthan pays ₹17,000 to households in its 150-unit free electricity scheme. The calculator includes only the central subsidy. See <a href="#state-top-ups">state solar subsidy top-ups</a> for the conditions.</div></details>
   <details class="faq"><summary>Is rooftop solar free in Delhi?</summary><div class="faq-body">For many homes, yes. Under the September 2026 amendment to the Delhi Solar Energy Policy, residential consumers who averaged up to 400 units a month can get a system of up to 3 kW at no cost through the government's utility-led route, with the central and state subsidies and any extra state support covering the price. Homes above 400 units, or those installing through their own vendor, can still get up to ₹78,000 central plus up to ₹78,000 state subsidy for 3 kW. Check your eligibility on the Delhi solar portal or with BSES / Tata Power Delhi.</div></details>
 
