@@ -64,7 +64,7 @@
   "description": "PM Surya Ghar solar subsidy calculator 2026: exact slabs for 1–10 kW, state top-ups in Delhi, UP, Gujarat, Maharashtra and Rajasthan, eligibility and how to apply.",
   "inLanguage": "en-IN",
   "datePublished": "2026-08-06",
-  "dateModified": "2026-11-25",
+  "dateModified": "2026-11-26",
   "author": {
     "@type": "Organization",
     "@id": "https://solarsense.dev/#organization",
@@ -121,6 +121,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes, on the solar portion only — provided the system is grid-connected, has export capability, and a net meter is installed. The battery is never subsidised. Rules vary by DISCOM; confirm before assuming."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get the PM Surya Ghar subsidy for a solar water pump?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. PM Surya Ghar covers rooftop solar on residential electricity connections only, so a farm or irrigation pump does not qualify. Solar pumps had their own scheme, PM-KUSUM, whose first phase ended on 31 March 2026; PM-KUSUM 2.0 has been proposed but its subsidy rates still await government approval as of November 2026. A pump that runs off your home's own connection, such as an overhead-tank pump, is simply part of your household use, and rooftop solar sized to that use is covered by PM Surya Ghar in the normal way. See the solar water pump guide for pump sizes, 2026 prices and state schemes."
       }
     },
     {
@@ -326,14 +334,14 @@ table.data tr:last-child td{border-bottom:none}
   </ul>
 
   <div class="info i-a">
-    <strong>Not eligible:</strong> Off-grid systems (see <a href="guides/off-grid.html">off-grid solar cost without a subsidy</a>), commercial/industrial connections (businesses can claim accelerated depreciation instead; see <a href="guides/commercial-rooftop-solar.html">commercial rooftop solar</a>), and the housing society common-area scheme (separate RWA rates apply: ₹18,000 per kW, see <a href="guides/housing-society-solar.html">solar for housing societies</a>). The subsidy is per household — not per system.
+    <strong>Not eligible:</strong> Off-grid systems (see <a href="guides/off-grid.html">off-grid solar cost without a subsidy</a>), commercial/industrial connections (businesses can claim accelerated depreciation instead; see <a href="guides/commercial-rooftop-solar.html">commercial rooftop solar</a>), and the housing society common-area scheme (separate RWA rates apply: ₹18,000 per kW, see <a href="guides/housing-society-solar.html">solar for housing societies</a>), and farm pump connections (solar pumps for irrigation came under PM-KUSUM instead; see <a href="guides/solar-water-pump.html">solar water pump and PM-KUSUM</a>). The subsidy is per household — not per system.
   </div>
 
   <h2>How to apply — step by step</h2>
   <div class="step-list">
     <div class="step-item"><div class="step-num">1</div><div class="step-text"><strong>Register on the portal</strong>Go to pmsuryaghar.gov.in. Enter your electricity consumer number and mobile number. Verification is via OTP.</div></div>
     <div class="step-item"><div class="step-num">2</div><div class="step-text"><strong>Apply for feasibility</strong>Submit an application to your DISCOM for rooftop solar feasibility approval. They check grid capacity and technical viability.</div></div>
-    <div class="step-item"><div class="step-num">3</div><div class="step-text"><strong>Get the system installed</strong>Use a DISCOM-empanelled installer. They must use DCR panels on the ALMM list (inverters are not on an ALMM list; see <a href="guides/panel-types.html">panel types</a> for DCR vs non-DCR). Verify empanelment before signing anything.</div></div>
+    <div class="step-item"><div class="step-num">3</div><div class="step-text"><strong>Get the system installed</strong>Use a DISCOM-empanelled installer. They must use DCR panels on the ALMM list (inverters are not on an ALMM list; see <a href="guides/panel-types.html">panel types</a> for DCR vs non-DCR). The subsidy is worked out on the panel kW, not the inverter kW, so a bigger inverter does not raise it (see <a href="guides/solar-inverter-size.html#sanctioned-load">solar inverter size</a>). Verify empanelment before signing anything.</div></div>
     <div class="step-item"><div class="step-num">4</div><div class="step-text"><strong>Apply for net meter</strong>Your installer submits the net metering application. The DISCOM installs a bi-directional meter — typically free of charge.</div></div>
     <div class="step-item"><div class="step-num">5</div><div class="step-text"><strong>Commissioning and inspection</strong>DISCOM inspects and commissions the system. They generate a commissioning certificate.</div></div>
     <div class="step-item"><div class="step-num">6</div><div class="step-text"><strong>Submit bank details, receive subsidy</strong>Enter your bank account on the portal. The central subsidy is credited via Direct Benefit Transfer — typically within 30–45 days of commissioning.</div></div>
@@ -348,6 +356,7 @@ table.data tr:last-child td{border-bottom:none}
   <details class="faq"><summary>Does the subsidy come before or after I pay?</summary><div class="faq-body">After. You pay the full system cost upfront (or finance it), and the subsidy lands in your bank account after commissioning and inspection — typically within 30–45 days. Budget for the gross cost and treat the subsidy as a reimbursement.</div></details>
   <details class="faq"><summary>Why does the calculator show more than ₹78,000?</summary><div class="faq-body">It shouldn't — we've corrected this. The PM Surya Ghar central subsidy is capped at ₹78,000 for any system 3 kW or larger. Some earlier versions of the calculator incorrectly applied an additional ₹9,000/kW above 3 kW — that figure is wrong. The correct answer is ₹78,000 hard cap.</div></details>
   <details class="faq"><summary>Can I get the subsidy on a hybrid system?</summary><div class="faq-body">Yes, on the solar portion only — provided the system is grid-connected, has export capability, and a net meter is installed. The battery is never subsidised. Rules vary by DISCOM; confirm before assuming.</div></details>
+  <details class="faq"><summary>Can I get the PM Surya Ghar subsidy for a solar water pump?</summary><div class="faq-body">No. PM Surya Ghar covers rooftop solar on residential electricity connections only, so a farm or irrigation pump does not qualify. Solar pumps had their own scheme, PM-KUSUM, whose first phase ended on 31 March 2026; PM-KUSUM 2.0 has been proposed but its subsidy rates still await government approval as of November 2026. A pump that runs off your home's own connection, such as an overhead-tank pump, is simply part of your household use, and rooftop solar sized to that use is covered by PM Surya Ghar in the normal way. See the <a href="guides/solar-water-pump.html">solar water pump guide</a> for pump sizes, 2026 prices and state schemes.</div></details>
   <details class="faq"><summary>What if my system is larger than 3 kW?</summary><div class="faq-body">You still get ₹78,000 — the same as a 3 kW system. No additional central subsidy is available above 3 kW. Larger systems fully qualify for net metering and you can <a href="guides/surplus-space.html">sell surplus to the grid</a>, but the extra capacity is self-funded.</div></details>
   <details class="faq"><summary>Is the solar subsidy higher in the North-East and hill states?</summary><div class="faq-body">Yes, by 10%. In PM Surya Ghar's special category states and UTs (Uttarakhand, Himachal Pradesh, Jammu &amp; Kashmir, Ladakh, the North-Eastern states including Sikkim, Andaman &amp; Nicobar and Lakshadweep) the central subsidy is ₹33,000 per kW for the first 2 kW and ₹19,800 for the third kW, up to ₹85,800 for 3 kW or more, against ₹78,000 elsewhere. Housing societies there get ₹19,800 per kW for common facilities. The calculator uses the general rates, so it understates the subsidy by up to ₹7,800 in these states; see <a href="#special-category">special category states</a>.</div></details>
   <details class="faq"><summary>Are there state top-up subsidies?</summary><div class="faq-body">Yes, a few states add their own subsidy on top of the central amount. As of November 2026: Delhi gives up to ₹26,000 per kW (capped at ₹78,000), Uttar Pradesh ₹15,000 per kW (capped at ₹30,000), Gujarat covers the cost above a 10% household share (5% for SC/ST) for systems up to 2.18 kW, Maharashtra's SMART scheme gives ₹10,000–17,500 for 1 kW systems in homes using under 100 units a month, and Rajasthan pays ₹17,000 to households in its 150-unit free electricity scheme. The calculator includes only the central subsidy. See <a href="#state-top-ups">state solar subsidy top-ups</a> for the conditions.</div></details>
