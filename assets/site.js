@@ -58,6 +58,7 @@
         <a href="${BASE}guides/hybrid.html">Hybrid Solar &amp; Battery Size</a>
         <a href="${BASE}guides/surplus-space.html">Earn from Surplus Space</a>
         <a href="${BASE}guides/solar-panel-cost.html">Solar Panel Cost</a>
+        <a href="${BASE}guides/solar-payback-roi.html">Solar Payback &amp; ROI</a>
         <a href="${BASE}guides/how-many-solar-panels.html">How Many Panels Do I Need?</a>
         <a href="${BASE}guides/solar-for-ac.html">Solar for AC</a>
         <a href="${BASE}guides/solar-for-units-per-month.html">Solar by Monthly Units</a>
